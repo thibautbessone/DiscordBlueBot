@@ -6,7 +6,10 @@ import net.dv8tion.jda.events.message.MessageReceivedEvent;
 import java.util.Random;
 
 /**
- * Created by Thibaut on 11/01/2017.
+ * @file RateCommand.java
+ * @author Blue
+ * @version 0.1
+ * @brief Rates the string given in parameter
  */
 public class RateCommand implements Command {
 

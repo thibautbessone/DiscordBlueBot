@@ -6,7 +6,7 @@ import net.dv8tion.jda.events.message.MessageReceivedEvent;
 /**
  * @file PingCommand.java
  * @author Blue
- * @version 0.1
+ * @version 0.2
  * @brief Classic ping command
  */
 public class PingCommand implements Command {

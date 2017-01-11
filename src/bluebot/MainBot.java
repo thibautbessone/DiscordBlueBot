@@ -15,7 +15,7 @@ import java.util.HashMap;
 /**
  * @file MainBot.java
  * @author Blue
- * @version 0.1
+ * @version 0.2
  * @brief The main class of BlueBot
  */
 

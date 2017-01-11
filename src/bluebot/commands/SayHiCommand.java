@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @file SayHiCommand.java
  * @author Blue
- * @version 0.1
+ * @version 0.2
  * @brief Says Hi ! to the mentioned users
  */
 public class SayHiCommand implements Command {

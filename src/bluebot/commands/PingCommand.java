@@ -11,7 +11,7 @@ import net.dv8tion.jda.events.message.MessageReceivedEvent;
  */
 public class PingCommand implements Command {
 
-    private final String HELP = "Pings the bot (to check if it's online). \nUsage : !ping";
+    private final String HELP = "The command `ping` pings the bot (to check if it's online). \nUsage : `!ping`";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -25,7 +25,7 @@ public class PingCommand implements Command {
             return;
         }
         else {
-            event.getTextChannel().sendMessage("Pong !");
+            event.getTextChannel().sendMessage("Pong ! Stop bothering me please, I'm being developed.");
         }
     }
 

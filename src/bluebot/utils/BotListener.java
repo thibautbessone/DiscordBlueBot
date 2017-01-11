@@ -1,5 +1,6 @@
-package bluebot;
+package bluebot.utils;
 
+import bluebot.MainBot;
 import net.dv8tion.jda.events.ReadyEvent;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.hooks.ListenerAdapter;

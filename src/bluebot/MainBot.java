@@ -1,5 +1,7 @@
 package bluebot;
 
+import bluebot.commands.RateCommand;
+import bluebot.utils.BotListener;
 import bluebot.utils.Command;
 import bluebot.commands.PingCommand;
 import bluebot.commands.SayCommand;
@@ -57,6 +59,7 @@ public class MainBot {
         commands.put("ping", new PingCommand());
         commands.put("sayhi", new SayHiCommand());
         commands.put("say", new SayCommand());
+        commands.put("rate", new RateCommand());
 
     }
 

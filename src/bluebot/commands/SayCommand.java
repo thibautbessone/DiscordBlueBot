@@ -11,7 +11,7 @@ import net.dv8tion.jda.events.message.MessageReceivedEvent;
  */
 public class SayCommand implements Command {
 
-    private final String HELP = "Makes the bot say what you want. \nUsage : !say yourMessage";
+    private final String HELP = "The command `say` makes the bot say what you want. \n\nUsage : `!say your message`";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

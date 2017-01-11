@@ -14,7 +14,8 @@ import java.util.List;
  */
 public class SayHiCommand implements Command {
 
-    private final String HELP = "Makes the bot say hi to a user and mention it.\nUsage : !say hi @User";
+    private final String HELP = "The command `sayhi` makes the bot say hi and mentioning the user given. \n\nUsage : `!say hi @User`";
+
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

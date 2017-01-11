@@ -1,10 +1,11 @@
 package bluebot;
 
+import bluebot.utils.Command;
 import bluebot.commands.PingCommand;
+import bluebot.commands.SayCommand;
 import bluebot.commands.SayHiCommand;
 import bluebot.utils.CommandParser;
 import net.dv8tion.jda.*;
-import net.dv8tion.jda.events.message.MessageReceivedEvent;
 
 import javax.security.auth.login.LoginException;
 import java.util.HashMap;
@@ -35,6 +36,11 @@ public class MainBot {
         }
     }
 
+    /**
+     * @brief Creates the conneciton with the server
+     * @param token
+     *      the token of the bot
+     */
     public MainBot(String token) {
         try {
             //jda instanciation
@@ -50,6 +56,7 @@ public class MainBot {
         //Activated bot commands
         commands.put("ping", new PingCommand());
         commands.put("sayhi", new SayHiCommand());
+        commands.put("say", new SayCommand());
 
     }
 

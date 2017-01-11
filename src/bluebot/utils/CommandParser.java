@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.StringJoiner;
 
 /**
- * Created by Thibaut on 11/01/2017.
+ * @file CommandParser.java
+ * @author Blue
+ * @version 0.1
+ * @brief Parse the commands given to the bot to the right form withs arguments
  */
 public class CommandParser {
 

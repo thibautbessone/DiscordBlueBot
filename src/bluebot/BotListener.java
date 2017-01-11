@@ -5,7 +5,10 @@ import net.dv8tion.jda.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.hooks.ListenerAdapter;
 
 /**
- * Created by Thibaut on 11/01/2017.
+ * @file BotListener.java
+ * @author Blue
+ * @version 0.1
+ * @brief Listens to message posted in chat
  */
 public class BotListener extends ListenerAdapter {
 
@@ -15,11 +18,4 @@ public class BotListener extends ListenerAdapter {
             MainBot.handleCommand(MainBot.parser.parse(event.getMessage().getContent().toLowerCase(), event));
         }
     }
-
-    @Override
-    public void onReady(ReadyEvent event) {
-        //MainBot.log("status", "Logged in as " + event.getJDA().getSelfInfo().getUsername());
-    }
-
-
 }

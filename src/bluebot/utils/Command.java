@@ -1,9 +1,12 @@
-package bluebot;
+package bluebot.utils;
 
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
 
 /**
- * Created by Thibaut on 11/01/2017.
+ * @file Command.java
+ * @author Blue
+ * @version 0.1
+ * @brief The Command interface, which will be implemented by all the future commands
  */
 public interface Command {
     public boolean called(String[] args, MessageReceivedEvent event);

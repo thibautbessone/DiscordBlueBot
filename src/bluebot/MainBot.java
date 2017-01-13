@@ -1,12 +1,7 @@
 package bluebot;
 
-import bluebot.commands.RateCommand;
-import bluebot.utils.BotListener;
-import bluebot.utils.Command;
-import bluebot.commands.PingCommand;
-import bluebot.commands.SayCommand;
-import bluebot.commands.SayHiCommand;
-import bluebot.utils.CommandParser;
+import bluebot.commands.*;
+import bluebot.utils.*;
 import net.dv8tion.jda.*;
 
 import javax.security.auth.login.LoginException;
@@ -48,7 +43,7 @@ public class MainBot {
             //jda instanciation
             //default method as provided in the API
             jda = new JDABuilder().setBotToken(token).addListener(new BotListener()).setBulkDeleteSplittingEnabled(false).buildBlocking();
-
+            System.out.println("Connected servers : " + jda.getGuilds().size());
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
             System.out.println("Error, check your internet connection");
@@ -60,6 +55,8 @@ public class MainBot {
         commands.put("sayhi", new SayHiCommand());
         commands.put("say", new SayCommand());
         commands.put("rate", new RateCommand());
+        commands.put("clear", new ClearCommand());
+        commands.put("whoareyou", new WhoAreYouCommand());
 
     }
 
@@ -68,7 +65,6 @@ public class MainBot {
             System.out.println("Missing bot token");
         }
         new MainBot(args[0]);
-
     }
 
 }

@@ -101,6 +101,7 @@ public class BlueBotInterface extends JFrame {
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                text.setText(null);
                 new MainBot();
                 start.setEnabled(false);
                 start.setText("BlueBot already running");

@@ -6,7 +6,7 @@ import net.dv8tion.jda.events.message.MessageReceivedEvent;
 /**
  * @file SayCommand.java
  * @author Blue
- * @version 0.2
+ * @version 0.3
  * @brief Make the bot say the string given in parameter. Originally created to try giving parameters to bot commands
  */
 public class SayCommand implements Command {
@@ -28,6 +28,7 @@ public class SayCommand implements Command {
             for(String arg : args) {
                 text += arg + " ";
             }
+            event.getMessage().deleteMessage();
             event.getTextChannel().sendMessage(text);
         }
     }

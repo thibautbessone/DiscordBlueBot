@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @file SayHiCommand.java
  * @author Blue
- * @version 0.2
+ * @version 0.3
  * @brief Says Hi ! to the mentioned users
  */
 public class SayHiCommand implements Command {
@@ -38,6 +38,7 @@ public class SayHiCommand implements Command {
                 for(User u : mentionedUsers) {
                     event.getTextChannel().sendMessage("Hi " + u.getAsMention() + " !");
                 }
+                event.getMessage().deleteMessage();
             }
         }
 

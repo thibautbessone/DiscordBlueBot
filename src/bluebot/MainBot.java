@@ -3,8 +3,11 @@ package bluebot;
 import bluebot.commands.*;
 import bluebot.utils.*;
 import net.dv8tion.jda.*;
+import net.dv8tion.jda.entities.Game;
+import net.dv8tion.jda.entities.User;
 
 import javax.security.auth.login.LoginException;
+import javax.swing.*;
 import java.util.HashMap;
 
 /**
@@ -16,7 +19,8 @@ import java.util.HashMap;
 
 public class MainBot {
 
-    private JDA jda;
+
+    private static JDA jda;
     public static final CommandParser parser = new CommandParser();
     public static HashMap<String, Command> commands = new HashMap<String, Command>();
 
@@ -33,22 +37,26 @@ public class MainBot {
         }
     }
 
-    /**
-     * @brief Creates the conneciton with the server
-     * @param token
-     *      the token of the bot
-     */
-    public MainBot(String token) {
+
+    public MainBot() {
         try {
             //jda instanciation
             //default method as provided in the API
-            jda = new JDABuilder().setBotToken(token).addListener(new BotListener()).setBulkDeleteSplittingEnabled(false).buildBlocking();
+            LoadingProperties config = new LoadingProperties();
+            jda = new JDABuilder().setBotToken(config.getBotToken()).addListener(new BotListener()).setBulkDeleteSplittingEnabled(false).buildBlocking();
+            jda.getAccountManager().setGame(config.getBotActivity());
+            System.out.println("Current activity " + jda.getSelfInfo().getCurrentGame());
             System.out.println("Connected servers : " + jda.getGuilds().size());
-        } catch (LoginException | InterruptedException e) {
-            e.printStackTrace();
+            System.out.println("Concerned users : " + jda.getUsers().size());
+        } catch (InterruptedException e) {
             System.out.println("Error, check your internet connection");
             return;
+        } catch (LoginException e) {
+            System.out.println("Invalid or missing token. Please edit config.blue again.");
+            return;
         }
+
+
 
         //Activated bot commands
         commands.put("ping", new PingCommand());
@@ -60,11 +68,8 @@ public class MainBot {
 
     }
 
-    public static void main(String[] args) {
-        if (args.length < 1) {
-            System.out.println("Missing bot token");
-        }
-        new MainBot(args[0]);
+    public static JDA getJda() {
+        return jda;
     }
 
 }

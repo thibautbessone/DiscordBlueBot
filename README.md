@@ -17,17 +17,18 @@ However, the required dependancies for the bot are included in this repository.
 
 ## Getting started
 
-If you want a .exe (or something like that) to run, I currently only run the bot through my IDE (currently IntelliJIdea), I'll provide later information on how to use the bot as a standalone.
+If you want a .exe (or something like that), go [here](https://github.com/thibautbessone/DiscordBlueBotReleases) and download the latest version for all the features. Simple instructions are provided in order to make the bot to work.
 
-If you want to use it at the moment, you'll need an IDE.
-You also will have to create your onw app [here](https://discordapp.com/login?redirect_to=/developers/applications/me).
-
-Simply **clone the project** into your favorite IDE using GitHub's integration. 
-On your application's page, **get your bot's token and give it to the program as an argument** in Run configuration. If no parameter is given, the bot won't start.
+To edit the code, just follow these steps : 
+* Create your onw app [here](https://discordapp.com/login?redirect_to=/developers/applications/me).
+* **Clone the project** into your favorite IDE using GitHub's integration. 
+* On your application page, get your application **token**
+* open **config.blue**
+* replace **YOURTOKENHERE** by your application token
 
 ## Commands
 
-There are currently four commands available : ```!ping```, ```!say```, ```!sayhi```, ```!rate```
+There are currently six commands available : ```!ping```, ```!say```, ```!sayhi```, ```!rate```, ```!clear``` and ```!whoareyou```.
 A lot more of commands will be added in the future, and the ```!help``` command will be used to display them all.
 
 By typing ```help``` after each command, you'll get information on how to use the command. 

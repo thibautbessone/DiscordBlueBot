@@ -1,4 +1,4 @@
-package bluebot.commands;
+package bluebot.commands.utility;
 
 import bluebot.utils.Command;
 import net.dv8tion.jda.entities.User;

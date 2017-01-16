@@ -1,4 +1,4 @@
-package bluebot.commands;
+package bluebot.commands.utility;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;

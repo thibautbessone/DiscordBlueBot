@@ -1,9 +1,9 @@
 package bluebot;
 
-import bluebot.commands.*;
 import bluebot.commands.fun.NopeCommand;
 import bluebot.commands.fun.RateCommand;
 import bluebot.commands.fun.YoMommaJokeCommand;
+import bluebot.commands.utility.*;
 import bluebot.utils.*;
 import net.dv8tion.jda.*;
 

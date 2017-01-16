@@ -1,4 +1,4 @@
-package bluebot.commands;
+package bluebot.commands.fun;
 
 import bluebot.utils.Command;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
@@ -60,11 +60,7 @@ public class RateCommand implements Command {
                 phrase = eighttonine;
             }
             else phrase = ten;
-            //The thing to rate
-            /*String text = new String("");
-            for(String arg : args) {
-                text += arg + " ";
-            }*/
+
             event.getTextChannel().sendMessage(responsePrefix + event.getAuthorName() + ", I'd say that this " /*+ text */+ phrase + rating + "/10." + "\n\t\tThe truth has been told.");
         }
 

@@ -1,14 +1,14 @@
 package bluebot;
 
 import bluebot.commands.*;
+import bluebot.commands.fun.NopeCommand;
+import bluebot.commands.fun.RateCommand;
+import bluebot.commands.fun.YoMommaJokeCommand;
 import bluebot.utils.*;
 import net.dv8tion.jda.*;
-import net.dv8tion.jda.entities.Game;
-import net.dv8tion.jda.entities.User;
 
 import javax.security.auth.login.LoginException;
-import javax.swing.*;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * @file MainBot.java
@@ -22,7 +22,7 @@ public class MainBot {
 
     private static JDA jda;
     public static final CommandParser parser = new CommandParser();
-    public static HashMap<String, Command> commands = new HashMap<String, Command>();
+    public static TreeMap<String, Command> commands = new TreeMap<String, Command>();
 
     public static void handleCommand(CommandParser.CommandContainer cmdContainer) {
         if(commands.containsKey(cmdContainer.invoke)) {
@@ -65,6 +65,9 @@ public class MainBot {
         commands.put("rate", new RateCommand());
         commands.put("clear", new ClearCommand());
         commands.put("whoareyou", new WhoAreYouCommand());
+        commands.put("help", new HelpCommand());
+        commands.put("nope", new NopeCommand());
+        commands.put("ymjoke", new YoMommaJokeCommand());
 
     }
 

@@ -1,8 +1,7 @@
 package bluebot;
 
-import bluebot.commands.fun.NopeCommand;
-import bluebot.commands.fun.RateCommand;
-import bluebot.commands.fun.YoMommaJokeCommand;
+import bluebot.commands.PlaySoundCommand;
+import bluebot.commands.fun.*;
 import bluebot.commands.utility.*;
 import bluebot.utils.*;
 import net.dv8tion.jda.*;
@@ -52,7 +51,7 @@ public class MainBot {
             System.out.println("Error, check your internet connection");
             return;
         } catch (LoginException e) {
-            System.out.println("Invalid or missing token. Please edit config.blue again.");
+            System.out.println("Invalid or missing token. Please edit config.blue and try again.");
             return;
         }
 
@@ -68,6 +67,9 @@ public class MainBot {
         commands.put("help", new HelpCommand());
         commands.put("nope", new NopeCommand());
         commands.put("ymjoke", new YoMommaJokeCommand());
+        commands.put("wat", new WatCommand());
+        //commands.put("join", new PlaySoundCommand());
+        commands.put("gif", new GifCommand());
 
     }
 

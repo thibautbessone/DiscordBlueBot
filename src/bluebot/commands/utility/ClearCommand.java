@@ -1,7 +1,9 @@
 package bluebot.commands.utility;
 
 import bluebot.utils.Command;
+import net.dv8tion.jda.Permission;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.exceptions.PermissionException;
 
 /**
  * @file ClearCommand.java
@@ -37,7 +39,6 @@ public class ClearCommand implements Command {
             } catch (NumberFormatException e) {
                 event.getTextChannel().sendMessage("Invalid entry. Please type a number.");
             }
-
         }
     }
 

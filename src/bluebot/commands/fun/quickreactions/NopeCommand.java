@@ -1,15 +1,18 @@
-package bluebot.commands.fun;
+package bluebot.commands.fun.quickreactions;
 
 import bluebot.utils.Command;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
 
 /**
- * @file WatCommand.java
+ * @file NopeCommand.java
  * @author Blue
  * @version 0.1
- * @brief Posts the WAT grandma image.
+ * @brief Posts the nope button gif.
  */
-public class WatCommand implements Command {
+public class NopeCommand implements Command {
+
+    private final String HELP = "The command `rate` just post the nope button gif. \n\nUsage : `!nope`";
+
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
         return true;
@@ -22,13 +25,13 @@ public class WatCommand implements Command {
             return;
         }
         else {
-            event.getTextChannel().sendMessage("http://i.imgur.com/7kZ562z.jpg");
+            event.getTextChannel().sendMessage("http://i.imgur.com/3CFcHZU.gif");
         }
     }
 
     @Override
     public String help() {
-        return null;
+        return HELP;
     }
 
     @Override

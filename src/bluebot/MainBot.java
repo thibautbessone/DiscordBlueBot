@@ -1,7 +1,8 @@
 package bluebot;
 
-import bluebot.commands.PlaySoundCommand;
 import bluebot.commands.fun.*;
+import bluebot.commands.fun.quickreactions.NopeCommand;
+import bluebot.commands.fun.quickreactions.WatCommand;
 import bluebot.commands.utility.*;
 import bluebot.utils.*;
 import net.dv8tion.jda.*;

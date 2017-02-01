@@ -13,10 +13,12 @@ import java.util.Properties;
 public class LoadingProperties {
     private String botToken;
     private String botActivity;
+    private String steamAPIKey;
 
     public String getBotToken() {
         return botToken;
     }
+    public String getSteamAPIKey() {return steamAPIKey;}
 
     public String getBotActivity() {
         return botActivity;

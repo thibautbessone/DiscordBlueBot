@@ -3,6 +3,7 @@ package bluebot;
 import bluebot.commands.fun.*;
 import bluebot.commands.fun.quickreactions.NopeCommand;
 import bluebot.commands.fun.quickreactions.WatCommand;
+import bluebot.commands.misc.SteamUserInfoCommand;
 import bluebot.commands.utility.*;
 import bluebot.utils.*;
 import net.dv8tion.jda.*;
@@ -71,6 +72,8 @@ public class MainBot {
         commands.put("wat", new WatCommand());
         //commands.put("join", new PlaySoundCommand());
         commands.put("gif", new GifCommand());
+        commands.put("c&h", new CyanideHapinessCommand());
+        commands.put("steam", new SteamUserInfoCommand());
 
     }
 

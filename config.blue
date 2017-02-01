@@ -1,0 +1,7 @@
+//BlueBot config file
+
+//The token of your application
+botToken=YOURTOKENHERE
+
+//The current played game of the bot
+botActivity=under development

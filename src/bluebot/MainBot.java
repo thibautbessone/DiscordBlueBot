@@ -73,7 +73,7 @@ public class MainBot {
         //commands.put("join", new PlaySoundCommand());
         commands.put("gif", new GifCommand());
         commands.put("c&h", new CyanideHapinessCommand());
-        commands.put("steam", new SteamUserInfoCommand());
+        //commands.put("steam", new SteamUserInfoCommand());
 
     }
 

@@ -4,7 +4,11 @@ import bluebot.utils.Command;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
+import org.json.JSONArray;
 import org.json.JSONException;
+
+import java.lang.reflect.Array;
+import java.util.Random;
 
 /**
  * Created by Thibaut on 17/01/2017.
@@ -25,13 +29,19 @@ public class GifCommand implements Command {
             return;
         } else {
             String url;
+            JSONArray array;
             String query = new String();
             for(String arg : args) {
                 query += arg.toLowerCase() + "+";
                 query = query.substring(0, query.length()-1);
             }
             try {
-                url = (String )Unirest.get("http://api.giphy.com/v1/gifs/search?q=" + query + "&api_key=dc6zaTOxFJmzC").asJson().getBody().getObject().getJSONArray("data").getJSONObject(0).get("url");
+                Random rand = new Random();
+
+                //url = (String )Unirest.get("http://api.giphy.com/v1/gifs/search?q=" + query + "&api_key=dc6zaTOxFJmzC").asJson().getBody().getObject().getJSONArray("data").getJSONObject(0).get("url");
+                array = Unirest.get("http://api.giphy.com/v1/gifs/search?q=" + query + "&api_key=dc6zaTOxFJmzC").asJson().getBody().getObject().getJSONArray("data");
+                int gifIndex = rand.nextInt(array.length());
+                url = (String) array.getJSONObject(gifIndex).get("url");
                 event.getTextChannel().sendMessage(url);
             } catch (Exception e) {
                 event.getTextChannel().sendMessage("No GIF found :cry:");

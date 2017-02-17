@@ -1,6 +1,6 @@
 # BlueBot - A Java-written Discord bot
 
-**Official support server :** [<img src="https://discordapp.com/api/guilds/268853008455041025/widget.png?style=shield">](https://discord.gg/rSekkJv)
+**Support server :** [<img src="https://discordapp.com/api/guilds/268853008455041025/widget.png?style=shield">](https://discord.gg/rSekkJv)
 
 You can also contact me on **Steam**, but please write a comment before adding me : [<img src="https://img.shields.io/badge/Steam-Bluered Mind-blue.svg">](http://steamcommunity.com/profiles/76561198206490817)
 
@@ -10,9 +10,11 @@ The **API** can be found [here](https://github.com/DV8FromTheWorld/JDA).
 However, the required dependancies for the bot are included in this repository.
 
 **BlueBot** will provide useful features like :
-* Moderation
-* Music/various sounds player
-* Meme search
+* Moderation, utility features
+* Quick reactions, jokes et other stuff
+* Cyanide & Hapiness comics
+* Memes/Gifs search
+* Twitch alerts
 * More to come !
 
 ## Getting started
@@ -28,8 +30,7 @@ To edit the code, just follow these steps :
 
 ## Commands
 
-There are currently six commands available : ```!ping```, ```!say```, ```!sayhi```, ```!rate```, ```!clear``` and ```!whoareyou```.
-A lot more of commands will be added in the future, and the ```!help``` command will be used to display them all.
+BlueBot provides a lot of commands. Use ```!help``` to display the complete list of them.
 
 By typing ```help``` after each command, you'll get information on how to use the command. 
 

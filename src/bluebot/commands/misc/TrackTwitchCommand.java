@@ -35,9 +35,7 @@ public class TrackTwitchCommand implements Command {
                 MainBot.getStreamerList().put(event.getMessage().getMentionedUsers().get(0).getId(), args[1]);
                 event.getTextChannel().sendMessage(event.getMessage().getMentionedUsers().get(0).getUsername() + " added to the tracked streamers");
             }
-
         }
-
     }
 
     @Override

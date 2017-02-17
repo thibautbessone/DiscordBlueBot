@@ -2,7 +2,7 @@
 
 **Official support server :** [<img src="https://discordapp.com/api/guilds/268853008455041025/widget.png?style=shield">](https://discord.gg/rSekkJv)
 
-You can also contact me on **Steam**, but please write a comment before adding me : [<img src="https://img.shields.io/badge/Steam-Bluered Mind-blue.svg">](http://steamcommunity.com/id/blueredmind)
+You can also contact me on **Steam**, but please write a comment before adding me : [<img src="https://img.shields.io/badge/Steam-Bluered Mind-blue.svg">](http://steamcommunity.com/profiles/76561198206490817)
 
 You can add the bot to your server by clicking on [this link](https://discordapp.com/oauth2/authorize?client_id=268420199370194944&scope=bot&permissions=-1).
 

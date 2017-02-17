@@ -11,7 +11,10 @@ import java.lang.reflect.Array;
 import java.util.Random;
 
 /**
- * Created by Thibaut on 17/01/2017.
+ * @file GifCommand.java
+ * @author Blue
+ * @version 0.1
+ * @brief Makes the bot post a gif searched on Giphy with the specified keywords
  */
 public class GifCommand implements Command {
 
@@ -38,6 +41,7 @@ public class GifCommand implements Command {
             try {
                 Random rand = new Random();
 
+                //First gif returned by the API
                 //url = (String )Unirest.get("http://api.giphy.com/v1/gifs/search?q=" + query + "&api_key=dc6zaTOxFJmzC").asJson().getBody().getObject().getJSONArray("data").getJSONObject(0).get("url");
                 array = Unirest.get("http://api.giphy.com/v1/gifs/search?q=" + query + "&api_key=dc6zaTOxFJmzC").asJson().getBody().getObject().getJSONArray("data");
                 int gifIndex = rand.nextInt(array.length());

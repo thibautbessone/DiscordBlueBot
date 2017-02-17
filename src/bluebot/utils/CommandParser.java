@@ -4,7 +4,6 @@ import bluebot.MainBot;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
-import java.util.StringJoiner;
 
 /**
  * @file CommandParser.java
@@ -34,7 +33,7 @@ public class CommandParser {
     public CommandContainer parse(String str, MessageReceivedEvent event) {
         ArrayList<String> split = new ArrayList<String>();
         String raw = str;
-        String noprefix = raw.replaceFirst("!", "");
+        String noprefix = raw.replaceFirst(MainBot.prefix, "");
         String[] split_noprefix = noprefix.split(" ");
         for(String s: split_noprefix) {split.add(s);}
         String invoke = split.get(0);

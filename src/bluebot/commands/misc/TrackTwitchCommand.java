@@ -42,7 +42,7 @@ public class TrackTwitchCommand implements Command {
 
     @Override
     public String help() {
-        return null;
+        return HELP;
     }
 
     @Override

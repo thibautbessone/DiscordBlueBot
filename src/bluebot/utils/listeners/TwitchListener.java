@@ -4,16 +4,13 @@ import bluebot.MainBot;
 import net.dv8tion.jda.entities.Game;
 import net.dv8tion.jda.entities.Guild;
 import net.dv8tion.jda.events.user.UserGameUpdateEvent;
-import net.dv8tion.jda.events.user.UserOnlineStatusUpdateEvent;
 import net.dv8tion.jda.hooks.ListenerAdapter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @file TwitchListener.java
  * @author Blue
- * @version 0.1
+ * @version 0.2
  * @brief Make the bot notify the users when a tracked streamer starts streaming on Twitch
  */
 
@@ -30,12 +27,12 @@ public class TwitchListener extends ListenerAdapter {
                 List<Guild> serverList = MainBot.getJda().getGuilds();
                 for(Guild server : serverList) {
                     if(server.getUsers().contains(event.getUser())) {
-                        server.getPublicChannel().sendMessage(event.getUser().getUsername() + " is now streaming ! Watch live at " + MainBot.getStreamerList().get(event.getUser().getId()));
+                        server.getPublicChannel().sendMessage(server.getPublicRole().getName() + " : " + event.getUser().getUsername() + " is now streaming ! Watch live at " + MainBot.getStreamerList().get(event.getUser().getId()));
                     }
                 }
             }
         } catch (NullPointerException e) {
-            e.printStackTrace();
+            e.printStackTrace(); //The user left streaming
         }
     }
 }

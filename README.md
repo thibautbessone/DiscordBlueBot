@@ -11,6 +11,7 @@ However, the required dependancies for the bot are included in this repository.
 
 **BlueBot** will provide useful features like :
 * Moderation, utility features
+* CleverBot integration
 * Quick reactions, jokes et other stuff
 * Cyanide & Hapiness comics
 * Memes/Gifs search

@@ -9,7 +9,10 @@ import net.dv8tion.jda.events.message.MessageReceivedEvent;
 import java.util.List;
 
 /**
- * Created by Thibaut on 17/02/2017.
+ * @file TrackTwitchCommand.java
+ * @author Blue
+ * @version 0.1
+ * @brief Makes the bot "track" a user in order to post a message when the user starts streaming.
  */
 public class TrackTwitchCommand implements Command {
 

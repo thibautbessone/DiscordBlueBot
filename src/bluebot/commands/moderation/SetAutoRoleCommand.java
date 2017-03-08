@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class SetAutoRoleCommand implements Command {
 
-    private final String HELP = "The command `setautorole` let you automatically assign the specified role to new users.\n\nUsage : `!setautorole role`";
+    private final String HELP = "The command `setautorole` let the owner automatically assign the specified role to new users.\n\nUsage : `!setautorole role`";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -27,16 +27,21 @@ public class SetAutoRoleCommand implements Command {
             event.getTextChannel().sendMessage(help());
             return;
         } else {
-            List<Role> roleList = event.getGuild().getRoles();
-            for(Role role : roleList) {
-                if(args[0].equals(role.getName())) {
-                    MainBot.getAutoRoleList().put(event.getGuild().getId(), role.getName());
-                    event.getTextChannel().sendMessage("The role given on join is now " + MainBot.getAutoRoleList().get(event.getGuild().getId()));
-                    System.out.println("<<<<" + MainBot.getAutoRoleList().get(event.getGuild().getId()) + ">>>>");
-                    return;
+            if(event.getAuthor() == event.getGuild().getOwner()) {
+                List<Role> roleList = event.getGuild().getRoles();
+                for(Role role : roleList) {
+                    if(args[0].equals(role.getName())) {
+                        MainBot.getAutoRoleList().put(event.getGuild().getId(), role.getName());
+                        event.getTextChannel().sendMessage("The role given on join is now " + MainBot.getAutoRoleList().get(event.getGuild().getId()));
+                        System.out.println("<<<<" + MainBot.getAutoRoleList().get(event.getGuild().getId()) + ">>>>");
+                        return;
+                    }
                 }
+                event.getTextChannel().sendMessage("The specified role doesn't exist");
+            } else {
+                event.getTextChannel().sendMessage("Only the owner of the server can use the `setautorole` command");
             }
-            event.getTextChannel().sendMessage("The specified role doesn't exist");
+
         }
     }
 

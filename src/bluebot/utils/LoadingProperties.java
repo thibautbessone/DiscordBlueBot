@@ -14,12 +14,13 @@ public class LoadingProperties {
     private String botToken;
     private String botActivity;
     private String steamAPIKey;
+    private String cleverbotAPIKey;
 
+    public String getCleverbotAPIKey() {return cleverbotAPIKey;}
     public String getBotToken() {
         return botToken;
     }
     public String getSteamAPIKey() {return steamAPIKey;}
-
     public String getBotActivity() {
         return botActivity;
     }
@@ -34,6 +35,7 @@ public class LoadingProperties {
 
             botToken = properties.getProperty("botToken");
             botActivity = properties.getProperty("botActivity");
+            cleverbotAPIKey = properties.getProperty("cleverbotAPIKey");
 
 
 

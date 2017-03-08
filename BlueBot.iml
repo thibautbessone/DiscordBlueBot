@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="JDA-withDependencies-2.3.0_379" level="project" />
+    <orderEntry type="library" name="lavaplayer-1.1.9" level="project" />
   </component>
 </module>

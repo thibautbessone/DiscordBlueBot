@@ -1,21 +1,22 @@
 package bluebot;
 
 import bluebot.commands.fun.*;
+import bluebot.commands.fun.quickreactions.IDGFCommand;
 import bluebot.commands.fun.quickreactions.NopeCommand;
 import bluebot.commands.fun.quickreactions.WatCommand;
+import bluebot.commands.misc.AddBadWordCommand;
+import bluebot.commands.misc.InfoCommand;
 import bluebot.commands.misc.TrackTwitchCommand;
 import bluebot.commands.moderation.SetAutoRoleCommand;
 import bluebot.commands.utility.*;
 import bluebot.utils.*;
-import bluebot.utils.listeners.MessageReceivedListener;
-import bluebot.utils.listeners.TwitchListener;
-import bluebot.utils.listeners.UserJoinLeaveListener;
+import bluebot.utils.listeners.*;
 import net.dv8tion.jda.*;
-import net.dv8tion.jda.entities.Guild;
-import net.dv8tion.jda.entities.Role;
-import net.dv8tion.jda.entities.impl.RoleImpl;
 
 import javax.security.auth.login.LoginException;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -35,6 +36,12 @@ public class MainBot {
     public static TreeMap<String, Command> commands = new TreeMap<String, Command>();
     private static Map<String, String> streamerList =  new HashMap<>();
     private static Map<String, String> autoRoleList = new HashMap<>();
+    private static ArrayList<String> badWords = new ArrayList<>();
+
+
+    public static ArrayList<String> getBadWords() {
+        return badWords;
+    }
 
     public static String prefix;
 
@@ -60,14 +67,17 @@ public class MainBot {
             prefix = "!"; //default prefix
             LoadingProperties config = new LoadingProperties();
             jda = new JDABuilder().setBotToken(config.getBotToken())
+                    .addListener(new CleverbotListener())
                     .addListener(new TwitchListener())
                     .addListener(new MessageReceivedListener())
+                    .addListener(new BadWordsListener())
                     .addListener(new UserJoinLeaveListener()).setBulkDeleteSplittingEnabled(false).buildBlocking();
 
             jda.getAccountManager().setGame(config.getBotActivity());
             System.out.println("Current activity " + jda.getSelfInfo().getCurrentGame());
             System.out.println("Connected servers : " + jda.getGuilds().size());
             System.out.println("Concerned users : " + jda.getUsers().size());
+
         } catch (InterruptedException e) {
             System.out.println("Error, check your internet connection");
             return;
@@ -95,6 +105,10 @@ public class MainBot {
         //commands.put("setprefix", new SetPrefixCommand());
         commands.put("tracktwitch", new TrackTwitchCommand());
         commands.put("setautorole", new SetAutoRoleCommand());
+        commands.put("cat", new CatCommand());
+        commands.put("idgf", new IDGFCommand());
+        commands.put("addbw", new AddBadWordCommand());
+        commands.put("info", new InfoCommand());
 
     }
 

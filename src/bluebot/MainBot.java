@@ -6,6 +6,7 @@ import bluebot.commands.fun.quickreactions.NopeCommand;
 import bluebot.commands.fun.quickreactions.WatCommand;
 import bluebot.commands.misc.AddBadWordCommand;
 import bluebot.commands.misc.InfoCommand;
+import bluebot.commands.misc.PlaySoundCommand;
 import bluebot.commands.misc.TrackTwitchCommand;
 import bluebot.commands.moderation.SetAutoRoleCommand;
 import bluebot.commands.utility.*;
@@ -14,8 +15,6 @@ import bluebot.utils.listeners.*;
 import net.dv8tion.jda.*;
 
 import javax.security.auth.login.LoginException;
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -103,6 +102,7 @@ public class MainBot {
         commands.put("c&h", new CyanideHapinessCommand());
         //commands.put("steam", new SteamUserInfoCommand());
         //commands.put("setprefix", new SetPrefixCommand());
+        commands.put("sound", new PlaySoundCommand());
         commands.put("tracktwitch", new TrackTwitchCommand());
         commands.put("setautorole", new SetAutoRoleCommand());
         commands.put("cat", new CatCommand());

@@ -1,22 +1,16 @@
 package bluebot.commands.misc;
 
 import bluebot.MainBot;
-import bluebot.commands.utility.MyUrlPlayer;
+import bluebot.utils.MyUrlPlayer;
 import bluebot.utils.Command;
-import net.dv8tion.jda.audio.player.URLPlayer;
 import net.dv8tion.jda.entities.VoiceChannel;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.managers.AudioManager;
 
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @file PlaySoundCommand.java

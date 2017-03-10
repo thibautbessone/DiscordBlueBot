@@ -1,4 +1,4 @@
-package bluebot.commands.utility;
+package bluebot.utils;
 
 import net.dv8tion.jda.JDA;
 import net.dv8tion.jda.audio.player.URLPlayer;

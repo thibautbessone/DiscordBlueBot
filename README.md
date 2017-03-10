@@ -10,11 +10,13 @@ The **API** can be found [here](https://github.com/DV8FromTheWorld/JDA).
 However, the required dependancies for the bot are included in this repository.
 
 **BlueBot** will provide useful features like :
-* Moderation, utility features
+* Moderation & utility features
+* Extensible & customizable soundboard
 * CleverBot integration
-* Quick reactions, jokes et other stuff
+* Quick reactions, jokes & other stuff
 * Cyanide & Hapiness comics
-* Memes/Gifs search
+* Custom memes (soon)
+* Gifs search
 * Twitch alerts
 * More to come !
 

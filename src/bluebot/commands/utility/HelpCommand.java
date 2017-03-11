@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * @file HelpCommand.java
  * @author Blue
- * @version 0.1
+ * @version 0.2
  * @brief Displays general help, the list of all commands available and how to get help for a specific command.
  */
 
@@ -17,11 +17,12 @@ import java.util.Map;
 public class HelpCommand implements Command {
 
     private final String HELP = "The command `help` displays the current available commands for the bot. \nUsage : `!help`";
-    String TEXT = "The currently available commands are listed below. All commands must be prefixed with a `!`. To obtain more information on a command, just type `!command help`\n\n";
+    private String TEXT = "The currently available commands are listed below. All commands must be prefixed with a `!`. To obtain more information on a command, just type `!command help`\n\n";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        return true;
+        if(args.length != 0 && args[0].equals("help") || args.length != 0) {return false;}
+        else return true;
     }
 
     @Override
@@ -37,11 +38,13 @@ public class HelpCommand implements Command {
 
     @Override
     public String help() {
-        return null;
+        return HELP;
     }
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
-
+        if(!success) {
+            event.getTextChannel().sendMessage(help());
+        }
     }
 }

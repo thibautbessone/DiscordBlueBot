@@ -28,42 +28,34 @@ public class RateCommand implements Command {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        return true;
+        if(args.length == 0 || args[0].equals("help")) {return false;}
+        else return true;
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        if(args.length == 0 || args[0].equals("help")) {
-            event.getTextChannel().sendMessage(help());
-            return;
-        } else {
-            //The phrase to say
-            String phrase;
-
-            //The random rating
-            Random rand = new Random();
-            int rating = rand.nextInt(10 + 1);
-
-            if(rating < 2) {
-                phrase = zerotoone;
-            }
-            else if(rating >= 2 && rating < 4) {
-                phrase = twotothree;
-            }
-            else if(rating >= 4 && rating < 6) {
-                phrase = fourtofive;
-            }
-            else if(rating >= 6 && rating < 8) {
-                phrase = sixtoseven;
-            }
-            else if(rating >= 8 && rating < 10) {
-                phrase = eighttonine;
-            }
-            else phrase = ten;
-
-            event.getTextChannel().sendMessage(responsePrefix + event.getAuthorName() + ", I'd say that this " /*+ text */+ phrase + rating + "/10." + "\n\t\tThe truth has been told.");
+        //The phrase to say
+        String phrase;
+         //The random rating
+        Random rand = new Random();
+        int rating = rand.nextInt(10 + 1);
+        if(rating < 2) {
+            phrase = zerotoone;
         }
-
+        else if(rating >= 2 && rating < 4) {
+            phrase = twotothree;
+        }
+        else if(rating >= 4 && rating < 6) {
+            phrase = fourtofive;
+        }
+        else if(rating >= 6 && rating < 8) {
+            phrase = sixtoseven;
+        }
+        else if(rating >= 8 && rating < 10) {
+            phrase = eighttonine;
+        }
+        else phrase = ten;
+        event.getTextChannel().sendMessage(responsePrefix + event.getAuthorName() + ", I'd say that this " /*+ text */+ phrase + rating + "/10." + "\n\t\tThe truth has been told.");
     }
 
     @Override
@@ -73,6 +65,9 @@ public class RateCommand implements Command {
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
+        if(!success) {
+            event.getTextChannel().sendMessage(help());
+        }
 
     }
 }

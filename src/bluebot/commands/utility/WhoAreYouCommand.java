@@ -8,7 +8,7 @@ import java.io.*;
 /**
  * @file WhoAreYouCommand.java
  * @author Blue
- * @version 0.2
+ * @version 0.3
  * @brief Provides info on the bot : creator, links, etc
  */
 public class WhoAreYouCommand implements Command {
@@ -17,39 +17,34 @@ public class WhoAreYouCommand implements Command {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        return true;
+        if(args.length != 0 && args[0].equals("help") || args.length != 0) {return false;}
+        else return true;
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        if(args.length != 0 && args[0].equals("help") || args.length != 0) {
-            event.getTextChannel().sendMessage(help());
-            return;
-        }
-        else {
-            String infoText = new String();
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("infoFile.blue")))) {
-                try {
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        infoText += line + "\n";
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+        String infoText = new String();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("infoFile.blue")))) {
+            try {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    infoText += line + "\n";
                 }
-            } catch (FileNotFoundException e) {
-                event.getTextChannel().sendMessage("No information given. I'm very mysterious at the moment.");
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-            event.getTextChannel().sendMessage(infoText);
+        } catch (FileNotFoundException e) {
+            event.getTextChannel().sendMessage("No information given. I'm very mysterious at the moment.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        event.getTextChannel().sendMessage(infoText);
     }
 
     @Override
@@ -59,6 +54,9 @@ public class WhoAreYouCommand implements Command {
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
+        if(!success) {
+            event.getTextChannel().sendMessage(help());
+        }
 
     }
 }

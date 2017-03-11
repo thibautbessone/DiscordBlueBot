@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @file SayHiCommand.java
  * @author Blue
- * @version 0.3
+ * @version 0.4
  * @brief Says Hi ! to the mentioned users
  */
 public class SayHiCommand implements Command {
@@ -19,29 +19,23 @@ public class SayHiCommand implements Command {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        return true;
+        if(args.length == 0 || args[0].equals("help")) {return false;}
+        else return true;
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        if(args.length == 0 || args[0].equals("help")) {
-            event.getTextChannel().sendMessage(help());
-            return;
+        if (event.getMessage().getMentionedUsers().isEmpty())
+        {
+            event.getTextChannel().sendMessage("No user mentioned.");
         }
         else {
-            if (event.getMessage().getMentionedUsers().isEmpty())
-            {
-                event.getTextChannel().sendMessage("No user mentioned.");
+            List<User> mentionedUsers = event.getMessage().getMentionedUsers();
+            for(User u : mentionedUsers) {
+                event.getTextChannel().sendMessage("Hi " + u.getAsMention() + " !");
             }
-            else {
-                List<User> mentionedUsers = event.getMessage().getMentionedUsers();
-                for(User u : mentionedUsers) {
-                    event.getTextChannel().sendMessage("Hi " + u.getAsMention() + " !");
-                }
-                event.getMessage().deleteMessage();
-            }
+            event.getMessage().deleteMessage();
         }
-
     }
 
     @Override
@@ -51,6 +45,8 @@ public class SayHiCommand implements Command {
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
-    return;
+        if(!success) {
+            event.getTextChannel().sendMessage(help());
+        }
     }
 }

@@ -6,7 +6,7 @@ import net.dv8tion.jda.events.message.MessageReceivedEvent;
 /**
  * @file PingCommand.java
  * @author Blue
- * @version 0.2
+ * @version 0.3
  * @brief Classic ping command
  */
 public class PingCommand implements Command {
@@ -15,18 +15,13 @@ public class PingCommand implements Command {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        return true;
+        if(args.length != 0 && args[0].equals("help") || args.length != 0) {return false;}
+        else return true;
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        if(args.length != 0 && args[0].equals("help") || args.length != 0) {
-            event.getTextChannel().sendMessage(help());
-            return;
-        }
-        else {
-            event.getTextChannel().sendMessage("Pong ! Stop bothering me please, I'm being developed.");
-        }
+        event.getTextChannel().sendMessage("Pong ! Stop bothering me please, I'm being developed.");
     }
 
     @Override
@@ -36,6 +31,8 @@ public class PingCommand implements Command {
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
-        return;
+        if(!success) {
+            event.getTextChannel().sendMessage(help());
+        }
     }
 }

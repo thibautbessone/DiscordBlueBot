@@ -6,7 +6,7 @@ import net.dv8tion.jda.events.message.MessageReceivedEvent;
 /**
  * @file NopeCommand.java
  * @author Blue
- * @version 0.1
+ * @version 0.2
  * @brief Posts https://www.youtube.com/watch?v=vsa1ZvzFgvU
  */
 public class IDGFCommand implements Command {
@@ -15,18 +15,13 @@ public class IDGFCommand implements Command {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        return true;
+        if(args.length != 0 && args[0].equals("help") || args.length != 0) {return false;}
+        else return true;
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        if(args.length != 0 && args[0].equals("help") || args.length != 0) {
-            event.getTextChannel().sendMessage(help());
-            return;
-        }
-        else {
             event.getTextChannel().sendMessage("https://www.youtube.com/watch?v=vsa1ZvzFgvU");
-        }
     }
 
     @Override
@@ -36,6 +31,8 @@ public class IDGFCommand implements Command {
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
-
+        if(!success) {
+            event.getTextChannel().sendMessage(help());
+        }
     }
 }

@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * @file CyanideHapinessCommand.java
  * @author Blue
- * @version 0.1
+ * @version 0.2
  * @brief Posts a Cyanide & Hapiness comic
  */
 public class CyanideHapinessCommand implements Command {
@@ -17,25 +17,21 @@ public class CyanideHapinessCommand implements Command {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        return true;
+        if(args.length == 0 || args[0].equals("help")) {return false;}
+        else return true;
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        if(args.length == 0 || args[0].equals("help")) {
+        if(args[0].equals("latest")) {
+            event.getTextChannel().sendMessage("http://explosm.net/comics/latest");
+        } else if(args[0].equals("random")) {
+            Random r = new Random();
+            int result = r.nextInt(3500) + 1000;
+            event.getTextChannel().sendMessage("http://explosm.net/comics/" + result);
+        }
+        else {
             event.getTextChannel().sendMessage(help());
-            return;
-        } else {
-            if(args[0].equals("latest")) {
-                event.getTextChannel().sendMessage("http://explosm.net/comics/latest");
-            } else if(args[0].equals("random")) {
-                Random r = new Random();
-                int result = r.nextInt(3500) + 1000;
-                event.getTextChannel().sendMessage("http://explosm.net/comics/" + result);
-            }
-            else {
-                event.getTextChannel().sendMessage(help());
-            }
         }
     }
 
@@ -46,6 +42,8 @@ public class CyanideHapinessCommand implements Command {
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
-
+        if(!success) {
+            event.getTextChannel().sendMessage(help());
+        }
     }
 }

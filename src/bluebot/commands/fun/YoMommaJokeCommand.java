@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @file YoMommaJokeCommand.java
  * @author Blue
- * @version 0.1
+ * @version 0.2
  * @brief Posts a random 'yo momma' joke from yomomma.info
  */
 
@@ -22,38 +22,30 @@ public class YoMommaJokeCommand implements Command {
 
     private final String HELP = "The command `ymjoke` mention the given user and post a 'yo momma' joke. \n\nUsage : `!ymjoke @User`";
 
-
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
+        if(args.length == 0 || args[0].equals("help")) {return false;}
         return true;
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        if(args.length == 0 || args[0].equals("help")) {
-            event.getTextChannel().sendMessage(help());
-            return;
+        if (event.getMessage().getMentionedUsers().isEmpty())
+        {
+            event.getTextChannel().sendMessage("No user mentioned.");
         }
         else {
-            if (event.getMessage().getMentionedUsers().isEmpty())
-            {
-                event.getTextChannel().sendMessage("No user mentioned.");
-            }
-            else {
-                String joke = new String();
-                List<User> mentionedUsers = event.getMessage().getMentionedUsers();
-                for(User u : mentionedUsers) {
-                    try {
-                        joke = (String) Unirest.get("http://api.yomomma.info/").asJson().getBody().getObject().get("joke");
-                    } catch (UnirestException ex) {
-                        event.getTextChannel().sendMessage("No joke found");
-                    }
-                    event.getTextChannel().sendMessage(u.getAsMention() + " " + joke);
+            String joke = new String();
+            List<User> mentionedUsers = event.getMessage().getMentionedUsers();
+            for(User u : mentionedUsers) {
+                try {
+                    joke = (String) Unirest.get("http://api.yomomma.info/").asJson().getBody().getObject().get("joke");
+                } catch (UnirestException ex) {
+                    event.getTextChannel().sendMessage("No joke found");
                 }
+                event.getTextChannel().sendMessage(u.getAsMention() + " " + joke);
             }
         }
-
-
     }
 
     @Override
@@ -63,6 +55,8 @@ public class YoMommaJokeCommand implements Command {
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
-
+        if(!success) {
+            event.getTextChannel().sendMessage(help());
+        }
     }
 }

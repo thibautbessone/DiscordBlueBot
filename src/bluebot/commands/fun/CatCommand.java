@@ -21,26 +21,20 @@ public class CatCommand implements Command {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        return true;
+        if(args.length != 0 && args[0].equals("help") || args.length != 0) {return false;}
+        else return true;
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        if(args.length != 0 && args[0].equals("help") || args.length != 0) {
-            event.getTextChannel().sendMessage(help());
-            return;
+        String url = new String();
+        try {
+            url = (String) Unirest.get("http://random.cat/meow").asJson().getBody().getObject().get("file");
+            System.out.println();
+        } catch (UnirestException ex) {
+            event.getTextChannel().sendMessage("The random.cat API might be down");
         }
-        else {
-            String url = new String();
-            try {
-                url = (String) Unirest.get("http://random.cat/meow").asJson().getBody().getObject().get("file");
-                System.out.println();
-            } catch (UnirestException ex) {
-                event.getTextChannel().sendMessage("The random.cat API might be down");
-            }
-            event.getTextChannel().sendMessage(url);
-        }
-
+        event.getTextChannel().sendMessage(url);
     }
 
     @Override
@@ -50,6 +44,8 @@ public class CatCommand implements Command {
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
-
+        if(!success) {
+            event.getTextChannel().sendMessage(help());
+        }
     }
 }

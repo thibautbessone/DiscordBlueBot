@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @file TrackTwitchCommand.java
  * @author Blue
- * @version 0.1
+ * @version 0.2
  * @brief Makes the bot "track" a user in order to post a message when the user starts streaming.
  */
 public class TrackTwitchCommand implements Command {
@@ -20,24 +20,24 @@ public class TrackTwitchCommand implements Command {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        return true;
+        if(args.length == 0 || args.length > 2 || args[0].equals("help")) {return false;}
+        else return true;
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        if(args.length == 0 || args.length > 2 || args[0].equals("help")) {
-            event.getTextChannel().sendMessage(help());
-            return;
+        if (event.getMessage().getMentionedUsers().isEmpty() || event.getMessage().getMentionedUsers().size() > 1) {
+            event.getTextChannel().sendMessage("No user or too many users mentioned.");
         }
         else {
-            if (event.getMessage().getMentionedUsers().isEmpty() || event.getMessage().getMentionedUsers().size() > 1)
-            {
-                event.getTextChannel().sendMessage("No user or too many users mentioned.");
-            }
-            else {
+            try {
                 MainBot.getStreamerList().put(event.getMessage().getMentionedUsers().get(0).getId(), args[1]);
-                event.getTextChannel().sendMessage(event.getMessage().getMentionedUsers().get(0).getUsername() + " added to the tracked streamers");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                event.getTextChannel().sendMessage("Stream is link missing.");
+                return;
             }
+
+            event.getTextChannel().sendMessage(event.getMessage().getMentionedUsers().get(0).getUsername() + " added to the tracked streamers");
         }
     }
 
@@ -48,6 +48,8 @@ public class TrackTwitchCommand implements Command {
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
-
+        if(!success) {
+            event.getTextChannel().sendMessage(help());
+        }
     }
 }

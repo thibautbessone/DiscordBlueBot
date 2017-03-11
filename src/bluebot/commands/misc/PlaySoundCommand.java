@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * @file PlaySoundCommand.java
  * @author Blue
- * @version 0.2
+ * @version 0.3
  * @brief Makes the bot join the user current voice channel and play the specified MP3 sound.
  */
 public class PlaySoundCommand implements Command {
@@ -31,7 +31,8 @@ public class PlaySoundCommand implements Command {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        return true;
+        if(args.length == 0 || args[0].equals("help")) {return false;}
+        else return true;
     }
 
     @Override
@@ -40,11 +41,8 @@ public class PlaySoundCommand implements Command {
             urlPlayersMap.put(event.getGuild(), new MyUrlPlayer(MainBot.getJda()));
         }
 
-        if(args.length == 0 || args[0].equals("help")) {
-            event.getTextChannel().sendMessage(help());
-            return;
-        } else if(args[0].equals("list")) {
-            //Displays the sound lists
+        if(args[0].equals("list")) {
+        //Displays the sound lists
             ArrayList<String> list = new ArrayList<>();
             for (File file : folder.listFiles()) {
                 if(file.getName().contains(".mp3")) {
@@ -66,7 +64,6 @@ public class PlaySoundCommand implements Command {
             fileList += "```";
             event.getTextChannel().sendMessage(fileList);
 
-
         } else if(args[0].equals("stop")) {
             if(audioManagerMap.get(event.getGuild()).isConnected()) {
                 urlPlayersMap.get(event.getGuild()).reset();
@@ -74,20 +71,8 @@ public class PlaySoundCommand implements Command {
             } else {
                 event.getTextChannel().sendMessage("I'm not even playing :cry:");
             }
-
-        } else if(args[0].equals("volume")) {
-        if(urlPlayersMap.get(event.getGuild()).isPlaying()) {
-            urlPlayersMap.get(event.getGuild()).reset();
-            audioManagerMap.get(event.getGuild()).closeAudioConnection();
         } else {
-            event.getTextChannel().sendMessage("I'm not even playing :cry:");
-        }
-
-    }
-
-
-
-        else {
+            //Play the sound
             if(urlPlayersMap.get(event.getGuild()).isPlaying()) {
                 event.getTextChannel().sendMessage("I'm already playing a sound.");
                 return;
@@ -130,6 +115,9 @@ public class PlaySoundCommand implements Command {
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
+        if(!success) {
+            event.getTextChannel().sendMessage(help());
+        }
 
     }
 }

@@ -13,11 +13,12 @@ However, the required dependancies for the bot are included in this repository.
 * Moderation & utility features
 * Extensible & customizable soundboard
 * CleverBot integration
+* GIFs search
+* Twitch alerts
+* Command prefix customization
 * Quick reactions, jokes & other stuff
 * Cyanide & Hapiness comics
 * Custom memes (soon)
-* Gifs search
-* Twitch alerts
 * More to come !
 
 ## Getting started

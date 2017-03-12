@@ -33,7 +33,12 @@ public class CommandParser {
     public CommandContainer parse(String str, MessageReceivedEvent event) {
         ArrayList<String> split = new ArrayList<String>();
         String raw = str;
-        String noprefix = raw.replaceFirst(MainBot.prefix, "");
+        String noprefix;
+        if(MainBot.getPrefixes().containsKey(event.getGuild())) {
+            noprefix = raw.replaceFirst(MainBot.getPrefixes().get(event.getGuild()), "");
+        } else {
+            noprefix = raw.replaceFirst(MainBot.getBasePrefix(), "");
+        }
         String[] split_noprefix = noprefix.split(" ");
         for(String s: split_noprefix) {split.add(s);}
         String invoke = split.get(0);

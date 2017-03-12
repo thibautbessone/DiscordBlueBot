@@ -9,10 +9,12 @@ import bluebot.commands.misc.InfoCommand;
 import bluebot.commands.misc.PlaySoundCommand;
 import bluebot.commands.misc.TrackTwitchCommand;
 import bluebot.commands.moderation.SetAutoRoleCommand;
+import bluebot.commands.moderation.SetPrefixCommand;
 import bluebot.commands.utility.*;
 import bluebot.utils.*;
 import bluebot.utils.listeners.*;
 import net.dv8tion.jda.*;
+import net.dv8tion.jda.entities.Guild;
 
 import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
@@ -36,14 +38,25 @@ public class MainBot {
     private static Map<String, String> streamerList =  new HashMap<>();
     private static Map<String, String> autoRoleList = new HashMap<>();
     private static ArrayList<String> badWords = new ArrayList<>();
+    private static Map<Guild, String> prefixes = new HashMap<>();
 
+    public static Map<Guild, String> getPrefixes() {
+        return prefixes;
+    }
 
     public static ArrayList<String> getBadWords() {
         return badWords;
     }
 
-    public static String prefix;
+    private static String basePrefix = new String("!");
 
+    public static String getBasePrefix() {
+        return basePrefix;
+    }
+
+    public static void setBasePrefix(String basePrefix) {
+        MainBot.basePrefix = basePrefix;
+    }
 
     public static void handleCommand(CommandParser.CommandContainer cmdContainer) {
         if(commands.containsKey(cmdContainer.invoke)) {
@@ -63,7 +76,6 @@ public class MainBot {
         try {
             //jda instanciation
             //default method as provided in the API
-            prefix = "!"; //default prefix
             LoadingProperties config = new LoadingProperties();
             jda = new JDABuilder().setBotToken(config.getBotToken())
                     .addListener(new CleverbotListener())
@@ -101,7 +113,7 @@ public class MainBot {
         commands.put("gif", new GifCommand());
         commands.put("c&h", new CyanideHapinessCommand());
         //commands.put("steam", new SteamUserInfoCommand());
-        //commands.put("setprefix", new SetPrefixCommand());
+        commands.put("setprefix", new SetPrefixCommand());
         commands.put("sound", new PlaySoundCommand());
         commands.put("tracktwitch", new TrackTwitchCommand());
         commands.put("setautorole", new SetAutoRoleCommand());

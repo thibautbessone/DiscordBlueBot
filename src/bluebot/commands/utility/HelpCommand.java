@@ -17,7 +17,7 @@ import java.util.Map;
 public class HelpCommand implements Command {
 
     private final String HELP = "The command `help` displays the current available commands for the bot. \nUsage : `!help`";
-    private String TEXT = "The currently available commands are listed below. All commands must be prefixed with a `!`. To obtain more information on a command, just type `!command help`\n\n";
+    private String TEXT = "The currently available commands are listed below. All commands must be prefixed with a `!` (by default). To obtain more information on a command, just type `!command help`\n\n";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

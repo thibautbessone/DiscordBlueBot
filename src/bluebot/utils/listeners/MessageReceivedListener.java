@@ -1,15 +1,8 @@
 package bluebot.utils.listeners;
 
 import bluebot.MainBot;
-import net.dv8tion.jda.OnlineStatus;
-import net.dv8tion.jda.events.guild.GuildJoinEvent;
-import net.dv8tion.jda.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.events.guild.member.GuildMemberLeaveEvent;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.events.user.UserNameUpdateEvent;
-import net.dv8tion.jda.events.user.UserOnlineStatusUpdateEvent;
 import net.dv8tion.jda.hooks.ListenerAdapter;
-import sun.applet.Main;
 
 import java.time.LocalDateTime;
 
@@ -25,14 +18,23 @@ public class MessageReceivedListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
         try {
             if(event.getAuthor().getId() != MainBot.getJda().getSelfInfo().getId()) {
-                if(event.getMessage().getContent().startsWith(MainBot.prefix) && event.getMessage().getAuthor() != event.getJDA()) {
-                    MainBot.handleCommand(MainBot.parser.parse(event.getMessage().getContent(), event));
+                if (MainBot.getPrefixes().containsKey(event.getGuild())) {
+                    System.out.println("test");
+                    if(event.getMessage().getContent().startsWith(MainBot.getPrefixes().get(event.getGuild())) && event.getMessage().getAuthor() != event.getJDA()) {
+                        System.out.println("test2");
+                        MainBot.handleCommand(MainBot.parser.parse(event.getMessage().getContent(), event));
+                    }
+                } else {
+                    if(event.getMessage().getContent().startsWith(MainBot.getBasePrefix()) && event.getMessage().getAuthor() != event.getJDA()) {
+                        MainBot.handleCommand(MainBot.parser.parse(event.getMessage().getContent(), event));
+                    }
                 }
+                System.out.println(MainBot.getBasePrefix());
                 System.out.println("[" + LocalDateTime.now() + "] " + "Guild : " + event.getGuild().getName() + "/" + event.getAuthor().getUsername() + "(" + event.getMessage().getAuthor().getId() + ")" + " : " + event.getMessage().getContent());
             }
         } catch (NullPointerException e) {
             //Command sent in private channel with the bot.
-            if(event.getMessage().getContent().startsWith(MainBot.prefix) && event.getMessage().getAuthor() != event.getJDA()) {
+            if(event.getMessage().getContent().startsWith(MainBot.getBasePrefix()) && event.getMessage().getAuthor() != event.getJDA()) {
                 event.getPrivateChannel().sendMessage("You can't use commands in our private conversation :wink:");
             }
         }

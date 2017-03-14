@@ -4,10 +4,7 @@ import bluebot.commands.fun.*;
 import bluebot.commands.fun.quickreactions.IDGFCommand;
 import bluebot.commands.fun.quickreactions.NopeCommand;
 import bluebot.commands.fun.quickreactions.WatCommand;
-import bluebot.commands.misc.AddBadWordCommand;
-import bluebot.commands.misc.InfoCommand;
-import bluebot.commands.misc.PlaySoundCommand;
-import bluebot.commands.misc.TrackTwitchCommand;
+import bluebot.commands.misc.*;
 import bluebot.commands.moderation.SetAutoRoleCommand;
 import bluebot.commands.moderation.SetPrefixCommand;
 import bluebot.commands.utility.*;
@@ -121,6 +118,7 @@ public class MainBot {
         commands.put("idgf", new IDGFCommand());
         commands.put("addbw", new AddBadWordCommand());
         commands.put("info", new InfoCommand());
+        commands.put("steam", new SteamStatusCommand());
 
     }
 

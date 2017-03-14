@@ -1,6 +1,8 @@
 # BlueBot - A Java-written Discord bot
 
-**Support server :** [<img src="https://discordapp.com/api/guilds/268853008455041025/widget.png?style=shield">](https://discord.gg/rSekkJv)
+**Support server :** 
+
+[<img src="https://discordapp.com/api/guilds/268853008455041025/widget.png?style=banner2">](https://discord.gg/rSekkJv)
 
 You can also contact me on **Steam**, but please write a comment before adding me : [<img src="https://img.shields.io/badge/Steam-Blue-blue.svg">](http://steamcommunity.com/profiles/76561198206490817)
 

@@ -5,7 +5,9 @@
    <b>Support server :</b>
 </p>
 <p align=center>
-  <img src="https://discordapp.com/api/guilds/268853008455041025/widget.png?style=banner2" href="https://discord.gg/rSekkJv">
+  <a  href="https://discord.gg/rSekkJv">
+    <img src="https://discordapp.com/api/guilds/268853008455041025/widget.png?style=banner2">
+  </a>
 </p>
 
   

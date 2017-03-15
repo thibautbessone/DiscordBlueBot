@@ -1,18 +1,14 @@
 # BlueBot - A Java-written Discord bot
 
-<p align="center">
-  <img src="http://i.imgur.com/RZ25Ype.png" alt="BlueBot"/>
-   <b>Support server :</b>
+<p align="center" >
+  <img src="http://i.imgur.com/RZ25Ype.png" alt="BlueBot"/><br>
+   <b>Join the support server :</b>
 </p>
 <p align=center>
   <a  href="https://discord.gg/rSekkJv">
     <img src="https://discordapp.com/api/guilds/268853008455041025/widget.png?style=banner2">
-  </a>
+  </a><br><br><br>
 </p>
-
-  
-
-
 
 You can also contact me on **Steam**, but please write a comment before adding me : [<img src="https://img.shields.io/badge/Steam-Blue-blue.svg">](http://steamcommunity.com/profiles/76561198206490817)
 

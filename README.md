@@ -31,7 +31,7 @@ However, the required dependancies for the bot are included in this repository.
 
 ## Getting started
 
-If you want a .exe (or something like that), go [here](https://github.com/thibautbessone/DiscordBlueBotReleases) and download the latest version for all the features. Simple instructions are provided in order to make the bot to work.
+<!--If you want a .exe (or something like that), go [here](https://github.com/thibautbessone/DiscordBlueBotReleases) and download the latest version for all the features. Simple instructions are provided in order to make the bot to work.-->
 
 To edit the code, just follow these steps : 
 * Create your onw app [here](https://discordapp.com/login?redirect_to=/developers/applications/me).

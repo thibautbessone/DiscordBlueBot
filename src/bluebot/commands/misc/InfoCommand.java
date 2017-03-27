@@ -3,6 +3,12 @@ package bluebot.commands.misc;
 import bluebot.MainBot;
 import bluebot.utils.Command;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
+import sun.applet.Main;
+
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+
 
 /**
  * @file InfoCommand.java
@@ -24,14 +30,25 @@ public class InfoCommand implements Command {
     public void action(String[] args, MessageReceivedEvent event) {
         int usersNumber = MainBot.getJda().getUsers().size();
         int serversNumber = MainBot.getJda().getGuilds().size();
-        int responseNumber = MainBot.getJda().getResponseTotal();
+        int channelNumber = MainBot.getJda().getTextChannels().size();
+        int voiceChannelNumber = MainBot.getJda().getVoiceChannels().size();
 
         String game = MainBot.getJda().getSelfInfo().getCurrentGame().getName();
+
         String message = new String();
-        message += "Current users : `" + usersNumber + "`\n";
-        message += "Current servers : `" + serversNumber + "`\n";
-        message += "Responses number : `" + responseNumber + "`\n";
+        message += "Users : `" + usersNumber + "`\n";
+        message += "Servers : `" + serversNumber + "`\n";
+        message += "Channels : `" + channelNumber + "` text channels and `" + voiceChannelNumber +"` voice channels\n";
         message += "Current game : `" + game + "`\n";
+
+        LocalDateTime curr = LocalDateTime.now();
+
+        Duration dur = Duration.between(MainBot.getStartTime(), curr);
+        long days = dur.toDays();
+        long hours = dur.toHours();
+        long minutes = dur.toMinutes();
+        message += "Uptime : `" + days + "` day(s), `" + hours + "` hours and `" + minutes + "` minutes";
+
         event.getTextChannel().sendMessage(message);
     }
 

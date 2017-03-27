@@ -2,6 +2,7 @@ package bluebot;
 
 import bluebot.commands.fun.*;
 import bluebot.commands.fun.quickreactions.IDGFCommand;
+import bluebot.commands.fun.quickreactions.KappaCommand;
 import bluebot.commands.fun.quickreactions.NopeCommand;
 import bluebot.commands.fun.quickreactions.WatCommand;
 import bluebot.commands.misc.*;
@@ -14,6 +15,7 @@ import net.dv8tion.jda.*;
 import net.dv8tion.jda.entities.Guild;
 
 import javax.security.auth.login.LoginException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +32,7 @@ public class MainBot {
 
 
     private static JDA jda;
+    private static LocalDateTime startTime = LocalDateTime.now();
     public static final CommandParser parser = new CommandParser();
     public static TreeMap<String, Command> commands = new TreeMap<String, Command>();
     private static Map<String, String> streamerList =  new HashMap<>();
@@ -119,6 +122,8 @@ public class MainBot {
         commands.put("addbw", new AddBadWordCommand());
         commands.put("info", new InfoCommand());
         commands.put("steam", new SteamStatusCommand());
+        commands.put("kappa", new KappaCommand());
+        commands.put("prune", new PruneCommand());
 
     }
 
@@ -127,6 +132,7 @@ public class MainBot {
     }
     public static Map<String, String> getStreamerList() {return streamerList;}
     public static Map<String, String> getAutoRoleList() {return autoRoleList;}
+    public static LocalDateTime getStartTime() {return startTime;}
 
 
 }

@@ -37,22 +37,14 @@ public class MainBot {
     public static TreeMap<String, Command> commands = new TreeMap<String, Command>();
     private static Map<String, String> streamerList =  new HashMap<>();
     private static Map<String, String> autoRoleList = new HashMap<>();
-    private static ArrayList<String> badWords = new ArrayList<>();
+    private static Map<Guild, ArrayList<String>> badWords = new HashMap<>();
     private static Map<Guild, String> prefixes = new HashMap<>();
 
     public static Map<Guild, String> getPrefixes() {
         return prefixes;
     }
 
-    public static ArrayList<String> getBadWords() {
-        return badWords;
-    }
-
-    private static String basePrefix = new String("!");
-
-    public static String getBasePrefix() {
-        return basePrefix;
-    }
+    private static String basePrefix = "!";
 
     public static void setBasePrefix(String basePrefix) {
         MainBot.basePrefix = basePrefix;
@@ -112,14 +104,13 @@ public class MainBot {
         commands.put("wat", new WatCommand());
         commands.put("gif", new GifCommand());
         commands.put("c&h", new CyanideHapinessCommand());
-        //commands.put("steam", new SteamUserInfoCommand());
         commands.put("setprefix", new SetPrefixCommand());
         commands.put("sound", new PlaySoundCommand());
         commands.put("tracktwitch", new TrackTwitchCommand());
         commands.put("setautorole", new SetAutoRoleCommand());
         commands.put("cat", new CatCommand());
         commands.put("idgf", new IDGFCommand());
-        commands.put("addbw", new AddBadWordCommand());
+        commands.put("bw", new BadWordCommand());
         commands.put("info", new InfoCommand());
         commands.put("steam", new SteamStatusCommand());
         commands.put("kappa", new KappaCommand());
@@ -133,6 +124,8 @@ public class MainBot {
     public static Map<String, String> getStreamerList() {return streamerList;}
     public static Map<String, String> getAutoRoleList() {return autoRoleList;}
     public static LocalDateTime getStartTime() {return startTime;}
+    public static Map<Guild, ArrayList<String>> getBadWords() {return badWords;}
+    public static String getBasePrefix() {return basePrefix;}
 
 
 }

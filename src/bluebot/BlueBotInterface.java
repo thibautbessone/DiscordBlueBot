@@ -74,7 +74,7 @@ public class BlueBotInterface extends JFrame {
 
         //assigns stdout and stdrr to the console output
         System.setOut(console);
-        //System.setErr(console);
+        System.setErr(console);
 
         text.setBorder(null);
         text.setEditable(false);

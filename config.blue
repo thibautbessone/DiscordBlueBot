@@ -1,10 +1,10 @@
 //BlueBot config file
 
 //The token of your application
-botToken=YOURAPPTOKEN
+botToken=MjY4NDIwMTk5MzcwMTk0OTQ0.C4E8yQ.kPEmGe3MXP8O6l79l8ObcOAXIiI
 
 //The current played game of the bot
-botActivity=under development
+botActivity=type !help for help
 
 //The CleverBot API Key
-cleverbotAPIKey=YOURCLEVERBOTAPIKEY
+cleverbotAPIKey=CCCn4jg_94_o9DFwxUip8vRS9Hw

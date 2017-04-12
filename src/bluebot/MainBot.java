@@ -46,9 +46,9 @@ public class MainBot {
 
     private static String basePrefix = "!";
 
-    public static void setBasePrefix(String basePrefix) {
+    /*public static void setBasePrefix(String basePrefix) {
         MainBot.basePrefix = basePrefix;
-    }
+    }*/
 
     public static void handleCommand(CommandParser.CommandContainer cmdContainer) {
         if(commands.containsKey(cmdContainer.invoke)) {
@@ -114,7 +114,7 @@ public class MainBot {
         commands.put("info", new InfoCommand());
         commands.put("steam", new SteamStatusCommand());
         commands.put("kappa", new KappaCommand());
-        commands.put("prune", new PruneCommand());
+        //commands.put("prune", new PruneCommand());
 
     }
 

@@ -37,8 +37,6 @@ public class LoadingProperties {
             botActivity = properties.getProperty("botActivity");
             cleverbotAPIKey = properties.getProperty("cleverbotAPIKey");
 
-
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

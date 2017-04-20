@@ -1,14 +1,8 @@
 package bluebot.utils.listeners;
 
 import bluebot.MainBot;
-import net.dv8tion.jda.entities.Guild;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.hooks.ListenerAdapter;
-import net.dv8tion.jda.managers.RoleManager;
-
-import javax.management.relation.Role;
-import javax.management.relation.RoleList;
-import java.lang.reflect.Member;
 
 
 /**

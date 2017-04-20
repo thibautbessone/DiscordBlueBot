@@ -2,7 +2,9 @@ package bluebot.commands.moderation;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;
+import net.dv8tion.jda.Permission;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.utils.PermissionUtil;
 
 /**
  * @file SetPrefixCommand.java
@@ -12,12 +14,23 @@ import net.dv8tion.jda.events.message.MessageReceivedEvent;
  */
 public class SetPrefixCommand implements Command {
 
-    private final String HELP = "The command `setprefix` let you change the prefix used by the bot.\n The default prefix is `!` \n\nUsage : `!setprefix yourPrefix`";
+    private final String HELP = "The command `setprefix` let you change the prefix used by the bot." +
+                                "\nThis command requires the administration permissions." +
+                                "\n The default prefix is `!` \n\nUsage : `!setprefix yourPrefix`";
+    private boolean permissionFail = false;
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
         if(args.length == 0 || args[0].equals("help") || args.length > 1) {return false;}
-        else return true;
+        else {
+            if(PermissionUtil.checkPermission(event.getGuild(), event.getAuthor(), Permission.ADMINISTRATOR)) {
+                return true;
+            } else {
+                event.getTextChannel().sendMessage(event.getAuthor().getAsMention() + ", you don't have the permission to do that.");
+                permissionFail = true;
+                return false;
+            }
+        }
     }
 
     @Override
@@ -34,7 +47,10 @@ public class SetPrefixCommand implements Command {
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
         if(!success) {
-            event.getTextChannel().sendMessage(help());
+            if(!permissionFail) {
+                event.getTextChannel().sendMessage(help());
+            }
+            permissionFail = false;
         }
 
     }

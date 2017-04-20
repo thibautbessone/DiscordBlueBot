@@ -6,6 +6,7 @@ import bluebot.commands.fun.quickreactions.KappaCommand;
 import bluebot.commands.fun.quickreactions.NopeCommand;
 import bluebot.commands.fun.quickreactions.WatCommand;
 import bluebot.commands.misc.*;
+import bluebot.commands.moderation.BadWordCommand;
 import bluebot.commands.moderation.SetAutoRoleCommand;
 import bluebot.commands.moderation.SetPrefixCommand;
 import bluebot.commands.utility.*;
@@ -40,6 +41,12 @@ public class MainBot {
     private static Map<Guild, ArrayList<String>> badWords = new HashMap<>();
     private static Map<Guild, String> prefixes = new HashMap<>();
 
+    private static Map<String, String> bannedServers = new HashMap<>(); //server, reason for ban
+
+    public static Map<String, String> getBannedServers() {
+        return bannedServers;
+    }
+
     public static Map<Guild, String> getPrefixes() {
         return prefixes;
     }
@@ -71,13 +78,19 @@ public class MainBot {
             LoadingProperties config = new LoadingProperties();
             jda = new JDABuilder().setBotToken(config.getBotToken())
                     .addListener(new CleverbotListener())
+                    .addListener(new BannedServersListener())
                     .addListener(new TwitchListener())
                     .addListener(new MessageReceivedListener())
                     .addListener(new BadWordsListener())
                     .addListener(new UserJoinLeaveListener()).setBulkDeleteSplittingEnabled(false).buildBlocking();
 
+
+
             jda.getAccountManager().setGame(config.getBotActivity());
             System.out.println("Current activity " + jda.getSelfInfo().getCurrentGame());
+            /*for(Guild g : jda.getGuilds()) {
+                System.out.println(g.getId() + " " + g.getName());
+            }*/
             System.out.println("Connected servers : " + jda.getGuilds().size());
             System.out.println("Concerned users : " + jda.getUsers().size());
 
@@ -89,6 +102,9 @@ public class MainBot {
             return;
         }
 
+        //Banned servers
+        bannedServers.put("304031909648793602", "spamming w/ bots to crash small bots");
+        //bannedServers.put("281978005088370688", "BlueBot TestServer");
 
 
         //Activated bot commands

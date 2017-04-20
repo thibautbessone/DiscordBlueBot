@@ -3,7 +3,7 @@ package bluebot.commands.utility;
 import bluebot.utils.Command;
 import net.dv8tion.jda.Permission;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.exceptions.PermissionException;
+import net.dv8tion.jda.utils.PermissionUtil;
 
 /**
  * @file ClearCommand.java
@@ -13,12 +13,22 @@ import net.dv8tion.jda.exceptions.PermissionException;
  */
 public class ClearCommand implements Command {
 
-    private final String HELP = "The command `clear` deletes the number of messages given in parameter. \n\nUsage : `!clear number (over 1)`";
-
+    private final String HELP = "The command `clear` deletes the number of messages given in parameter." +
+                                "\nThis command requires the manage messages permission." +
+                                " \n\nUsage : `!clear number (over 1)`";
+    private boolean permissionFail = false;
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
         if(args.length == 0 || args[0].equals("help")) {return false;}
-        else return true;
+        else {
+            if(PermissionUtil.checkPermission(event.getGuild(), event.getAuthor(), Permission.MESSAGE_MANAGE)) {
+                return true;
+            } else {
+                event.getTextChannel().sendMessage(event.getAuthor().getAsMention() + ", you don't have the permission to do that.");
+                permissionFail = true;
+                return false;
+            }
+        }
     }
 
     @Override
@@ -44,9 +54,11 @@ public class ClearCommand implements Command {
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
-    if (!success) {
-        event.getTextChannel().sendMessage(help());
-    }
-
+        if (!success) {
+            if(!permissionFail) {
+                event.getTextChannel().sendMessage(help());
+            }
+            permissionFail = false;
+        }
     }
 }

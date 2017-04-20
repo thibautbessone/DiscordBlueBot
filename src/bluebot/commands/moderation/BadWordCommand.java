@@ -1,8 +1,10 @@
-package bluebot.commands.misc;
+package bluebot.commands.moderation;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;
+import net.dv8tion.jda.Permission;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.utils.PermissionUtil;
 
 import java.util.ArrayList;
 
@@ -14,15 +16,25 @@ import java.util.ArrayList;
  */
 public class BadWordCommand implements Command {
 
-    private final String HELP = "The command `bw` allow you to ban some words to be used on your server.\n\n" +
-            "Usage : \n`!bw add yourWord` adds yourWord to the forbidden words list\n" +
+    private final String HELP = "The command `bw` allow you to ban some words to be used on your server." +
+            "\nThis command requires the manage messages permission." +
+            "\n\nUsage : \n`!bw add yourWord` adds yourWord to the forbidden words list\n" +
             "`!bw rm yourWord` removes yourWord from the forbidden words list if it's in the list\n" +
             "`!bw list` sends you a DM with the forbidden words list.";
+    private boolean permissionFail = false;
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
         if (args.length == 0 || args[0].equals("help") || args.length > 2) {return false;}
-        else return true;
+        else {
+            if(PermissionUtil.checkPermission(event.getGuild(), event.getAuthor(), Permission.MESSAGE_MANAGE)) {
+                return true;
+            } else {
+                event.getTextChannel().sendMessage(event.getAuthor().getAsMention() + ", you don't have the permission to do that.");
+                permissionFail = true;
+                return false;
+            }
+        }
     }
 
     @Override
@@ -66,9 +78,11 @@ public class BadWordCommand implements Command {
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help());
+        if (!success) {
+            if(!permissionFail) {
+                event.getTextChannel().sendMessage(help());
+            }
+            permissionFail = false;
         }
-
     }
 }

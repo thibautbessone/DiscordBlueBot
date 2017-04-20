@@ -3,8 +3,10 @@ package bluebot.commands.misc;
 import bluebot.MainBot;
 import bluebot.utils.Command;
 import bluebot.utils.listeners.TwitchListener;
+import net.dv8tion.jda.Permission;
 import net.dv8tion.jda.entities.User;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.utils.PermissionUtil;
 
 import java.util.List;
 
@@ -16,12 +18,22 @@ import java.util.List;
  */
 public class TrackTwitchCommand implements Command {
 
-    private final String HELP = "The command `tracktwitch` makes the bot when the specified user is streaming \n\nUsage : `!tracktwitch @TrackedUser streamLink`";
-
+    private final String HELP = "The command `tracktwitch` makes the bot when the specified user is streaming." +
+                                "\nThis command requires the manage messages permission." +
+                                " \n\nUsage : `!tracktwitch @TrackedUser streamLink`";
+    private boolean permissionFail = false;
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
         if(args.length == 0 || args.length > 2 || args[0].equals("help")) {return false;}
-        else return true;
+        else {
+            if(PermissionUtil.checkPermission(event.getGuild(), event.getAuthor(), Permission.MESSAGE_MANAGE)) {
+                return true;
+            } else {
+                event.getTextChannel().sendMessage(event.getAuthor().getAsMention() + ", you don't have the permission to do that.");
+                permissionFail = true;
+                return false;
+            }
+        }
     }
 
     @Override
@@ -49,7 +61,10 @@ public class TrackTwitchCommand implements Command {
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
         if(!success) {
-            event.getTextChannel().sendMessage(help());
+            if(!permissionFail) {
+                event.getTextChannel().sendMessage(help());
+            }
+            permissionFail = false;
         }
     }
 }

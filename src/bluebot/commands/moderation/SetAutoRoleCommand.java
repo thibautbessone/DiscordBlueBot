@@ -2,8 +2,11 @@ package bluebot.commands.moderation;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;
+import net.dv8tion.jda.Permission;
 import net.dv8tion.jda.entities.Role;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.utils.PermissionUtil;
+
 import java.util.List;
 
 /**
@@ -14,29 +17,36 @@ import java.util.List;
  */
 public class SetAutoRoleCommand implements Command {
 
-    private final String HELP = "The command `setautorole` let the owner automatically assign the specified role to new users.\n\nUsage : `!setautorole role`";
+    private final String HELP = "The command `setautorole` let the owner automatically assign the specified role to new users." +
+                                "\nThis command requires the administration permissions." +
+                                "\n\nUsage : `!setautorole role`";
+    private boolean permissionFail = false;
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
         if(args.length != 1 || args[0].equals("help")) {return false;}
-        else return true;
+        else {
+            if(PermissionUtil.checkPermission(event.getGuild(), event.getAuthor(), Permission.ADMINISTRATOR)) {
+                return true;
+            } else {
+                event.getTextChannel().sendMessage(event.getAuthor().getAsMention() + ", you don't have the permission to do that.");
+                permissionFail = true;
+                return false;
+            }
+        }
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        if(event.getAuthor() == event.getGuild().getOwner()) {
-            List<Role> roleList = event.getGuild().getRoles();
-            for(Role role : roleList) {
-                if(args[0].equals(role.getName())) {
-                    MainBot.getAutoRoleList().put(event.getGuild().getId(), role.getName());
-                    event.getTextChannel().sendMessage("The role given on join is now " + MainBot.getAutoRoleList().get(event.getGuild().getId()));
-                    return;
-                }
+        List<Role> roleList = event.getGuild().getRoles();
+        for(Role role : roleList) {
+            if(args[0].equals(role.getName())) {
+                MainBot.getAutoRoleList().put(event.getGuild().getId(), role.getName());
+                event.getTextChannel().sendMessage("The role given on join is now " + MainBot.getAutoRoleList().get(event.getGuild().getId()));
+                return;
             }
-            event.getTextChannel().sendMessage("The specified role doesn't exist");
-        } else {
-            event.getTextChannel().sendMessage("Only the owner of the server can use the `setautorole` command");
         }
+        event.getTextChannel().sendMessage("The specified role doesn't exist");
     }
 
 
@@ -48,7 +58,10 @@ public class SetAutoRoleCommand implements Command {
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
         if (!success) {
-            event.getTextChannel().sendMessage(help());
+            if(!permissionFail) {
+                event.getTextChannel().sendMessage(help());
+            }
+            permissionFail = false;
         }
     }
 }

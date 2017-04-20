@@ -41,13 +41,13 @@ public class InfoCommand implements Command {
         message += "Channels : `" + channelNumber + "` text channels and `" + voiceChannelNumber +"` voice channels\n";
         message += "Current game : `" + game + "`\n";
 
-        LocalDateTime curr = LocalDateTime.now();
+        /*LocalDateTime curr = LocalDateTime.now();
 
         Duration dur = Duration.between(MainBot.getStartTime(), curr);
         long days = dur.toDays();
         long hours = dur.toHours();
         long minutes = dur.toMinutes();
-        message += "Uptime : `" + days + "` day(s), `" + hours + "` hours and `" + minutes + "` minutes";
+        message += "Uptime : `" + days + "` day(s), `" + hours + "` hours and `" + minutes + "` minutes";*/
 
         event.getTextChannel().sendMessage(message);
     }

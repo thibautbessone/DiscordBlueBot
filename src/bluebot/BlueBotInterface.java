@@ -157,10 +157,18 @@ public class BlueBotInterface extends JFrame {
     }
 
     public static void main(String[] args) {
-        BlueBotInterface blueBotConsole = new BlueBotInterface();
-        blueBotConsole.setVisible(true);
-        blueBotConsole.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+        if(args.length == 1) {
+            if(args[0].equals("cmd")) {
+                new MainBot();
+            } else {
+                System.out.println("Invalid option - use the cmd option to run in command-line mode.\n" +
+                        "Usage : java -jar BlueBot.jar cmd");
+            }
+        } else {
+            BlueBotInterface blueBotConsole = new BlueBotInterface();
+            blueBotConsole.setVisible(true);
+            blueBotConsole.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        }
     }
 
 }

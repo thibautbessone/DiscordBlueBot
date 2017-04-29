@@ -23,7 +23,7 @@ import java.util.Map;
  */
 public class PlaySoundCommand implements Command {
 
-    private Map<Guild, MyUrlPlayer> urlPlayersMap = new HashMap<>();
+    //private Map<Guild, MyUrlPlayer> urlPlayersMap = new HashMap<>();
     private final String HELP = "The command `sound` makes the bot join your current voice channel and play the specified sound. \n\nUsage : `!sound list` - lists all the available sounds, `!sound theSpecifiedSound` - plays the sound";
     private File folder = new File("soundboard");
     private Map<Guild, AudioManager> audioManagerMap = new HashMap<>();
@@ -37,8 +37,8 @@ public class PlaySoundCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        if(!urlPlayersMap.containsKey(event.getGuild())) {
-            urlPlayersMap.put(event.getGuild(), new MyUrlPlayer(MainBot.getJda()));
+        if(!MainBot.getUrlPlayersMap().containsKey(event.getGuild())) {
+            MainBot.getUrlPlayersMap().put(event.getGuild(), new MyUrlPlayer(MainBot.getJda()));
         }
 
         if(args[0].equals("list")) {
@@ -66,14 +66,14 @@ public class PlaySoundCommand implements Command {
 
         } else if(args[0].equals("stop")) {
             if(audioManagerMap.get(event.getGuild()).isConnected()) {
-                urlPlayersMap.get(event.getGuild()).reset();
+                MainBot.getUrlPlayersMap().get(event.getGuild()).reset();
                 audioManagerMap.get(event.getGuild()).closeAudioConnection();
             } else {
                 event.getTextChannel().sendMessage("I'm not even playing :cry:");
             }
         } else {
             //Play the sound
-            if(urlPlayersMap.get(event.getGuild()).isPlaying()) {
+            if(MainBot.getUrlPlayersMap().get(event.getGuild()).isPlaying()) {
                 event.getTextChannel().sendMessage("I'm already playing a sound.");
                 return;
             }
@@ -81,17 +81,17 @@ public class PlaySoundCommand implements Command {
             audioManagerMap.put(event.getGuild(), audioManager);
             voiceChannelList = audioManagerMap.get(event.getGuild()).getGuild().getVoiceChannels();
             boolean userConnected = false;
-            urlPlayersMap.get(event.getGuild()).reset();
+            MainBot.getUrlPlayersMap().get(event.getGuild()).reset();
 
             for(VoiceChannel channel : voiceChannelList) {
                 if(channel.getUsers().contains(event.getAuthor())) {
                     userConnected = true;
-                    audioManagerMap.get(event.getGuild()).setSendingHandler(urlPlayersMap.get(event.getGuild()));
-                    urlPlayersMap.get(event.getGuild()).setVolume(1);
+                    audioManagerMap.get(event.getGuild()).setSendingHandler(MainBot.getUrlPlayersMap().get(event.getGuild()));
+                    MainBot.getUrlPlayersMap().get(event.getGuild()).setVolume(1);
                     try {
                         URL file = new File(folder.getName() + "/" + args[0] + ".mp3").toURI().toURL();
-                        urlPlayersMap.get(event.getGuild()).setAudioUrl(file);
-                        urlPlayersMap.get(event.getGuild()).play();
+                        MainBot.getUrlPlayersMap().get(event.getGuild()).setAudioUrl(file);
+                        MainBot.getUrlPlayersMap().get(event.getGuild()).play();
                         if(!audioManagerMap.get(event.getGuild()).isConnected()) {
                             audioManagerMap.get(event.getGuild()).openAudioConnection(channel);
                         }

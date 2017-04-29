@@ -40,7 +40,7 @@ public class MainBot {
     private static Map<String, String> autoRoleList = new HashMap<>();
     private static Map<Guild, ArrayList<String>> badWords = new HashMap<>();
     private static Map<Guild, String> prefixes = new HashMap<>();
-
+    private static Map<Guild, MyUrlPlayer> urlPlayersMap = new HashMap<>();
     private static Map<String, String> bannedServers = new HashMap<>(); //server, reason for ban
 
     public static Map<String, String> getBannedServers() {
@@ -51,11 +51,11 @@ public class MainBot {
         return prefixes;
     }
 
-    private static String basePrefix = "!";
+    public static Map<Guild, MyUrlPlayer> getUrlPlayersMap() {
+        return urlPlayersMap;
+    }
 
-    /*public static void setBasePrefix(String basePrefix) {
-        MainBot.basePrefix = basePrefix;
-    }*/
+    private static String basePrefix = "!";
 
     public static void handleCommand(CommandParser.CommandContainer cmdContainer) {
         if(commands.containsKey(cmdContainer.invoke)) {
@@ -78,6 +78,7 @@ public class MainBot {
             LoadingProperties config = new LoadingProperties();
             jda = new JDABuilder().setBotToken(config.getBotToken())
                     .addListener(new CleverbotListener())
+                    .addListener(new BotKickedListener())
                     .addListener(new BannedServersListener())
                     .addListener(new TwitchListener())
                     .addListener(new MessageReceivedListener())

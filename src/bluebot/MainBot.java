@@ -9,6 +9,8 @@ import bluebot.commands.misc.*;
 import bluebot.commands.moderation.BadWordCommand;
 import bluebot.commands.moderation.SetAutoRoleCommand;
 import bluebot.commands.moderation.SetPrefixCommand;
+import bluebot.commands.owner.SetGameCommand;
+import bluebot.commands.owner.SetOnlineStateCommand;
 import bluebot.commands.utility.*;
 import bluebot.utils.*;
 import bluebot.utils.listeners.*;
@@ -25,7 +27,7 @@ import java.util.TreeMap;
 /**
  * @file MainBot.java
  * @author Blue
- * @version 0.2
+ * @version 0.45 (I forgot some ...)
  * @brief The main class of BlueBot
  */
 
@@ -33,6 +35,7 @@ public class MainBot {
 
 
     private static JDA jda;
+    private static String botOwner;
     private static LocalDateTime startTime = LocalDateTime.now();
     public static final CommandParser parser = new CommandParser();
     public static TreeMap<String, Command> commands = new TreeMap<String, Command>();
@@ -53,6 +56,10 @@ public class MainBot {
 
     public static Map<Guild, MyUrlPlayer> getUrlPlayersMap() {
         return urlPlayersMap;
+    }
+
+    public static String getBotOwner() {
+        return botOwner;
     }
 
     private static String basePrefix = "!";
@@ -86,7 +93,7 @@ public class MainBot {
                     .addListener(new UserJoinLeaveListener()).setBulkDeleteSplittingEnabled(false).buildBlocking();
 
 
-
+            botOwner = config.getBotOwner();
             jda.getAccountManager().setGame(config.getBotActivity());
             System.out.println("Current activity " + jda.getSelfInfo().getCurrentGame());
             /*for(Guild g : jda.getGuilds()) {
@@ -133,6 +140,9 @@ public class MainBot {
         commands.put("kappa", new KappaCommand());
         //commands.put("prune", new PruneCommand());
 
+        //Owner commands
+        commands.put("setgame", new SetGameCommand());
+        commands.put("setos", new SetOnlineStateCommand());
     }
 
     public static JDA getJda() {

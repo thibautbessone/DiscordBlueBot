@@ -15,14 +15,20 @@ public class LoadingProperties {
     private String botActivity;
     private String steamAPIKey;
     private String cleverbotAPIKey;
+    private String botOwner;
 
-    public String getCleverbotAPIKey() {return cleverbotAPIKey;}
+    public String getCleverbotAPIKey() {
+        return cleverbotAPIKey;
+    }
     public String getBotToken() {
         return botToken;
     }
     public String getSteamAPIKey() {return steamAPIKey;}
     public String getBotActivity() {
         return botActivity;
+    }
+    public String getBotOwner() {
+        return botOwner;
     }
 
     public LoadingProperties() {
@@ -36,9 +42,8 @@ public class LoadingProperties {
             botToken = properties.getProperty("botToken");
             botActivity = properties.getProperty("botActivity");
             cleverbotAPIKey = properties.getProperty("cleverbotAPIKey");
+            botOwner = properties.getProperty("botOwner");
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

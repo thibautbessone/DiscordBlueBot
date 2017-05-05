@@ -1,10 +1,13 @@
 //BlueBot config file
 
 //The token of your application
-botToken=YOURAPPTOKEN
+botToken=MzA0NzA2MzQ4NjQ0MzAyODUz.C9qjcg.hdNvzYjK-IQ90NNJ7wjWzmUJuT8
 
 //The current played game of the bot
 botActivity=type !help for help
 
 //The CleverBot API Key
 cleverbotAPIKey=YOURCLEVERBOTAPIKEY
+
+//Your Discord ID
+botOwner=YOURIDHERE

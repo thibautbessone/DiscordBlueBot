@@ -7,18 +7,22 @@
 <p align=center>
   <a  href="https://discord.gg/rSekkJv">
     <img src="https://discordapp.com/api/guilds/268853008455041025/widget.png?style=banner2">
-  </a><br><br><br>
+  </a><br>
+</p>
+<p align=center>
+You can add the bot to your server by clicking on
+<a href="https://discordapp.com/oauth2/authorize?client_id=268420199370194944&scope=bot&permissions=-1">this link</a><br><br>
 </p>
 
-You can also contact me on **Steam**, but please write a comment before adding me : [<img src="https://img.shields.io/badge/Steam-Blue-blue.svg">](http://steamcommunity.com/profiles/76561198206490817)
 
-You can add the bot to your server by clicking on [this link](https://discordapp.com/oauth2/authorize?client_id=268420199370194944&scope=bot&permissions=-1).
+You can also contact me on **Steam** : [<img src="https://img.shields.io/badge/Steam-Blue-blue.svg">](http://steamcommunity.com/profiles/76561198206490817)
 
 The **API** can be found [here](https://github.com/DV8FromTheWorld/JDA).
 However, the required dependancies for the bot are included in this repository.
 
 **BlueBot** will provide useful features like :
 * Moderation & utility features
+* Owner-only commands
 * Extensible & customizable soundboard
 * CleverBot integration
 * GIFs search
@@ -39,6 +43,7 @@ To edit the code, just follow these steps :
 * On your application page, get your application **token**
 * open **config.blue**
 * replace **YOURTOKENHERE** by your application token
+* replace **YOURIDHERE** by your ID
 
 ## Commands
 

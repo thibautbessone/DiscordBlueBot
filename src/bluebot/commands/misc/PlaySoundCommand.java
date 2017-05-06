@@ -24,7 +24,10 @@ import java.util.Map;
 public class PlaySoundCommand implements Command {
 
     //private Map<Guild, MyUrlPlayer> urlPlayersMap = new HashMap<>();
-    private final String HELP = "The command `sound` makes the bot join your current voice channel and play the specified sound. \n\nUsage : `!sound list` - lists all the available sounds, `!sound theSpecifiedSound` - plays the sound";
+    private final String HELP = "The command `sound` makes the bot join your current voice channel and play the specified sound." +
+                                " \n\nUsage : `!sound list` - lists all the available sounds," +
+                                " `!sound theSpecifiedSound` - plays the sound," +
+                                " `!sound stop` - stop playing and makes the bot leave the voice channel.";
     private File folder = new File("soundboard");
     private Map<Guild, AudioManager> audioManagerMap = new HashMap<>();
     private List<VoiceChannel> voiceChannelList;

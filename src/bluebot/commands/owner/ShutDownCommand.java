@@ -2,25 +2,24 @@ package bluebot.commands.owner;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;
-import net.dv8tion.jda.OnlineStatus;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
 
 /**
- * @file SetOnlineStateCommand.java
+ * @file ShutDownCommand.java
  * @author Blue
  * @version 0.1
- * @brief Sets the online status of the bot
+ * @brief Shutdowns the bot (emergency command)
  */
-public class SetOnlineStateCommand implements Command {
+public class ShutDownCommand implements Command {
 
-    private final String HELP = "The command `setos` change the current online status of the bot." +
+    private final String HELP = "The command `shutdown` stops the bot." +
             "\nThis command requires to be the owner of the bot." +
-            "\n\nUsage : `!setos online | away | dnd (do not disturb) | invisible`";
+            "\n\nUsage : `!shutdown`";
     private boolean permissionFail = false;
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        if(args.length == 0 || args[0].equals("help")) {
+        if(args.length != 0 && args[0].equals("help") || args.length != 0) {
             return false;
         } else {
             if(event.getAuthor().getId().equals(MainBot.getBotOwner())) {
@@ -35,17 +34,9 @@ public class SetOnlineStateCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        try {
-            if(args[0].equals("dnd")) {
-                MainBot.getJda().getAccountManager().setStatus(OnlineStatus.DO_NOT_DISTURB);
-            } else {
-                MainBot.getJda().getAccountManager().setStatus(OnlineStatus.valueOf(args[0].toUpperCase()));
-            }
-            event.getTextChannel().sendMessage("Online status updated to " + args[0]);
-        } catch (IllegalArgumentException e) {
-            event.getTextChannel().sendMessage("Incorrect status.");
-        }
-
+        System.out.println("Forced shutdown ...");
+        event.getTextChannel().sendMessage("I've been shut down.");
+        MainBot.getJda().shutdown();
     }
 
     @Override

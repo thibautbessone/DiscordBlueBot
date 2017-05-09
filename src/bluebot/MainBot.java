@@ -9,8 +9,10 @@ import bluebot.commands.misc.*;
 import bluebot.commands.moderation.BadWordCommand;
 import bluebot.commands.moderation.SetAutoRoleCommand;
 import bluebot.commands.moderation.SetPrefixCommand;
+import bluebot.commands.owner.AnnouncementCommand;
 import bluebot.commands.owner.SetGameCommand;
 import bluebot.commands.owner.SetOnlineStateCommand;
+import bluebot.commands.owner.ShutDownCommand;
 import bluebot.commands.utility.*;
 import bluebot.utils.*;
 import bluebot.utils.listeners.*;
@@ -84,7 +86,7 @@ public class MainBot {
             //default method as provided in the API
             LoadingProperties config = new LoadingProperties();
             jda = new JDABuilder().setBotToken(config.getBotToken())
-                    .addListener(new CleverbotListener())
+                    //.addListener(new CleverbotListener()) //Cause key ran out of usage
                     .addListener(new BotKickedListener())
                     .addListener(new BannedServersListener())
                     .addListener(new TwitchListener())
@@ -143,6 +145,8 @@ public class MainBot {
         //Owner commands
         commands.put("setgame", new SetGameCommand());
         commands.put("setos", new SetOnlineStateCommand());
+        commands.put("shutdown", new ShutDownCommand());
+        commands.put("ann", new AnnouncementCommand());
     }
 
     public static JDA getJda() {

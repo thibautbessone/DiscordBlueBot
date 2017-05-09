@@ -2,20 +2,20 @@ package bluebot.commands.owner;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;
-import net.dv8tion.jda.OnlineStatus;
+import net.dv8tion.jda.entities.Guild;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
 
 /**
- * @file SetOnlineStateCommand.java
+ * @file AnnouncementCommand.java
  * @author Blue
  * @version 0.1
- * @brief Sets the online status of the bot
+ * @brief Allows the owner of the bot to say a message on all the server the bot is connected on.
  */
-public class SetOnlineStateCommand implements Command {
+public class AnnouncementCommand implements Command {
 
-    private final String HELP = "The command `setos` change the current online status of the bot." +
+    private final String HELP = "The command `announcement` makes the bot say a message on all its servers." +
             "\nThis command requires to be the owner of the bot." +
-            "\n\nUsage : `!setos online | away | dnd (do not disturb) | invisible`";
+            "\n\nUsage : `!announcement yourMessage`";
     private boolean permissionFail = false;
 
     @Override
@@ -35,17 +35,15 @@ public class SetOnlineStateCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        try {
-            if(args[0].equals("dnd")) {
-                MainBot.getJda().getAccountManager().setStatus(OnlineStatus.DO_NOT_DISTURB);
-            } else {
-                MainBot.getJda().getAccountManager().setStatus(OnlineStatus.valueOf(args[0].toUpperCase()));
-            }
-            event.getTextChannel().sendMessage("Online status updated to " + args[0]);
-        } catch (IllegalArgumentException e) {
-            event.getTextChannel().sendMessage("Incorrect status.");
+        String text = "Announcement : ";
+        for(String arg : args) {
+            text += arg + " ";
         }
-
+        for(Guild guild : MainBot.getJda().getGuilds()) {
+            if(guild == event.getGuild()) continue;
+            guild.getPublicChannel().sendMessage(text);
+        }
+        event.getTextChannel().sendMessage("Announcement done.");
     }
 
     @Override

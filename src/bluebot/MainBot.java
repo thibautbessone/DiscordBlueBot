@@ -149,6 +149,7 @@ public class MainBot {
         commands.put("setprefix", new SetPrefixCommand());
         commands.put("sound", new PlaySoundCommand());
         commands.put("tracktwitch", new TrackTwitchCommand());
+        commands.put("untrack", new UntrackCommand());
         commands.put("setautorole", new SetAutoRoleCommand());
         commands.put("cat", new CatCommand());
         commands.put("idgf", new IDGFCommand());

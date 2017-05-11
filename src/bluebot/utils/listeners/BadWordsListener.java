@@ -16,6 +16,9 @@ public class BadWordsListener extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
+        if(MainBot.getBwDisabled().contains(event.getGuild().getId())) {
+            return; //function disabled
+        }
         try {
             for(String word : MainBot.getBadWords().get(event.getGuild())) {
                 if(event.getMessage().getContent().contains(word)) {

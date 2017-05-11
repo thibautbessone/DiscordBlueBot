@@ -27,7 +27,10 @@ public class TwitchListener extends ListenerAdapter {
                 List<Guild> serverList = MainBot.getJda().getGuilds();
                 for(Guild server : serverList) {
                     if(server.getUsers().contains(event.getUser())) {
-                        server.getPublicChannel().sendMessage(server.getPublicRole().getName() + " : " + event.getUser().getUsername() + " is now streaming ! Watch live at " + MainBot.getStreamerList().get(event.getUser().getId()));
+                        if(MainBot.getTwitchDisabled().contains(server.getId())) {
+                            continue; //function disabled
+                        }
+                        server.getPublicChannel().sendMessage(/*server.getPublicRole().getName() + " : " + */event.getUser().getUsername() + " is now streaming ! Watch live at " + MainBot.getStreamerList().get(event.getUser().getId()));
                     }
                 }
             }

@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class TrackTwitchCommand implements Command {
 
-    private final String HELP = "The command `tracktwitch` makes the bot when the specified user is streaming." +
+    private final String HELP = "The command `tracktwitch` makes the bot post a message when the specified user is streaming." +
                                 "\nThis command requires the manage messages permission." +
                                 " \n\nUsage : `!tracktwitch @TrackedUser streamLink`";
     private boolean permissionFail = false;

@@ -6,9 +6,7 @@ import bluebot.commands.fun.quickreactions.KappaCommand;
 import bluebot.commands.fun.quickreactions.NopeCommand;
 import bluebot.commands.fun.quickreactions.WatCommand;
 import bluebot.commands.misc.*;
-import bluebot.commands.moderation.BadWordCommand;
-import bluebot.commands.moderation.SetAutoRoleCommand;
-import bluebot.commands.moderation.SetPrefixCommand;
+import bluebot.commands.moderation.*;
 import bluebot.commands.owner.AnnouncementCommand;
 import bluebot.commands.owner.SetGameCommand;
 import bluebot.commands.owner.SetOnlineStateCommand;
@@ -18,6 +16,7 @@ import bluebot.utils.*;
 import bluebot.utils.listeners.*;
 import net.dv8tion.jda.*;
 import net.dv8tion.jda.entities.Guild;
+import net.dv8tion.jda.hooks.ListenerAdapter;
 
 import javax.security.auth.login.LoginException;
 import java.time.LocalDateTime;
@@ -48,20 +47,34 @@ public class MainBot {
     private static Map<Guild, MyUrlPlayer> urlPlayersMap = new HashMap<>();
     private static Map<String, String> bannedServers = new HashMap<>(); //server, reason for ban
 
+    private static ArrayList<String> twitchDisabled = new ArrayList<>();
+    private static ArrayList<String> cleverbotDisabled = new ArrayList<>();
+    private static ArrayList<String> bwDisabled = new ArrayList<>();
+    private static ArrayList<String> userEventDisabled = new ArrayList<>();
+
     public static Map<String, String> getBannedServers() {
         return bannedServers;
     }
-
     public static Map<Guild, String> getPrefixes() {
         return prefixes;
     }
-
     public static Map<Guild, MyUrlPlayer> getUrlPlayersMap() {
         return urlPlayersMap;
     }
-
     public static String getBotOwner() {
         return botOwner;
+    }
+    public static ArrayList<String> getTwitchDisabled() {
+        return twitchDisabled;
+    }
+    public static ArrayList<String> getCleverbotDisabled() {
+        return cleverbotDisabled;
+    }
+    public static ArrayList<String> getBwDisabled() {
+        return bwDisabled;
+    }
+    public static ArrayList<String> getUserEventDisabled() {
+        return userEventDisabled;
     }
 
     private static String basePrefix = "!";
@@ -85,15 +98,18 @@ public class MainBot {
             //jda instanciation
             //default method as provided in the API
             LoadingProperties config = new LoadingProperties();
+
+            //userEventDisabled.add("281978005088370688");
+
             jda = new JDABuilder().setBotToken(config.getBotToken())
-                    //.addListener(new CleverbotListener()) //Cause key ran out of usage
+                    .addListener(new TwitchListener())
+                    .addListener(new CleverbotListener())
+                    .addListener(new BadWordsListener())
+                    .addListener(new UserJoinLeaveListener())
                     .addListener(new BotKickedListener())
                     .addListener(new BannedServersListener())
-                    .addListener(new TwitchListener())
                     .addListener(new MessageReceivedListener())
-                    .addListener(new BadWordsListener())
-                    .addListener(new UserJoinLeaveListener()).setBulkDeleteSplittingEnabled(false).buildBlocking();
-
+                    .setBulkDeleteSplittingEnabled(false).buildBlocking();
 
             botOwner = config.getBotOwner();
             jda.getAccountManager().setGame(config.getBotActivity());
@@ -140,6 +156,8 @@ public class MainBot {
         commands.put("info", new InfoCommand());
         commands.put("steam", new SteamStatusCommand());
         commands.put("kappa", new KappaCommand());
+        commands.put("enable", new EnableListenerCommand());
+        commands.put("disable", new DisableListenerCommand());
         //commands.put("prune", new PruneCommand());
 
         //Owner commands

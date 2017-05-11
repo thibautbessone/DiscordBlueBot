@@ -14,11 +14,17 @@ import net.dv8tion.jda.hooks.ListenerAdapter;
 public class UserJoinLeaveListener extends ListenerAdapter {
 
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
+        if(MainBot.getUserEventDisabled().contains(event.getGuild().getId())) {
+            return; //function disabled
+        }
         event.getGuild().getPublicChannel().sendMessage(event.getUser().getAsMention() + " has joined the server ! Welcome :wave: !");
         event.getGuild().getManager().addRoleToUser(event.getUser(), event.getGuild().getRolesByName(MainBot.getAutoRoleList().get(event.getGuild().getId())).get(0)).update();
     }
 
     public void onGuildMemberLeave(GuildMemberLeaveEvent event) {
+        if(MainBot.getUserEventDisabled().contains(event.getGuild().getId())) {
+            return; //function disabled
+        }
         event.getGuild().getPublicChannel().sendMessage(event.getUser().getAsMention() + " has left the server :cry: !");
     }
 }

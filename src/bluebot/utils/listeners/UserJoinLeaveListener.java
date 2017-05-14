@@ -17,7 +17,7 @@ public class UserJoinLeaveListener extends ListenerAdapter {
         if(MainBot.getUserEventDisabled().contains(event.getGuild().getId())) {
             return; //function disabled
         }
-        event.getGuild().getPublicChannel().sendMessage(event.getUser().getAsMention() + " has joined the server ! Welcome :wave: !");
+        MainBot.getUsereventChannel().get(event.getGuild()).sendMessage(event.getUser().getAsMention() + " has joined the server ! Welcome :wave: !");
         event.getGuild().getManager().addRoleToUser(event.getUser(), event.getGuild().getRolesByName(MainBot.getAutoRoleList().get(event.getGuild().getId())).get(0)).update();
     }
 
@@ -25,6 +25,6 @@ public class UserJoinLeaveListener extends ListenerAdapter {
         if(MainBot.getUserEventDisabled().contains(event.getGuild().getId())) {
             return; //function disabled
         }
-        event.getGuild().getPublicChannel().sendMessage(event.getUser().getAsMention() + " has left the server :cry: !");
+        MainBot.getUsereventChannel().get(event.getGuild()).sendMessage(event.getUser().getAsMention() + " has left the server :cry: !");
     }
 }

@@ -43,6 +43,12 @@ public class PlaySoundCommand implements Command {
         if(!MainBot.getUrlPlayersMap().containsKey(event.getGuild())) {
             MainBot.getUrlPlayersMap().put(event.getGuild(), new MyUrlPlayer(MainBot.getJda()));
         }
+        if(MainBot.getMusicChannel().containsKey(event.getGuild())) {
+            if(event.getTextChannel() != MainBot.getMusicChannel().get(event.getGuild())) {
+                event.getTextChannel().sendMessage(event.getAuthor().getAsMention()+ ", please use the " + MainBot.getMusicChannel().get(event.getGuild()).getAsMention() + " channel for sound commands.");
+                return;
+            }
+        }
 
         if(args[0].equals("list")) {
         //Displays the sound lists

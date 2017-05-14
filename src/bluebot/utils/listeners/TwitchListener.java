@@ -30,7 +30,7 @@ public class TwitchListener extends ListenerAdapter {
                         if(MainBot.getTwitchDisabled().contains(server.getId())) {
                             continue; //function disabled
                         }
-                        server.getPublicChannel().sendMessage(/*server.getPublicRole().getName() + " : " + */event.getUser().getUsername() + " is now streaming ! Watch live at " + MainBot.getStreamerList().get(event.getUser().getId()));
+                        MainBot.getTwitchChannel().get(server).sendMessage(/*server.getPublicRole().getName() + " : " + */event.getUser().getUsername() + " is now streaming ! Watch live at " + MainBot.getStreamerList().get(event.getUser().getId()));
                     }
                 }
             }

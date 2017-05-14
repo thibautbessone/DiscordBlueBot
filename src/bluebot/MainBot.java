@@ -16,6 +16,7 @@ import bluebot.utils.*;
 import bluebot.utils.listeners.*;
 import net.dv8tion.jda.*;
 import net.dv8tion.jda.entities.Guild;
+import net.dv8tion.jda.entities.TextChannel;
 import net.dv8tion.jda.hooks.ListenerAdapter;
 
 import javax.security.auth.login.LoginException;
@@ -52,6 +53,10 @@ public class MainBot {
     private static ArrayList<String> bwDisabled = new ArrayList<>();
     private static ArrayList<String> userEventDisabled = new ArrayList<>();
 
+    private static Map<Guild, TextChannel> twitchChannel = new HashMap<>();
+    private static Map<Guild, TextChannel> usereventChannel = new HashMap<>();
+    private static Map<Guild, TextChannel> musicChannel = new HashMap<>();
+
     public static Map<String, String> getBannedServers() {
         return bannedServers;
     }
@@ -75,6 +80,15 @@ public class MainBot {
     }
     public static ArrayList<String> getUserEventDisabled() {
         return userEventDisabled;
+    }
+    public static Map<Guild, TextChannel> getTwitchChannel() {
+        return twitchChannel;
+    }
+    public static Map<Guild, TextChannel> getUsereventChannel() {
+        return usereventChannel;
+    }
+    public static Map<Guild, TextChannel> getMusicChannel() {
+        return musicChannel;
     }
 
     private static String basePrefix = "!";
@@ -114,9 +128,13 @@ public class MainBot {
             botOwner = config.getBotOwner();
             jda.getAccountManager().setGame(config.getBotActivity());
             System.out.println("Current activity " + jda.getSelfInfo().getCurrentGame());
-            /*for(Guild g : jda.getGuilds()) {
-                System.out.println(g.getId() + " " + g.getName());
-            }*/
+
+            //Default channels
+            for(Guild server : jda.getGuilds()) {
+                getTwitchChannel().put(server, server.getPublicChannel());
+                getUsereventChannel().put(server, server.getPublicChannel());
+            }
+
             System.out.println("Connected servers : " + jda.getGuilds().size());
             System.out.println("Concerned users : " + jda.getUsers().size());
 
@@ -159,6 +177,7 @@ public class MainBot {
         commands.put("kappa", new KappaCommand());
         commands.put("enable", new EnableListenerCommand());
         commands.put("disable", new DisableListenerCommand());
+        commands.put("ch", new SpecificChannelCommand());
         //commands.put("prune", new PruneCommand());
 
         //Owner commands

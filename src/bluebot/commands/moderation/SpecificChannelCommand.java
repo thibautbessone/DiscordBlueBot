@@ -37,7 +37,11 @@ public class SpecificChannelCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        if(!event.getGuild().getTextChannels().toString().contains(args[0])) {
+        boolean channelExists = false;
+        for(TextChannel ch : event.getGuild().getTextChannels()) {
+            if(ch.getName().equals(args[0])) channelExists = true;
+        }
+        if(!channelExists) {
             event.getTextChannel().sendMessage("The specified channel doesn't exist.");
         } else {
             TextChannel channel = event.getGuild().getPublicChannel(); //default channel

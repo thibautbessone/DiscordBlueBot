@@ -177,7 +177,7 @@ public class MainBot {
         commands.put("kappa", new KappaCommand());
         commands.put("enable", new EnableListenerCommand());
         commands.put("disable", new DisableListenerCommand());
-        commands.put("ch", new SpecificChannelCommand());
+        commands.put("channel", new SpecificChannelCommand());
         //commands.put("prune", new PruneCommand());
 
         //Owner commands

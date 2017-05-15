@@ -1,7 +1,7 @@
 # BlueBot - A Java-written Discord bot
 
 <p align="center" >
-  <img src="http://i.imgur.com/RZ25Ype.png" alt="BlueBot"/><br>
+  <img src="http://i.imgur.com/6ivzOgT.png" alt="BlueBot" style="border-radius: 50%"/><br>
    <b>Join the support server :</b>
 </p>
 <p align=center>

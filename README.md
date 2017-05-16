@@ -22,6 +22,7 @@ However, the required dependancies for the bot are included in this repository.
 
 **BlueBot** will provide useful features like :
 * Moderation & utility features
+* Ability to enable & disable features
 * Owner-only commands
 * Extensible & customizable soundboard
 * CleverBot integration
@@ -30,7 +31,7 @@ However, the required dependancies for the bot are included in this repository.
 * Command prefix customization
 * Quick reactions, jokes & other stuff
 * Cyanide & Hapiness comics
-* Custom memes (soon)
+<!--* Custom memes (soon)-->
 * More to come !
 
 ## Getting started

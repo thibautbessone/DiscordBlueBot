@@ -15,9 +15,9 @@ import net.dv8tion.jda.utils.PermissionUtil;
  */
 public class SpecificChannelCommand implements Command {
 
-    private final String HELP = "The command `ch` sets the restricted channel used by the bot for Twitch notifications / Sound commands / User events. " +
+    private final String HELP = "The command `channel` sets the restricted channel used by the bot for Twitch notifications / Sound commands / User events. " +
             "\nThis command requires the manage messages permission." +
-            "\n\nUsage : `!ch yourChannel twitch | userevent | sound | soundReset`";
+            "\n\nUsage : `!channel yourChannel twitch | userevent | sound | soundReset`";
 
     private boolean permissionFail = false;
 

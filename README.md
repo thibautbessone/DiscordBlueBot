@@ -25,7 +25,7 @@ However, the required dependancies for the bot are included in this repository.
 * Ability to enable & disable features
 * Owner-only commands
 * Extensible & customizable soundboard
-* CleverBot integration
+* CleverBot integration (currently disabled)
 * GIFs search
 * Twitch alerts
 * Command prefix customization

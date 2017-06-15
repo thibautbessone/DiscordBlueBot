@@ -14,6 +14,7 @@ import bluebot.commands.owner.ShutDownCommand;
 import bluebot.commands.utility.*;
 import bluebot.utils.*;
 import bluebot.utils.listeners.*;
+import com.google.gson.Gson;
 import net.dv8tion.jda.*;
 import net.dv8tion.jda.entities.Guild;
 import net.dv8tion.jda.entities.TextChannel;
@@ -40,7 +41,7 @@ public class MainBot {
     private static String botOwner;
     private static LocalDateTime startTime = LocalDateTime.now();
     public static final CommandParser parser = new CommandParser();
-    public static TreeMap<String, Command> commands = new TreeMap<String, Command>();
+    public static  Map<String, Command> commands = new TreeMap<String, Command>();
     private static Map<String, String> streamerList =  new HashMap<>();
     private static Map<String, String> autoRoleList = new HashMap<>();
     private static Map<Guild, ArrayList<String>> badWords = new HashMap<>();
@@ -178,6 +179,7 @@ public class MainBot {
         commands.put("enable", new EnableListenerCommand());
         commands.put("disable", new DisableListenerCommand());
         commands.put("channel", new SpecificChannelCommand());
+        commands.put("invite", new InviteCommand());
         //commands.put("prune", new PruneCommand());
 
         //Owner commands

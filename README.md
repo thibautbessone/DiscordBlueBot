@@ -42,9 +42,10 @@ To edit the code, just follow these steps :
 * Create your onw app [here](https://discordapp.com/login?redirect_to=/developers/applications/me).
 * **Clone the project** into your favorite IDE using GitHub's integration. 
 * On your application page, get your application **token**
-* open **config.blue**
-* replace **YOURTOKENHERE** by your application token
-* replace **YOURIDHERE** by your ID
+* Open **config.blue**
+* Replace **YOURTOKENHERE** by your application token
+* Replace **YOURIDHERE** by your ID
+* Create a directory named soundboard in the bot's root folder. You will place your .mp3 files here.
 
 ## Commands
 

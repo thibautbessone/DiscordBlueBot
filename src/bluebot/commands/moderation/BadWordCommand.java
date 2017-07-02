@@ -42,25 +42,25 @@ public class BadWordCommand implements Command {
         if(args[0].equals("list")) {
             String list = "```This is the list of the current forbidden words on the server : \n";
             list += "---------------------------------------------------------------\n\n";
-            for(String word : MainBot.getBadWords().get(event.getGuild())) {
+            for(String word : MainBot.getBadWords().get(event.getGuild().getId())) {
                 list += word + "\n";
             }
             event.getTextChannel().sendMessage("Check your DMs.");
             event.getAuthor().getPrivateChannel().sendMessage(list + "```");
         } else if(args[0].equals("add")) {
-            if(MainBot.getBadWords().containsKey(event.getGuild())) {
-                MainBot.getBadWords().get(event.getGuild()).add(args[1]);
+            if(MainBot.getBadWords().containsKey(event.getGuild().getId())) {
+                MainBot.getBadWords().get(event.getGuild().getId()).add(args[1]);
             } else {
                 ArrayList<String> words = new ArrayList<>();
                 words.add(args[0]);
-                MainBot.getBadWords().put(event.getGuild(), words);
+                MainBot.getBadWords().put(event.getGuild().getId(), words);
             }
             event.getTextChannel().sendMessage("The word has been added to the forbidden words list.");
         } else if(args[0].equals("rm")) {
-            if(MainBot.getBadWords().get(event.getGuild()).contains(args[1])) {
-                for(int i = 0; i < MainBot.getBadWords().get(event.getGuild()).size(); ++i) {
-                    if(args[1].equals(MainBot.getBadWords().get(event.getGuild()).get(i))) {
-                        MainBot.getBadWords().get(event.getGuild()).remove(i);
+            if(MainBot.getBadWords().get(event.getGuild().getId()).contains(args[1])) {
+                for(int i = 0; i < MainBot.getBadWords().get(event.getGuild().getId()).size(); ++i) {
+                    if(args[1].equals(MainBot.getBadWords().get(event.getGuild().getId()).get(i))) {
+                        MainBot.getBadWords().get(event.getGuild().getId()).remove(i);
                         event.getTextChannel().sendMessage("The word `" + args[1] + "`has been removed from the forbidden words list");
                         return;
                     }

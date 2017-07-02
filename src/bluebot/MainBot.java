@@ -15,10 +15,9 @@ import bluebot.commands.utility.*;
 import bluebot.utils.*;
 import bluebot.utils.listeners.*;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import net.dv8tion.jda.*;
 import net.dv8tion.jda.entities.Guild;
-import net.dv8tion.jda.entities.TextChannel;
-import net.dv8tion.jda.hooks.ListenerAdapter;
 
 import javax.security.auth.login.LoginException;
 import java.time.LocalDateTime;
@@ -44,25 +43,23 @@ public class MainBot {
     public static  Map<String, Command> commands = new TreeMap<String, Command>();
     private static Map<String, String> streamerList =  new HashMap<>();
     private static Map<String, String> autoRoleList = new HashMap<>();
-    private static Map<Guild, ArrayList<String>> badWords = new HashMap<>();
-    private static Map<Guild, String> prefixes = new HashMap<>();
+
+    private static Map<String, ArrayList<String>> badWords = new HashMap<>();
+    private static Map<String, String> prefixes = new HashMap<>();
     private static Map<Guild, MyUrlPlayer> urlPlayersMap = new HashMap<>();
     private static Map<String, String> bannedServers = new HashMap<>(); //server, reason for ban
 
     private static ArrayList<String> twitchDisabled = new ArrayList<>();
-    private static ArrayList<String> cleverbotDisabled = new ArrayList<>();
+    private static ArrayList<String> cleverBotDisabled = new ArrayList<>();
     private static ArrayList<String> bwDisabled = new ArrayList<>();
     private static ArrayList<String> userEventDisabled = new ArrayList<>();
 
-    private static Map<Guild, TextChannel> twitchChannel = new HashMap<>();
-    private static Map<Guild, TextChannel> usereventChannel = new HashMap<>();
-    private static Map<Guild, TextChannel> musicChannel = new HashMap<>();
+    private static Map<String, String> twitchChannel = new HashMap<>();
+    private static Map<String, String> userEventChannel = new HashMap<>();
+    private static Map<String, String> musicChannel = new HashMap<>();
 
     public static Map<String, String> getBannedServers() {
         return bannedServers;
-    }
-    public static Map<Guild, String> getPrefixes() {
-        return prefixes;
     }
     public static Map<Guild, MyUrlPlayer> getUrlPlayersMap() {
         return urlPlayersMap;
@@ -73,8 +70,8 @@ public class MainBot {
     public static ArrayList<String> getTwitchDisabled() {
         return twitchDisabled;
     }
-    public static ArrayList<String> getCleverbotDisabled() {
-        return cleverbotDisabled;
+    public static ArrayList<String> getCleverBotDisabled() {
+        return cleverBotDisabled;
     }
     public static ArrayList<String> getBwDisabled() {
         return bwDisabled;
@@ -82,13 +79,13 @@ public class MainBot {
     public static ArrayList<String> getUserEventDisabled() {
         return userEventDisabled;
     }
-    public static Map<Guild, TextChannel> getTwitchChannel() {
+    public static Map<String, String> getTwitchChannel() {
         return twitchChannel;
     }
-    public static Map<Guild, TextChannel> getUsereventChannel() {
-        return usereventChannel;
+    public static Map<String, String> getUserEventChannel() {
+        return userEventChannel;
     }
-    public static Map<Guild, TextChannel> getMusicChannel() {
+    public static Map<String, String> getMusicChannel() {
         return musicChannel;
     }
 
@@ -132,25 +129,43 @@ public class MainBot {
 
             //Default channels
             for(Guild server : jda.getGuilds()) {
-                getTwitchChannel().put(server, server.getPublicChannel());
-                getUsereventChannel().put(server, server.getPublicChannel());
+                getTwitchChannel().put(server.getId(), server.getPublicChannel().getId());
+                getUserEventChannel().put(server.getId(), server.getPublicChannel().getId());
             }
+
+            //Loading the previous state of the bot(before shutdown)
+            Gson gson = new Gson();
+            streamerList = gson.fromJson(config.getStreamerList(), new TypeToken<Map<String, String>>(){}.getType());
+            autoRoleList = gson.fromJson(config.getAutoRoleList(), new TypeToken<Map<String, String>>(){}.getType());
+
+            badWords = gson.fromJson(config.getBadWords(), new TypeToken<Map<String, ArrayList<String>>>(){}.getType());
+            prefixes = gson.fromJson(config.getPrefixes(), new TypeToken<Map<String, String>>(){}.getType());
+
+            twitchDisabled = gson.fromJson(config.getTwitchDisabled(), new TypeToken<ArrayList<String>>(){}.getType());
+            cleverBotDisabled = gson.fromJson(config.getCleverBotDisabled(), new TypeToken<ArrayList<String>>(){}.getType());
+            bwDisabled = gson.fromJson(config.getBwDisabled(), new TypeToken<ArrayList<String>>(){}.getType());
+            userEventDisabled = gson.fromJson(config.getUserEventDisabled(), new TypeToken<ArrayList<String>>(){}.getType());
+
+            twitchChannel = gson.fromJson(config.getTwitchChannel(), new TypeToken<Map<String, String>>(){}.getType());
+            userEventChannel = gson.fromJson(config.getUserEventChannel(), new TypeToken<Map<String, String>>(){}.getType());
+            musicChannel = gson.fromJson(config.getMusicChannel(), new TypeToken<Map<String, String>>(){}.getType());
+
+
 
             System.out.println("Connected servers : " + jda.getGuilds().size());
             System.out.println("Concerned users : " + jda.getUsers().size());
 
         } catch (InterruptedException e) {
-            System.out.println("Error, check your internet connection");
+            System.out.println("Error, please check your internet connection");
             return;
         } catch (LoginException e) {
-            System.out.println("Invalid or missing token. Please edit config.blue and try again.");
+            System.out.println("No internet connection or invalid or missing token. Please edit config.blue and try again.");
             return;
         }
 
         //Banned servers
         bannedServers.put("304031909648793602", "spamming w/ bots to crash small bots");
         //bannedServers.put("281978005088370688", "BlueBot TestServer");
-
 
         //Activated bot commands
         commands.put("ping", new PingCommand());
@@ -186,7 +201,7 @@ public class MainBot {
         commands.put("setgame", new SetGameCommand());
         commands.put("setos", new SetOnlineStateCommand());
         commands.put("shutdown", new ShutDownCommand());
-        commands.put("ann", new AnnouncementCommand());
+        commands.put("announce", new AnnouncementCommand());
     }
 
     public static JDA getJda() {
@@ -195,8 +210,9 @@ public class MainBot {
     public static Map<String, String> getStreamerList() {return streamerList;}
     public static Map<String, String> getAutoRoleList() {return autoRoleList;}
     public static LocalDateTime getStartTime() {return startTime;}
-    public static Map<Guild, ArrayList<String>> getBadWords() {return badWords;}
+    public static Map<String, ArrayList<String>> getBadWords() {return badWords;}
     public static String getBasePrefix() {return basePrefix;}
-
-
+    public static Map<String, String> getPrefixes() {
+        return prefixes;
+    }
 }

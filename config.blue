@@ -1,13 +1,15 @@
-//BlueBot config file
-
-//The token of your application
-botToken=MzA0NzA2MzQ4NjQ0MzAyODUz.C9qjcg.hdNvzYjK-IQ90NNJ7wjWzmUJuT8
-
-//The current played game of the bot
-botActivity=type !help for help
-
-//The CleverBot API Key
+badWords={}
+userEventChannel={}
+musicChannel={}
+botActivity=type \!help for help
+botToken=YOURTOKENHERE
+twitchChannel={}
+userEventDisabled=[]
+prefixes={}
+autoRoleList={}
+streamerList={"218461869617184768"\:"https\://www.twitch.tv/minipasglop"}
+twitchDisabled=[]
+cleverBotDisabled=[]
 cleverbotAPIKey=YOURCLEVERBOTAPIKEY
-
-//Your Discord ID
+bwDisabled=[]
 botOwner=YOURIDHERE

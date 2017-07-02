@@ -18,8 +18,8 @@ public class MessageReceivedListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
         try {
             if(!event.getAuthor().isBot()) {
-                if (MainBot.getPrefixes().containsKey(event.getGuild())) {
-                    if(event.getMessage().getContent().startsWith(MainBot.getPrefixes().get(event.getGuild())) && event.getMessage().getAuthor() != event.getJDA()) {
+                if (MainBot.getPrefixes().containsKey(event.getGuild().getId())) {
+                    if(event.getMessage().getContent().startsWith(MainBot.getPrefixes().get(event.getGuild().getId())) && event.getMessage().getAuthor() != event.getJDA()) {
                         MainBot.handleCommand(MainBot.parser.parse(event.getMessage().getContent(), event));
                     }
                 } else {

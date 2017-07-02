@@ -20,7 +20,7 @@ public class BadWordsListener extends ListenerAdapter {
             return; //function disabled
         }
         try {
-            for(String word : MainBot.getBadWords().get(event.getGuild())) {
+            for(String word : MainBot.getBadWords().get(event.getGuild().getId())) {
                 if(event.getMessage().getContent().contains(word)) {
                     event.getMessage().deleteMessage();
                     event.getTextChannel().sendMessage("Whoop whoop " + event.getMessage().getAuthor().getAsMention() + ", don't use such bad words :confused:");
@@ -28,7 +28,7 @@ public class BadWordsListener extends ListenerAdapter {
                 }
             }
         } catch (NullPointerException e) { //Guild is not present in the badWords map
-            MainBot.getBadWords().put(event.getGuild(), new ArrayList<String>());
+            MainBot.getBadWords().put(event.getGuild().getId(), new ArrayList<String>());
         }
     }
 }

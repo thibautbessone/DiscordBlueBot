@@ -24,7 +24,7 @@ public class DisableListenerCommand implements Command {
         link = new HashMap<>();
         link.put("twitch", MainBot.getTwitchDisabled());
         link.put("bw", MainBot.getBwDisabled());
-        link.put("cleverbot", MainBot.getCleverbotDisabled());
+        link.put("cleverbot", MainBot.getCleverBotDisabled());
         link.put("userevent", MainBot.getUserEventDisabled());
     }
 

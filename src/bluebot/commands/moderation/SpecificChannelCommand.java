@@ -50,24 +50,23 @@ public class SpecificChannelCommand implements Command {
             }
             switch (args[1]) {
                 case "twitch":
-                    MainBot.getTwitchChannel().put(event.getGuild(), channel);
+                    MainBot.getTwitchChannel().put(event.getGuild().getId(), channel.getId());
                     event.getTextChannel().sendMessage("Channel " + channel.getAsMention() + " set for Twitch notifications.");
-                    System.out.println(MainBot.getTwitchChannel());
                     break;
                 case "userevent":
-                    MainBot.getUsereventChannel().put(event.getGuild(), channel);
+                    MainBot.getUserEventChannel().put(event.getGuild().getId(), channel.getId());
                     event.getTextChannel().sendMessage("Channel " + channel.getAsMention() + " set for user event messages.");
                     break;
                 case "sound":
                     //Prevents restricting sound command usage to general channel
                     if (!channel.getId().equals(event.getGuild().getPublicChannel().getId())) {
-                        MainBot.getMusicChannel().put(event.getGuild(), channel);
+                        MainBot.getMusicChannel().put(event.getGuild().getId(), channel.getId());
                         event.getTextChannel().sendMessage("Channel " + channel.getAsMention() + " set for sound commands.");
                     }
                     break;
                 case "soundReset":
-                    if(MainBot.getMusicChannel().containsKey(event.getGuild())) {
-                        MainBot.getMusicChannel().remove(event.getGuild());
+                    if(MainBot.getMusicChannel().containsKey(event.getGuild().getId())) {
+                        MainBot.getMusicChannel().remove(event.getGuild().getId());
                     }
                     event.getTextChannel().sendMessage("You can now use the sound commands on any channel.");
                     break;

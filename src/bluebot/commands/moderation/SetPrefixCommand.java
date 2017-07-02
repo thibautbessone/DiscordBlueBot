@@ -35,8 +35,8 @@ public class SetPrefixCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        MainBot.getPrefixes().put(event.getGuild(), args[0]);
-        event.getTextChannel().sendMessage("The prefix has been updated to " + MainBot.getPrefixes().get(event.getGuild()));
+        MainBot.getPrefixes().put(event.getGuild().getId(), args[0]);
+        event.getTextChannel().sendMessage("The prefix has been updated to " + MainBot.getPrefixes().get(event.getGuild().getId()));
     }
 
     @Override

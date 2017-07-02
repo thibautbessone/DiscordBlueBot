@@ -34,8 +34,8 @@ public class CommandParser {
         ArrayList<String> split = new ArrayList<String>();
         String raw = str;
         String noprefix;
-        if(MainBot.getPrefixes().containsKey(event.getGuild())) {
-            noprefix = raw.replaceFirst(MainBot.getPrefixes().get(event.getGuild()), "");
+        if(MainBot.getPrefixes().containsKey(event.getGuild().getId())) {
+            noprefix = raw.replaceFirst(MainBot.getPrefixes().get(event.getGuild().getId()), "");
         } else {
             noprefix = raw.replaceFirst(MainBot.getBasePrefix(), "");
         }

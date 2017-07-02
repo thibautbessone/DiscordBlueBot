@@ -19,11 +19,11 @@ public class CleverbotListener extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if(MainBot.getCleverbotDisabled().contains(event.getGuild().getId())) {
+        if(MainBot.getCleverBotDisabled().contains(event.getGuild().getId())) {
             return; //function disabled
         }
         try {
-            if(event.getAuthor().getId() != MainBot.getJda().getSelfInfo().getId()) {
+            if(!event.getAuthor().getId().equals(MainBot.getJda().getSelfInfo().getId())) {
                 boolean talkingToBot = false;
                 for(User mention : event.getMessage().getMentionedUsers()) {
                     if (mention.getId().equals(event.getJDA().getSelfInfo().getId())) talkingToBot = true;

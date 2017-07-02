@@ -110,6 +110,8 @@ public class MainBot {
             //jda instanciation
             //default method as provided in the API
             LoadingProperties config = new LoadingProperties();
+            SaveThread saveThread = new SaveThread();
+            saveThread.run();
 
             //userEventDisabled.add("281978005088370688");
 

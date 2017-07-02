@@ -13,7 +13,7 @@ import java.util.Properties;
  * @file JSONSaver.java
  * @author Blue
  * @version 0.1
- * @brief Loads all JSON files containing settings for each servers
+ * @brief Loads all JSON files containing settings for each server
  */
 public class JSONSaver {
 

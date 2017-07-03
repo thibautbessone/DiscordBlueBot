@@ -197,6 +197,7 @@ public class MainBot {
         commands.put("disable", new DisableListenerCommand());
         commands.put("channel", new SpecificChannelCommand());
         commands.put("invite", new InviteCommand());
+        commands.put("call", new CallCommand());
         //commands.put("prune", new PruneCommand());
 
         //Owner commands

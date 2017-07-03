@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * @file PlaySoundCommand.java
  * @author Blue
- * @version 0.3
+ * @version 0.4
  * @brief Makes the bot join the user current voice channel and play the specified MP3 sound.
  */
 public class PlaySoundCommand implements Command {
@@ -96,6 +96,7 @@ public class PlaySoundCommand implements Command {
                 if(channel.getUsers().contains(event.getAuthor())) {
                     userConnected = true;
                     audioManagerMap.get(event.getGuild()).setSendingHandler(MainBot.getUrlPlayersMap().get(event.getGuild()));
+                    audioManagerMap.get(event.getGuild()).setConnectTimeout(2000);
                     MainBot.getUrlPlayersMap().get(event.getGuild()).setVolume(1);
                     try {
                         URL file = new File(folder.getName() + "/" + args[0] + ".mp3").toURI().toURL();

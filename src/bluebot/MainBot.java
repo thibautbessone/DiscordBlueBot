@@ -111,7 +111,6 @@ public class MainBot {
             //default method as provided in the API
             LoadingProperties config = new LoadingProperties();
             SaveThread saveThread = new SaveThread();
-            saveThread.run();
 
             //userEventDisabled.add("281978005088370688");
 
@@ -145,6 +144,8 @@ public class MainBot {
             twitchChannel = gson.fromJson(config.getTwitchChannel(), new TypeToken<Map<String, String>>(){}.getType());
             userEventChannel = gson.fromJson(config.getUserEventChannel(), new TypeToken<Map<String, String>>(){}.getType());
             musicChannel = gson.fromJson(config.getMusicChannel(), new TypeToken<Map<String, String>>(){}.getType());
+
+            saveThread.run();
 
             System.out.println("Connected servers : " + jda.getGuilds().size());
             System.out.println("Concerned users : " + jda.getUsers().size());

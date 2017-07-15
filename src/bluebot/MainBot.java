@@ -117,7 +117,7 @@ public class MainBot {
 
             jda = new JDABuilder().setBotToken(config.getBotToken())
                     .addListener(new TwitchListener())
-                    .addListener(new CleverbotListener())
+                    //.addListener(new CleverbotListener())
                     .addListener(new BadWordsListener())
                     .addListener(new UserJoinLeaveListener())
                     .addListener(new BotKickedListener())
@@ -128,12 +128,6 @@ public class MainBot {
             botOwner = config.getBotOwner();
             jda.getAccountManager().setGame(config.getBotActivity());
             System.out.println("Current activity " + jda.getSelfInfo().getCurrentGame());
-
-            //Default channels
-            for(Guild server : jda.getGuilds()) {
-                getTwitchChannel().put(server.getId(), server.getPublicChannel().getId());
-                getUserEventChannel().put(server.getId(), server.getPublicChannel().getId());
-            }
 
             //Loading the previous state of the bot(before shutdown)
             Gson gson = new Gson();
@@ -151,8 +145,6 @@ public class MainBot {
             twitchChannel = gson.fromJson(config.getTwitchChannel(), new TypeToken<Map<String, String>>(){}.getType());
             userEventChannel = gson.fromJson(config.getUserEventChannel(), new TypeToken<Map<String, String>>(){}.getType());
             musicChannel = gson.fromJson(config.getMusicChannel(), new TypeToken<Map<String, String>>(){}.getType());
-
-
 
             System.out.println("Connected servers : " + jda.getGuilds().size());
             System.out.println("Concerned users : " + jda.getUsers().size());

@@ -107,7 +107,8 @@ public class PlaySoundCommand implements Command {
                         }
 
                     } catch (Exception e) {
-                        event.getTextChannel().sendMessage("Incorrect file name, please try again.");
+                        event.getTextChannel().sendMessage("Incorrect file name / Corrupted file, please try again.");
+                        e.printStackTrace();
                         return;
                     }
                 }

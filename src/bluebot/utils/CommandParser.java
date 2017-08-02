@@ -4,6 +4,7 @@ import bluebot.MainBot;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
+import java.util.regex.PatternSyntaxException;
 
 /**
  * @file CommandParser.java
@@ -35,7 +36,11 @@ public class CommandParser {
         String raw = str;
         String noprefix;
         if(MainBot.getPrefixes().containsKey(event.getGuild().getId())) {
-            noprefix = raw.replaceFirst(MainBot.getPrefixes().get(event.getGuild().getId()), "");
+            try {
+                noprefix = raw.replaceFirst(MainBot.getPrefixes().get(event.getGuild().getId()), "");
+            } catch (PatternSyntaxException e) {
+                noprefix = raw.replaceFirst("\\" + MainBot.getPrefixes().get(event.getGuild().getId()), "");
+            }
         } else {
             noprefix = raw.replaceFirst(MainBot.getBasePrefix(), "");
         }

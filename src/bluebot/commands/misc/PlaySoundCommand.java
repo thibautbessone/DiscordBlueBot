@@ -69,6 +69,12 @@ public class PlaySoundCommand implements Command {
                 }
                 fileList += file + "\t";
                 if(0 == nb%6) fileList += "\n";
+                if(0 == nb%42) {
+                    System.out.println("50 atteint");
+                    fileList += "```";
+                    event.getTextChannel().sendMessage(fileList);
+                    fileList = "```";
+                }
             }
             fileList += "```";
             event.getTextChannel().sendMessage(fileList);

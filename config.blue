@@ -1,15 +1,16 @@
-badWords={}
+#Mon Nov 06 17:56:30 CET 2017
+badWords={"311620440319590400"\:[],"342940167570456587"\:[]}
 userEventChannel={}
 musicChannel={}
 botActivity=type \!help for help
-botToken=YOURTOKENHERE
+botToken=MzA0NzA2MzQ4NjQ0MzAyODUz.DGPs0g.EnA8u7ryCxKu-IovkeRv0GIK4L4
 twitchChannel={}
 userEventDisabled=[]
-prefixes={}
+prefixes={"311620440319590400"\:"?"}
 autoRoleList={}
-streamerList={"218461869617184768"\:"https\://www.twitch.tv/minipasglop"}
 twitchDisabled=[]
+streamerList={"218461869617184768"\:"https\://www.twitch.tv/1234"}
 cleverBotDisabled=[]
-cleverbotAPIKey=YOURCLEVERBOTAPIKEY
 bwDisabled=[]
-botOwner=YOURIDHERE
+cleverbotAPIKey=YOURCLEVERBOTAPIKEY
+botOwner=197114678533554179

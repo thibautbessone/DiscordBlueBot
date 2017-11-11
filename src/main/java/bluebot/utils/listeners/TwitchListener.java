@@ -33,7 +33,7 @@ public class TwitchListener extends ListenerAdapter {
                         if(MainBot.getTwitchChannel().containsKey(server.getId())) {
                             MainBot.getJda().getTextChannelById(MainBot.getTwitchChannel().get(server.getId())).sendMessage(/*server.getPublicRole().getName() + " : " + */event.getUser().getName() + " is now streaming ! Watch live at " + MainBot.getStreamerList().get(event.getUser().getId())).queue();
                         } else {
-                            server.getPublicChannel().sendMessage(/*server.getPublicRole().getName() + " : " + */event.getUser().getName() + " is now streaming ! Watch live at " + MainBot.getStreamerList().get(event.getUser().getId())).queue();
+                            server.getDefaultChannel().sendMessage(/*server.getPublicRole().getName() + " : " + */event.getUser().getName() + " is now streaming ! Watch live at " + MainBot.getStreamerList().get(event.getUser().getId())).queue();
                         }
                     }
                 }

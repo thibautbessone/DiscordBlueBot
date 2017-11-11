@@ -36,6 +36,9 @@ public class LoadingProperties {
     private String userEventChannel;
     private String musicChannel;
 
+
+    private String embedColor;
+
     public String getCleverbotAPIKey() {
         return cleverbotAPIKey;
     }
@@ -82,6 +85,10 @@ public class LoadingProperties {
     public String getMusicChannel() {
         return musicChannel;
     }
+    public String getEmbedColor() {
+        return embedColor;
+    }
+
 
     public LoadingProperties() {
         try {
@@ -110,6 +117,8 @@ public class LoadingProperties {
             twitchChannel = properties.getProperty("twitchChannel");
             userEventChannel = properties.getProperty("userEventChannel");
             musicChannel = properties.getProperty("musicChannel");
+
+            embedColor = properties.getProperty("embedColor");
 
         } catch (IOException e) {
             e.printStackTrace();

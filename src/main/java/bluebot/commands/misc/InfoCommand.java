@@ -2,8 +2,10 @@ package bluebot.commands.misc;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
+import java.awt.*;
 import java.lang.management.ManagementFactory;
 
 
@@ -32,20 +34,6 @@ public class InfoCommand implements Command {
 
         String game = MainBot.getJda().getPresence().getGame().getName();
 
-        String message = new String();
-        message += "**Users :**`" + usersNumber + "`\n";
-        message += "**Servers :** `" + serversNumber + "`\n";
-        message += "**Channels :** `" + channelNumber + "` text channels and `" + voiceChannelNumber +"` voice channels\n";
-        message += "**Current game :** `" + game + "`\n";
-
-        /*LocalDateTime curr = LocalDateTime.now();
-
-        Duration dur = Duration.between(MainBot.getStartTime(), curr);
-        long days = dur.toDays();
-        long hours = dur.toHours();
-        long minutes = dur.toMinutes();
-        message += "Uptime : `" + days + "` day(s), `" + hours + "` hours and `" + minutes + "` minutes";*/
-
         //Taken from Almighty Alpaca
         //https://github.com/Java-Discord-Bot-System/Plugin-Uptime/blob/master/src/main/java/com/almightyalpaca/discord/bot/plugin/uptime/UptimePlugin.java#L28-L42
         final long duration = ManagementFactory.getRuntimeMXBean().getUptime();
@@ -64,9 +52,27 @@ public class InfoCommand implements Command {
         uptime = replaceLast(uptime, ", ", "");
         uptime = replaceLast(uptime, ",", " and");
 
-        message += "**Uptime :** " + uptime + "\n";
 
-        event.getTextChannel().sendMessage(message).queue();
+
+
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setAuthor("Information about " + MainBot.getJda().getSelfUser().getName(), "https://bluebot.pw", "http://i.imgur.com/880AyL6.png");
+        builder.setColor(Color.decode(MainBot.getConfig().getEmbedColor()));
+        builder.setThumbnail(MainBot.getJda().getSelfUser().getAvatarUrl());
+
+
+        builder.addField("Owner :white_check_mark:", MainBot.getJda().getUserById(MainBot.getConfig().getBotOwner()).getName(), true);
+        builder.addBlankField(true);
+
+        builder.addField("Users :busts_in_silhouette:", String.valueOf(usersNumber), true);
+        builder.addField("Servers :desktop:", String.valueOf(serversNumber), true);
+        builder.addField("Channels :keyboard: :loud_sound:", String.valueOf(channelNumber) + " text channels / " + String.valueOf(voiceChannelNumber) + " voice channels", true);
+        builder.addBlankField(true);
+
+        builder.addField("Current activity :video_game:", game, true);
+        builder.addField("Uptime :timer:", uptime, true);
+
+        event.getTextChannel().sendMessage(builder.build()).queue();
     }
 
     //Taken from Almighty Alpaca

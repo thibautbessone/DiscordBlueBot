@@ -46,6 +46,7 @@ public class MainBot {
 
 
     private static JDA jda;
+    private static LoadingProperties config = new LoadingProperties();
     private static AudioPlayerManager playerManager;
 
 
@@ -58,7 +59,6 @@ public class MainBot {
 
     private static Map<String, ArrayList<String>> badWords = new HashMap<>();
     private static Map<String, String> prefixes = new HashMap<>();
-    //private static Map<Guild, AudioPlayer> audioPlayersMap = new HashMap<>();
     private static Map<String, String> bannedServers = new HashMap<>(); //server, reason for ban
 
     private static ArrayList<String> twitchDisabled = new ArrayList<>();
@@ -75,9 +75,6 @@ public class MainBot {
     public static Map<String, String> getBannedServers() {
         return bannedServers;
     }
-    /*public static Map<Guild, AudioPlayer> getAudioPlayersMap() {
-        return audioPlayersMap;
-    }*/
     public static String getBotOwner() {
         return botOwner;
     }
@@ -123,14 +120,11 @@ public class MainBot {
         try {
             //jda instanciation
             //default method as provided in the API
-            LoadingProperties config = new LoadingProperties();
+            config = new LoadingProperties();
             SaveThread saveThread = new SaveThread();
 
             playerManager = new DefaultAudioPlayerManager();
             AudioSourceManagers.registerLocalSource(playerManager);
-
-
-            //userEventDisabled.add("281978005088370688");
 
             jda = new JDABuilder(AccountType.BOT).setToken(config.getBotToken())
                     .addEventListener(new TwitchListener())
@@ -205,6 +199,7 @@ public class MainBot {
         commands.put("channel", new SpecificChannelCommand());
         commands.put("invite", new InviteCommand());
         commands.put("call", new CallCommand());
+        commands.put("whois", new WhoisCommand());
         //commands.put("prune", new PruneCommand());
 
         //Owner commands
@@ -215,6 +210,9 @@ public class MainBot {
     }
 
     public static JDA getJda() {return jda;}
+    public static LoadingProperties getConfig() {
+        return config;
+    }
     public static AudioPlayerManager getPlayerManager() {return playerManager;}
     public static Map<String, String> getStreamerList() {return streamerList;}
     public static Map<String, String> getAutoRoleList() {return autoRoleList;}

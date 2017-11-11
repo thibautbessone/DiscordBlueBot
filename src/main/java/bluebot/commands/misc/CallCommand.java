@@ -29,7 +29,7 @@ public class CallCommand implements Command {
         }
         else {
             String url = "https://appear.in/bluebot-";
-            for (int i = 0; i < 10; ++i) {
+            for (int i = 0; i < 25; ++i) {
                 int rand = (int)(Math.random()*10);
                 url += rand;
             }

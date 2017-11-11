@@ -1,11 +1,15 @@
 package bluebot.commands.misc;
 
+import bluebot.MainBot;
 import bluebot.utils.Command;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONObject;
+
+import java.awt.*;
 
 /**
  * @file SteamStatusCommand.java
@@ -33,44 +37,51 @@ public class SteamStatusCommand implements Command {
         try {
             Response response = caller.newCall(request).execute();
             result = new JSONObject(response.body().string());
-            System.out.println(result);
 
             //Client
             JSONObject client = result.getJSONObject("ISteamClient");
             String cOnlineStatus = client.get("online").toString();
-            if(cOnlineStatus.equals("1")) {cOnlineStatus = "online";} else {cOnlineStatus = "offline";}
-            message += "Steam client : `" + cOnlineStatus + "`\n\n";
+            if(cOnlineStatus.equals("1")) {cOnlineStatus = "Online";} else {cOnlineStatus = "Offline";}
 
             //Store
             JSONObject store = result.getJSONObject("SteamStore");
             String sOnlineStatus = store.get("online").toString();
             int sResponseTime = (int) store.get("time");
-            if(sOnlineStatus.equals("1")) {sOnlineStatus = "online";} else {sOnlineStatus = "offline";}
-            message += "Steam Store : `" + sOnlineStatus +"`\nResponse time : `" + sResponseTime + " ms`\n\n";
+            if(sOnlineStatus.equals("1")) {sOnlineStatus = "Online";} else {sOnlineStatus = "Offline";}
 
             //Community
             JSONObject steamCommunity = result.getJSONObject("SteamCommunity");
             String sCOnlineStatus = steamCommunity.get("online").toString();
             int sCResponseTime = (int) steamCommunity.get("time");
-            if(sCOnlineStatus.equals("1")) {sCOnlineStatus = "online";} else {sCOnlineStatus = "offline";}
-            message += "Steam Community : `" + sCOnlineStatus +"`\nResponse time : `" + sCResponseTime + " ms`\n\n";
-                       // CS:GO Matchmaking :
+            if(sCOnlineStatus.equals("1")) {sCOnlineStatus = "Online";} else {sCOnlineStatus = "Offline";}
 
             //Game coordinators
             JSONObject dota2 = result.getJSONObject("ISteamGameCoordinator").getJSONObject("570");
             String dota2OnlineStatus = dota2.get("online").toString();
             int dota2SearchingPlayers = (int) dota2.getJSONObject("stats").get("players_searching");
-            if(dota2OnlineStatus.equals("1")) {dota2OnlineStatus = "online";} else {dota2OnlineStatus = "offline";}
-            message += "Dota 2 Matchmaking : `" + dota2OnlineStatus + "`, players searching : `" + dota2SearchingPlayers + "`\n";
+            if(dota2OnlineStatus.equals("1")) {dota2OnlineStatus = "Online";} else {dota2OnlineStatus = "Offline";}
 
+            // CS:GO Matchmaking :
             JSONObject csgo = result.getJSONObject("ISteamGameCoordinator").getJSONObject("730");
             String csgoOnlineStatus = csgo.get("online").toString();
             int csgoSearchingPlayers = (int) csgo.getJSONObject("stats").get("players_searching");
-            if(csgoOnlineStatus.equals("1")) {csgoOnlineStatus = "online";} else {csgoOnlineStatus = "offline";}
-            message += "CS:GO Matchmaking : `" + csgoOnlineStatus + "`, players searching : `" + csgoSearchingPlayers + "`\n";
+            if(csgoOnlineStatus.equals("1")) {csgoOnlineStatus = "Online";} else {csgoOnlineStatus = "Offline";}
 
-            event.getTextChannel().sendMessage(message).queue();
+            EmbedBuilder builder = new EmbedBuilder();
+            builder.setAuthor("Steam, CS:GO & Dota 2 status", null, event.getAuthor().getAvatarUrl());
+            builder.setColor(Color.decode(MainBot.getConfig().getEmbedColor()));
+            builder.setThumbnail("https://cdn.discordapp.com/avatars/197114678533554179/0e1b293ed7fec780b9365952c64664e8.png");
 
+            builder.addBlankField(false);
+            builder.addField("Steam Client", cOnlineStatus, false);
+            builder.addField("Steam Store / Response time", sOnlineStatus + " / " + sResponseTime + " ms", false);
+            builder.addField("Steam Community / Response time", sCOnlineStatus + " / " + sCResponseTime + " ms", false);
+            builder.addBlankField(false);
+            builder.addField("CS:GO Matchmaking / Players searching", csgoOnlineStatus + " / " + csgoSearchingPlayers, false);
+            builder.addField("Dota 2 Matchmaking / Players searching", dota2OnlineStatus + " / " + dota2SearchingPlayers, false);
+
+
+            event.getTextChannel().sendMessage(builder.build()).queue();
         } catch (Exception e) {
             e.printStackTrace();
             event.getTextChannel().sendMessage("There was an error contacting the API. Please try again later.").queue();

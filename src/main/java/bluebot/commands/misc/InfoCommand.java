@@ -61,7 +61,7 @@ public class InfoCommand implements Command {
         builder.setThumbnail(MainBot.getJda().getSelfUser().getAvatarUrl());
 
 
-        builder.addField("Owner :white_check_mark:", MainBot.getJda().getUserById(MainBot.getConfig().getBotOwner()).getName(), true);
+        builder.addField("Owner :white_check_mark:", MainBot.getJda().getUserById(MainBot.getConfig().getBotOwner()).getName() + "#" + MainBot.getJda().getUserById(MainBot.getConfig().getBotOwner()).getDiscriminator(), true);
         builder.addBlankField(true);
 
         builder.addField("Users :busts_in_silhouette:", String.valueOf(usersNumber), true);

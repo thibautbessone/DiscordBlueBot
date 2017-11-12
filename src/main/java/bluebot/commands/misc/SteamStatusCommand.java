@@ -14,7 +14,7 @@ import java.awt.*;
 /**
  * @file SteamStatusCommand.java
  * @author Blue
- * @version 0.2
+ * @version 0.3
  * @brief Post Steam, CS:GO and Dota 2 current status
  */
 public class SteamStatusCommand implements Command {
@@ -70,7 +70,7 @@ public class SteamStatusCommand implements Command {
             EmbedBuilder builder = new EmbedBuilder();
             builder.setAuthor("Steam, CS:GO & Dota 2 status", null, event.getAuthor().getAvatarUrl());
             builder.setColor(Color.decode(MainBot.getConfig().getEmbedColor()));
-            builder.setThumbnail("https://cdn.discordapp.com/avatars/197114678533554179/0e1b293ed7fec780b9365952c64664e8.png");
+            builder.setThumbnail("https://i.imgur.com/7G9Ciep.jpg");
 
             builder.addBlankField(false);
             builder.addField("Steam Client", cOnlineStatus, false);

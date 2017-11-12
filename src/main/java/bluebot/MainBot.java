@@ -200,6 +200,7 @@ public class MainBot {
         commands.put("invite", new InviteCommand());
         commands.put("call", new CallCommand());
         commands.put("whois", new WhoisCommand());
+        commands.put("github", new GitHubCommand());
         //commands.put("prune", new PruneCommand());
 
         //Owner commands

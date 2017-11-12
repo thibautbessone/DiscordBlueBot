@@ -189,6 +189,7 @@ public class MainBot {
         commands.put("untrack", new UntrackCommand());
         commands.put("setautorole", new SetAutoRoleCommand());
         commands.put("cat", new CatCommand());
+        commands.put("dog", new DogCommand());
         commands.put("idgf", new IDGFCommand());
         commands.put("bw", new BadWordCommand());
         commands.put("info", new InfoCommand());

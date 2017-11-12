@@ -1,10 +1,10 @@
 package bluebot.commands.fun;
 
 import bluebot.utils.Command;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -13,11 +13,11 @@ import java.io.IOException;
  * @file CatCommand.java
  * @author Blue
  * @version 0.1
- * @brief Posts a random cat image/gif from random.cat
+ * @brief Posts a random dog image/gif from https://dog.ceo
  */
-public class CatCommand implements Command {
+public class DogCommand implements Command {
 
-    private final String HELP = "The command `cat` posts a cat image from random.cat.\n\nUsage : `!cat`";
+    private final String HELP = "The command `dog` posts a cat image from dog.ceo.\n\nUsage : `!dog`";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -29,12 +29,11 @@ public class CatCommand implements Command {
     public void action(String[] args, MessageReceivedEvent event) {
         String url = new String();
         OkHttpClient caller = new OkHttpClient();
-        Request request = new Request.Builder().url("http://random.cat/meow").build();
+        Request request = new Request.Builder().url("https://dog.ceo/api/breeds/image/random").build();
         try {
             Response response = caller.newCall(request).execute();
             JSONObject json = new JSONObject(response.body().string());
-            url = (String) json.get("file");
-            System.out.println(json);
+            url = (String) json.get("message");
         } catch (IOException | NullPointerException e) {
             event.getTextChannel().sendMessage("The random.cat API might be down at the moment").queue();
         }
@@ -48,8 +47,6 @@ public class CatCommand implements Command {
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
+
     }
 }

@@ -183,6 +183,7 @@ public class MainBot {
         commands.put("wat", new WatCommand());
         commands.put("gif", new GifCommand());
         commands.put("c&h", new CyanideHapinessCommand());
+        commands.put("xkcd", new XKCDCommand());
         commands.put("setprefix", new SetPrefixCommand());
         commands.put("sound", new PlaySoundCommand());
         commands.put("tracktwitch", new TrackTwitchCommand());

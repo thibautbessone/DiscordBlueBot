@@ -1,0 +1,120 @@
+.text-area .content {
+    -fx-background-color: #36393e;
+    -fx-background-radius: 0 ;
+}
+.text-area {
+    -fx-text-fill: whitesmoke;
+    -fx-focus-color: whitesmoke;
+}
+
+#labelTitle {
+    -fx-text-fill: whitesmoke;
+}
+
+#background {
+    -fx-background-color: #2f3136;
+}
+
+#minimize {
+    -fx-background-color: transparent;
+    -fx-text-fill: gray;
+    -fx-font-size: 1em;
+}
+
+#minimize:hover {
+    -fx-text-fill: red;
+    -fx-background-color: whitesmoke;
+
+}
+
+
+#startBtn {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #12a22d 0%, #169012 100%),
+            #239d26,
+            #2aaf2d,
+            radial-gradient(center 50% 50%, radius 100%, #239d26, #2aaf2d);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1em;
+}
+
+#startBtn:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+
+#stopBtn {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+            #9d4024,
+            #d86e3a,
+            radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1em;
+}
+
+#stopBtn:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+
+#editBtn {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #125ea1 0%, #125590 100%),
+            #135fa3,
+            #0f64af,
+            radial-gradient(center 50% 50%, radius 100%, #0f64af, #125590);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1em;
+}
+
+#editBtn:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+
+#quitBtn {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #a01212 0%, #901212 100%),
+            #a21212,
+            #af0f0f,
+            radial-gradient(center 50% 50%, radius 100%, #af0f0f, #901212);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1em;
+}
+
+#quitBtn:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+
+#startBtn:hover, #stopBtn:hover, #editBtn:hover, #quitBtn:hover {
+    -fx-cursor: hand;
+}
+
+#website, #server {
+    -fx-text-fill: whitesmoke;
+    -fx-background-color: #36393e;
+}
+
+#website:hover, #server:hover {
+    -fx-text-fill: whitesmoke;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}

@@ -1,9 +1,11 @@
 # BlueBot - A Java-written Discord bot
 
 <p align="center" >
-  <img src="http://i.imgur.com/6ivzOgT.png" alt="BlueBot" style="border-radius: 50%"/><br>
+  <img src="http://i.imgur.com/6ivzOgT.png" alt="BlueBot" style="border-radius: 50%"/>
+  <img src="https://i.imgur.com/IbZUkkh.png" alt="BlueBot" style="border-radius: 2%"/><br>
    <b>Join the support server :</b>
 </p>
+
 <p align=center>
   <a  href="https://discord.gg/rSekkJv">
     <img src="https://discordapp.com/api/guilds/268853008455041025/widget.png?style=banner2">
@@ -46,6 +48,15 @@ To edit the code, just follow these steps :
 * Replace **YOURTOKENHERE** by your application token
 * Replace **YOURIDHERE** by your ID
 * Create a directory named soundboard in the bot's root folder. You will place your .mp3 files here.
+
+
+##Interface
+
+* Double click anywhere on the background to minimize
+* Click anywhere on the background to drag the window
+* Start buttons launchs the bot, Stop button stops it
+* Edit button open the config file in your default text editor
+* Quit button stops the bot (if running) and closes the window
 
 ## Commands
 

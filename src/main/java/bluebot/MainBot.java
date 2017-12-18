@@ -203,6 +203,7 @@ public class MainBot {
         commands.put("call", new CallCommand());
         commands.put("whois", new WhoisCommand());
         commands.put("github", new GitHubCommand());
+        commands.put("server", new ServerCommand());
         //commands.put("prune", new PruneCommand());
 
         //Owner commands

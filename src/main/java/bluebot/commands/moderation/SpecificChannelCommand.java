@@ -44,7 +44,7 @@ public class SpecificChannelCommand implements Command {
         if(!channelExists) {
             event.getTextChannel().sendMessage("The specified channel doesn't exist.").queue();
         } else {
-            TextChannel channel = event.getGuild().getPublicChannel(); //default channel
+            TextChannel channel = event.getGuild().getDefaultChannel(); //default channel
             for(TextChannel ch : event.getGuild().getTextChannels()) {
                 if(ch.getName().equals(args[0])) channel = ch;
             }
@@ -59,7 +59,7 @@ public class SpecificChannelCommand implements Command {
                     break;
                 case "sound":
                     //Prevents restricting sound command usage to general channel
-                    if (!channel.getId().equals(event.getGuild().getPublicChannel().getId())) {
+                    if (!channel.getId().equals(event.getGuild().getDefaultChannel().getId())) {
                         MainBot.getMusicChannel().put(event.getGuild().getId(), channel.getId());
                         event.getTextChannel().sendMessage("Channel " + channel.getAsMention() + " set for sound commands.").queue();
                     }

@@ -21,7 +21,7 @@ public class UserJoinLeaveListener extends ListenerAdapter {
         if(MainBot.getUserEventChannel().containsKey(event.getGuild().getId())) {
             MainBot.getJda().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(event.getMember().getAsMention() + " has joined the server ! Welcome :wave: !").queue();
         } else {
-            event.getGuild().getPublicChannel().sendMessage(event.getMember().getAsMention() + " has joined the server ! Welcome :wave: !").queue();
+            event.getGuild().getDefaultChannel().sendMessage(event.getMember().getAsMention() + " has joined the server ! Welcome :wave: !").queue();
         }
         //event.getGuild().getManager().addRoleToUser(event.getMember(), event.getGuild().getRolesByName(MainBot.getAutoRoleList().get(event.getGuild().getId())).get(0)).update();
         event.getGuild().getController().addRolesToMember(event.getMember(), event.getGuild().getRolesByName(MainBot.getAutoRoleList().get(event.getGuild().getId()), true).get(0)).queue();
@@ -47,7 +47,7 @@ public class UserJoinLeaveListener extends ListenerAdapter {
         if(MainBot.getUserEventChannel().containsKey(event.getGuild().getId())) {
             MainBot.getJda().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(event.getMember().getAsMention() + " has left the server :cry: !").queue();
         } else {
-            event.getGuild().getPublicChannel().sendMessage(event.getMember().getAsMention() + " has left the server :cry: !").queue();
+            event.getGuild().getDefaultChannel().sendMessage(event.getMember().getAsMention() + " has left the server :cry: !").queue();
         }
     }
 }

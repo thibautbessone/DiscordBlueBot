@@ -41,7 +41,7 @@ public class AnnouncementCommand implements Command {
         }
         for(Guild guild : MainBot.getJda().getGuilds()) {
             if(guild == event.getGuild()) continue;
-            guild.getPublicChannel().sendMessage(text).queue();
+            guild.getDefaultChannel().sendMessage(text).queue();
         }
         event.getTextChannel().sendMessage("Announcement done.").queue();
     }

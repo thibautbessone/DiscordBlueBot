@@ -1,5 +1,6 @@
 package bluebot.utils.listeners;
 
+import bluebot.MainBot;
 import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
@@ -12,7 +13,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class BotKickedListener extends ListenerAdapter {
     @Override
     public void onGuildLeave(GuildLeaveEvent event) {
-        //MainBot.getUrlPlayersMap().remove(event.getGuild());
+        MainBot.getPrefixes().remove(event.getGuild().getId());
         System.out.println("Bot kicked from " + event.getGuild().getName() + "(" + event.getGuild().getId() + ")");
     }
 }

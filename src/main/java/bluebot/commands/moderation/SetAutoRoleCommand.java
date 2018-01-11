@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @file SetAutoRoleCommand.java
  * @author Blue
- * @version 0.2
+ * @version 0.3
  * @brief Allows the admin of the server to set a role automatically assigned when an user joins the server.
  */
 public class SetAutoRoleCommand implements Command {
@@ -24,7 +24,7 @@ public class SetAutoRoleCommand implements Command {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        if(args.length != 1 || args[0].equals("help")) {return false;}
+        if(args.length == 0 || args[0].equals("help")) {return false;}
         else {
             if(PermissionUtil.checkPermission(event.getTextChannel(), event.getMember(), Permission.ADMINISTRATOR)) {
                 return true;
@@ -38,9 +38,14 @@ public class SetAutoRoleCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
+        String roleName = new String();
+        for(String arg : args) {
+            roleName += arg + " ";
+        }
+        roleName = roleName.substring(0, roleName.length() -1);
         List<Role> roleList = event.getGuild().getRoles();
         for(Role role : roleList) {
-            if(args[0].equals(role.getName())) {
+            if(roleName.equals(role.getName())) {
                 MainBot.getAutoRoleList().put(event.getGuild().getId(), role.getName());
                 event.getTextChannel().sendMessage("The role given on join is now " + MainBot.getAutoRoleList().get(event.getGuild().getId())).queue();
                 return;

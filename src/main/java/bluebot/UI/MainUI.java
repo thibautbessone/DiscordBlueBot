@@ -70,17 +70,18 @@ public class MainUI extends Application {
         primaryStage.show();
     }
 
-
     public static void main(String[] args) {
         if(args.length == 1) {
             if(args[0].equals("cmd")) {
-                new MainBot();
+                new MainBot(); //Runs command-line app
+                System.out.println("Command-line app started");
             } else {
                 System.out.println("Invalid option - use the cmd option to run in command-line mode.\n" +
-                                    "Usage : java -jar BlueBot.jar cmd");
+                        "Usage : java -jar BlueBot.jar cmd");
             }
         } else {
-            launch(args);
+            System.out.println("JavaFX app started");
+            launch(args); //Runs GUI
         }
     }
 }

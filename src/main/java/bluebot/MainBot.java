@@ -38,7 +38,7 @@ import java.util.TreeMap;
 /**
  * @file MainBot.java
  * @author Blue
- * @version 0.45 (I forgot some ...)
+ * @version 1
  * @brief The main class of BlueBot
  */
 
@@ -134,6 +134,7 @@ public class MainBot {
                     .addEventListener(new BotKickedListener())
                     .addEventListener(new BannedServersListener())
                     .addEventListener(new MessageReceivedListener())
+                    //.addEventListener(new VCJoinedListener())
                     .setBulkDeleteSplittingEnabled(false).buildBlocking();
 
             botOwner = config.getBotOwner();
@@ -220,7 +221,6 @@ public class MainBot {
     public static AudioPlayerManager getPlayerManager() {return playerManager;}
     public static Map<String, String> getStreamerList() {return streamerList;}
     public static Map<String, String> getAutoRoleList() {return autoRoleList;}
-    public static LocalDateTime getStartTime() {return startTime;}
     public static Map<String, ArrayList<String>> getBadWords() {return badWords;}
     public static String getBasePrefix() {return basePrefix;}
     public static Map<String, String> getPrefixes() {return prefixes;}

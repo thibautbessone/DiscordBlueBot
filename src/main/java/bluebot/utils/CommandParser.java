@@ -37,6 +37,7 @@ public class CommandParser {
         String noprefix;
         if(MainBot.getPrefixes().containsKey(event.getGuild().getId())) {
             try {
+                if(raw.substring(0,1).equals("$")) throw new PatternSyntaxException("Dollar char", "", 0); //Fix for this µ@#!] character that I personnaly now hate
                 noprefix = raw.replaceFirst(MainBot.getPrefixes().get(event.getGuild().getId()), "");
             } catch (PatternSyntaxException e) {
                 noprefix = raw.replaceFirst("\\" + MainBot.getPrefixes().get(event.getGuild().getId()), "");

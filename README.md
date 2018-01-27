@@ -50,11 +50,11 @@ To edit the code, just follow these steps :
 * Create a directory named soundboard in the bot's root folder. You will place your .mp3 files here.
 
 
-##Interface
+## Interface
 
 * Double click anywhere on the background to minimize
 * Click anywhere on the background to drag the window
-* Start buttons launchs the bot, Stop button stops it
+* Start buttons launches the bot, Stop button stops it
 * Edit button open the config file in your default text editor
 * Quit button stops the bot (if running) and closes the window
 
@@ -69,12 +69,19 @@ By typing ```help``` after each command, you'll get information on how to use th
 The command ping pings the bot (to check if it's online). Usage : !ping
 ```
 
+## Running BlueBot on a headless device (VPS, Raspberry ...)
 
-# License
+Since BlueBot is using JavaFX for the GUI, you'll need to install an additional library to run the app without a display.
+The OpenJFX Monocle library can be found [here](https://drive.google.com/uc?id=1U4LGDiNYRvnKDvBPiCt65VKlChBtxQsJ&export=download) (you can find it on the web, but this is the version I'm using on my server).
+* Install Java 8 (ex. Debian : sudo apt-get install java-8-oracle)
+* Place the downloaded .jar in the ${JAVA_HOME}/jre/lib/ext folder (for me it's ```/usr/lib/jvm/java-8-oracle/jre/lib/ext``` with Debian 8)
+* Run the bot with ```java -jar -Xmx512m -Dtestfx.robot=glass -Dglass.platform=Monocle -Dmonocle.platform=Headless -Dprism.order=sw BlueBot.jar cmd```
 
-This project is realeased under the [MIT License](https://github.com/thibautbessone/DiscordBlueBot/blob/master/LICENSE).
+## License
 
-# Also !
+This project is released under the [MIT License](https://github.com/thibautbessone/DiscordBlueBot/blob/master/LICENSE).
+
+## Also !
 
 I'm currently a student, so the project may take a while to come to its end. Don't expect too many updates, I have some work to do and some social life to have.
 

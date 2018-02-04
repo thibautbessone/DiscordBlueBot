@@ -29,7 +29,7 @@ public class PlaySoundCommand implements Command {
                                 " \n\nUsage : `!sound list` - lists all the available sounds," +
                                 " `!sound theSpecifiedSound` - plays the sound," +
                                 " `!sound stop` - stop playing and makes the bot leave the voice channel.";
-    private File folder = new File("soundboard");
+    private File folder;
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -39,6 +39,9 @@ public class PlaySoundCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
+
+        folder = new File("soundboard" + "/" + event.getGuild().getId());
+
 
         AudioManager guildAudioManager = event.getGuild().getAudioManager();
         AudioPlayer player = MainBot.getPlayerManager().createPlayer();
@@ -94,7 +97,7 @@ public class PlaySoundCommand implements Command {
                 event.getTextChannel().sendMessage("Please join a voice channel first.").queue();
             } else {
                 //playing the sound
-                final String trackUrl = "./soundboard/" + args[0] + ".mp3";
+                final String trackUrl = "./" + folder.getPath() + "/" + args[0] + ".mp3";
                 MainBot.getPlayerManager().loadItem(trackUrl, new AudioLoadResultHandler() {
                     @Override
                     public void trackLoaded(AudioTrack audioTrack) {

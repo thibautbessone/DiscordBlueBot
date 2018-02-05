@@ -29,7 +29,6 @@ import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
 import javax.security.auth.login.LoginException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,7 +50,6 @@ public class MainBot {
 
 
     private static String botOwner;
-    private static LocalDateTime startTime = LocalDateTime.now();
     public static final CommandParser parser = new CommandParser();
     public static  Map<String, Command> commands = new TreeMap<String, Command>();
     private static Map<String, String> streamerList =  new HashMap<>();
@@ -176,7 +174,7 @@ public class MainBot {
         commands.put("sayhi", new SayHiCommand());
         commands.put("say", new SayCommand());
         commands.put("rate", new RateCommand());
-        //commands.put("clear", new ClearCommand());
+        commands.put("clear", new ClearCommand());
         commands.put("whoareyou", new WhoAreYouCommand());
         commands.put("help", new HelpCommand());
         commands.put("nope", new NopeCommand());

@@ -8,8 +8,9 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 /**
  * @file AnnouncementCommand.java
  * @author Blue
- * @version 0.1
+ * @version 0.2
  * @brief Allows the owner of the bot to say a message on all the server the bot is connected on.
+ * NOT WORKING DUE TO DISCORD RATE LIMITS
  */
 public class AnnouncementCommand implements Command {
 

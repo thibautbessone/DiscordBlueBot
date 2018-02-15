@@ -26,9 +26,11 @@ import java.util.ArrayList;
 public class PlaySoundCommand implements Command {
 
     private final String HELP = "The command `sound` makes the bot join your current voice channel and play the specified sound." +
-                                " \n\nUsage : `!sound list` - lists all the available sounds," +
+                                " \n\nUsage : `!sound list` - lists all the available sounds on your server," +
                                 " `!sound theSpecifiedSound` - plays the sound," +
-                                " `!sound stop` - stop playing and makes the bot leave the voice channel.";
+                                " `!sound stop` - stop playing and makes the bot leave the voice channel." +
+                                " \nAdd the `general` parameter after theSpecifiedSound to use the general soundboard : " +
+                                " `!sound theSpecifiedSound general`, `!sound list general`";
     private File folder;
 
     @Override
@@ -39,9 +41,11 @@ public class PlaySoundCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-
-        folder = new File("soundboard" + "/" + event.getGuild().getId());
-
+        if(args.length == 2 && args[1].equals("general")) {
+            folder = new File("soundboard/");
+        } else {
+            folder = new File("soundboard" + "/" + event.getGuild().getId());
+        }
 
         AudioManager guildAudioManager = event.getGuild().getAudioManager();
         AudioPlayer player = MainBot.getPlayerManager().createPlayer();

@@ -17,7 +17,7 @@ import java.util.Map;
 public class HelpCommand implements Command {
 
     private final String HELP = "The command `help` displays the current available commands for the bot. \nUsage : `!help`";
-    private String TEXT = "The currently available commands are listed below. Some commands are unavailable and under work. All commands must be prefixed with a `!` (by default). To obtain more information on a command, just type `!command help`\n\n";
+    private String TEXT = "The currently available commands are listed below. All commands must be prefixed with a `!` (by default). \nTo obtain more information on a command, just type `!command help`\n";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -28,12 +28,34 @@ public class HelpCommand implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
 
-        String list = new String();
-        for(Map.Entry<String, Command> entry : MainBot.commands.entrySet()) {
+        String funCommandsList = new String("**Fun commands : ** ");
+        for(Map.Entry<String, Command> entry : MainBot.funCommands.entrySet()) {
             String command = entry.getKey();
-            list += command + "\n";
+            funCommandsList += "`" + command + "`" + "\t";
         }
-        event.getTextChannel().sendMessage(TEXT + "```\n" + list + "```").queue();
+
+        String modUtilCommandsList = new String("\n\n**Moderation & Utlity commands : ** ");
+        for(Map.Entry<String, Command> entry : MainBot.modUtilCommands.entrySet()) {
+            String command = entry.getKey();
+            modUtilCommandsList += "`" + command + "`" + "\t";
+        }
+
+        String miscCommandsList = new String("\n\n**Miscellaneous commands : ** ");
+        for(Map.Entry<String, Command> entry : MainBot.miscCommands.entrySet()) {
+            String command = entry.getKey();
+            miscCommandsList += "`" + command + "`" + "\t";
+        }
+
+        String ownerCommandsList = new String("\n\n**Owner-only commands : ** ");
+        for(Map.Entry<String, Command> entry : MainBot.ownerCommands.entrySet()) {
+            String command = entry.getKey();
+            ownerCommandsList += "`" + command + "`" + "\t";
+        }
+
+        String footer = new String("\n\nIf you need more help, join the support server : https://discord.gg/rSekkJv \n\nThanks for using **BlueBot** ! ");
+
+        String finalList = funCommandsList + modUtilCommandsList + miscCommandsList + ownerCommandsList + footer;
+        event.getAuthor().openPrivateChannel().queue( (channel) -> channel.sendMessage(TEXT + "\n" + finalList + "").queue() );
     }
 
     @Override

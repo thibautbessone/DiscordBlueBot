@@ -41,7 +41,8 @@ public class PlaySoundCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        if(args.length == 2 && args[1].equals("general")) {
+        System.out.println(MainBot.getServerSBDisabled().toString());
+        if(MainBot.getServerSBDisabled().contains(event.getGuild().getId())) {
             folder = new File("soundboard/");
         } else {
             folder = new File("soundboard" + "/" + event.getGuild().getId());

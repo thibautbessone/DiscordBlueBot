@@ -26,6 +26,7 @@ public class DisableListenerCommand implements Command {
         link.put("bw", MainBot.getBwDisabled());
         link.put("cleverbot", MainBot.getCleverBotDisabled());
         link.put("userevent", MainBot.getUserEventDisabled());
+        link.put("serversb", MainBot.getServerSBDisabled());
     }
 
     private final String HELP = "The command `disable` disable the specified BlueBot functionality." +
@@ -34,7 +35,8 @@ public class DisableListenerCommand implements Command {
             "\n\n`!disable twitch` : disable Twitch notifications" +
             "\n`!disable bw` : disable the bad words filter" +
             "\n`!disable cleverbot` : disable CleverBot integration" +
-            "\n`!disable userevent` : disable role auto-assign and welcome/goodbye messages";
+            "\n`!disable userevent` : disable role auto-assign and welcome/goodbye messages" +
+            "\n`!disable serversb` : disable the dedicated soundboard for the general one";
 
     private boolean permissionFail = false;
 

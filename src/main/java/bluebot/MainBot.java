@@ -51,7 +51,11 @@ public class MainBot {
 
     private static String botOwner;
     public static final CommandParser parser = new CommandParser();
-    public static  Map<String, Command> commands = new TreeMap<String, Command>();
+    //public static  Map<String, Command> commands = new TreeMap<String, Command>();
+    public static  Map<String, Command> funCommands = new TreeMap<String, Command>();
+    public static  Map<String, Command> modUtilCommands = new TreeMap<String, Command>();
+    public static  Map<String, Command> miscCommands = new TreeMap<String, Command>();
+    public static  Map<String, Command> ownerCommands = new TreeMap<String, Command>();
     private static Map<String, String> streamerList =  new HashMap<>();
     private static Map<String, String> autoRoleList = new HashMap<>();
 
@@ -63,6 +67,7 @@ public class MainBot {
     private static ArrayList<String> cleverBotDisabled = new ArrayList<>();
     private static ArrayList<String> bwDisabled = new ArrayList<>();
     private static ArrayList<String> userEventDisabled = new ArrayList<>();
+    private static ArrayList<String> serverSBDisabled = new ArrayList<>();
     private static ArrayList<String> nameProtectionDisabled = new ArrayList<>();
 
 
@@ -97,11 +102,30 @@ public class MainBot {
     public static Map<String, String> getMusicChannel() {
         return musicChannel;
     }
-
+    public static ArrayList<String> getServerSBDisabled() {
+        return serverSBDisabled;
+    }
     private static String basePrefix = "!";
 
     public static void handleCommand(CommandParser.CommandContainer cmdContainer) {
-        if(commands.containsKey(cmdContainer.invoke)) {
+        Map<String, Command> localMap = new TreeMap<String, Command>();
+        if(funCommands.containsKey(cmdContainer.invoke)) localMap = funCommands;
+        if(modUtilCommands.containsKey(cmdContainer.invoke)) localMap = modUtilCommands;
+        if(miscCommands.containsKey(cmdContainer.invoke)) localMap = miscCommands;
+        if(ownerCommands.containsKey(cmdContainer.invoke)) localMap = ownerCommands;
+
+        if(!localMap.isEmpty()) {
+            boolean safe = localMap.get(cmdContainer.invoke).called(cmdContainer.args, cmdContainer.event);
+            if(safe) {
+                localMap.get(cmdContainer.invoke).action(cmdContainer.args, cmdContainer.event);
+                localMap.get(cmdContainer.invoke).executed(safe, cmdContainer.event);
+            }
+            else {
+                localMap.get(cmdContainer.invoke).executed(safe, cmdContainer.event);
+            }
+        }
+
+        /*if(commands.containsKey(cmdContainer.invoke)) {
             boolean safe = commands.get(cmdContainer.invoke).called(cmdContainer.args, cmdContainer.event);
             if(safe) {
                 commands.get(cmdContainer.invoke).action(cmdContainer.args, cmdContainer.event);
@@ -110,7 +134,7 @@ public class MainBot {
             else {
                 commands.get(cmdContainer.invoke).executed(safe, cmdContainer.event);
             }
-        }
+        }*/
     }
 
 
@@ -170,47 +194,55 @@ public class MainBot {
         //bannedServers.put("281978005088370688", "BlueBot TestServer");
 
         //Activated bot commands
-        commands.put("ping", new PingCommand());
-        commands.put("sayhi", new SayHiCommand());
-        commands.put("say", new SayCommand());
-        commands.put("rate", new RateCommand());
-        commands.put("clear", new ClearCommand());
-        commands.put("whoareyou", new WhoAreYouCommand());
-        commands.put("help", new HelpCommand());
-        commands.put("nope", new NopeCommand());
-        commands.put("ymjoke", new YoMommaJokeCommand());
-        commands.put("wat", new WatCommand());
-        commands.put("gif", new GifCommand());
-        commands.put("c&h", new CyanideHapinessCommand());
-        commands.put("xkcd", new XKCDCommand());
-        commands.put("setprefix", new SetPrefixCommand());
-        commands.put("sound", new PlaySoundCommand());
-        commands.put("tracktwitch", new TrackTwitchCommand());
-        commands.put("untrack", new UntrackCommand());
-        commands.put("setautorole", new SetAutoRoleCommand());
-        commands.put("cat", new CatCommand());
-        commands.put("dog", new DogCommand());
-        commands.put("idgf", new IDGFCommand());
-        commands.put("bw", new BadWordCommand());
-        commands.put("info", new InfoCommand());
-        commands.put("steam", new SteamStatusCommand());
-        commands.put("kappa", new KappaCommand());
-        commands.put("enable", new EnableListenerCommand());
-        commands.put("disable", new DisableListenerCommand());
-        commands.put("channel", new SpecificChannelCommand());
-        commands.put("invite", new InviteCommand());
-        commands.put("call", new CallCommand());
-        commands.put("whois", new WhoisCommand());
-        commands.put("github", new GitHubCommand());
-        commands.put("server", new ServerCommand());
-        commands.put("rmsound", new RemoveSoundCommand());
-        //commands.put("prune", new PruneCommand());
+
+        //Fun commands
+        funCommands.put("idgf", new IDGFCommand());
+        funCommands.put("kappa", new KappaCommand());
+        funCommands.put("nope", new NopeCommand());
+        funCommands.put("wat", new WatCommand());
+        funCommands.put("cat", new CatCommand());
+        funCommands.put("c&h", new CyanideHapinessCommand());
+        funCommands.put("dog", new DogCommand());
+        funCommands.put("gif", new GifCommand());
+        funCommands.put("rate", new RateCommand());
+        funCommands.put("xkcd", new XKCDCommand());
+        funCommands.put("ymjoke", new YoMommaJokeCommand());
+
+        //Miscellaneous commands
+        miscCommands.put("call", new CallCommand());
+        miscCommands.put("github", new GitHubCommand());
+        miscCommands.put("info", new InfoCommand());
+        miscCommands.put("invite", new InviteCommand());
+        miscCommands.put("sound", new PlaySoundCommand());
+        miscCommands.put("rmsound", new RemoveSoundCommand());
+        miscCommands.put("server", new ServerCommand());
+        miscCommands.put("steam", new SteamStatusCommand());
+        miscCommands.put("tracktwitch", new TrackTwitchCommand());
+        miscCommands.put("untrack", new UntrackCommand());
+        miscCommands.put("whois", new WhoisCommand());
+
+        //Moderation & utility commands
+        modUtilCommands.put("bw", new BadWordCommand());
+        modUtilCommands.put("enable", new EnableListenerCommand());
+        modUtilCommands.put("disable", new DisableListenerCommand());
+        modUtilCommands.put("setautorole", new SetAutoRoleCommand());
+        modUtilCommands.put("setprefix", new SetPrefixCommand());
+        modUtilCommands.put("channel", new SpecificChannelCommand());
+
+        modUtilCommands.put("clear", new ClearCommand());
+        modUtilCommands.put("help", new HelpCommand());
+        modUtilCommands.put("ping", new PingCommand());
+        modUtilCommands.put("say", new SayCommand());
+        modUtilCommands.put("sayhi", new SayHiCommand());
+        modUtilCommands.put("whoareyou", new WhoAreYouCommand());
 
         //Owner commands
-        commands.put("setgame", new SetGameCommand());
-        commands.put("setos", new SetOnlineStateCommand());
-        commands.put("shutdown", new ShutDownCommand());
-        commands.put("announce", new AnnouncementCommand());
+        ownerCommands.put("announce", new AnnouncementCommand());
+        ownerCommands.put("setgame", new SetGameCommand());
+        ownerCommands.put("setos", new SetOnlineStateCommand());
+        ownerCommands.put("shutdown", new ShutDownCommand());
+
+        //commands.put("prune", new PruneCommand());
     }
 
     public static JDA getJda() {return jda;}

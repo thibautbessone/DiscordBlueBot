@@ -1,17 +1,17 @@
-#Sun Nov 12 22:22:49 CET 2017
-badWords={"311620440319590400"\:[],"342940167570456587"\:[]}
+#Sun Mar 11 07:56:16 CET 2018
+badWords={}
 userEventChannel={}
 musicChannel={}
 botActivity=type \!help for help
-botToken=MzA0NzA2MzQ4NjQ0MzAyODUz.DGPs0g.EnA8u7ryCxKu-IovkeRv0GIK4L4
+botToken=YOURTOKENHERE
 twitchChannel={}
 userEventDisabled=[]
-prefixes={"311620440319590400"\:"?"}
+prefixes={}
 embedColor=\#0088FF
 autoRoleList={}
-streamerList={"218461869617184768"\:"https\://www.twitch.tv/1234"}
+streamerList={}
 twitchDisabled=[]
 cleverBotDisabled=[]
 cleverbotAPIKey=YOURCLEVERBOTAPIKEY
 bwDisabled=[]
-botOwner=197114678533554179
+botOwner=YOURIDHERE

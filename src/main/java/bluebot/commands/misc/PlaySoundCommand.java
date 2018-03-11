@@ -43,7 +43,10 @@ public class PlaySoundCommand implements Command {
     public void action(String[] args, MessageReceivedEvent event) {
         System.out.println(MainBot.getServerSBDisabled().toString());
         if(MainBot.getServerSBDisabled().contains(event.getGuild().getId())) {
-            folder = new File("soundboard/");
+            //folder = new File("soundboard/");
+            event.getTextChannel().sendMessage("Full sound list available at : https://bluebot.pw/sound_list.php").queue();
+            return; //Edited since 4500+ sounds were a mess to list lol
+
         } else {
             folder = new File("soundboard" + "/" + event.getGuild().getId());
         }

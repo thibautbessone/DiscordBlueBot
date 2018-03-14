@@ -124,17 +124,6 @@ public class MainBot {
                 localMap.get(cmdContainer.invoke).executed(safe, cmdContainer.event);
             }
         }
-
-        /*if(commands.containsKey(cmdContainer.invoke)) {
-            boolean safe = commands.get(cmdContainer.invoke).called(cmdContainer.args, cmdContainer.event);
-            if(safe) {
-                commands.get(cmdContainer.invoke).action(cmdContainer.args, cmdContainer.event);
-                commands.get(cmdContainer.invoke).executed(safe, cmdContainer.event);
-            }
-            else {
-                commands.get(cmdContainer.invoke).executed(safe, cmdContainer.event);
-            }
-        }*/
     }
 
 
@@ -214,6 +203,7 @@ public class MainBot {
         miscCommands.put("info", new InfoCommand());
         miscCommands.put("invite", new InviteCommand());
         miscCommands.put("sound", new PlaySoundCommand());
+        miscCommands.put("qpoll", new QuickPollCommand());
         miscCommands.put("rmsound", new RemoveSoundCommand());
         miscCommands.put("server", new ServerCommand());
         miscCommands.put("steam", new SteamStatusCommand());

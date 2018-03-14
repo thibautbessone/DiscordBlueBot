@@ -66,7 +66,7 @@ public class InfoCommand implements Command {
 
         builder.addField("Users :busts_in_silhouette:", String.valueOf(usersNumber), true);
         builder.addField("Servers :desktop:", String.valueOf(serversNumber), true);
-        builder.addField("Channels :keyboard: :loud_sound:", String.valueOf(channelNumber) + " text channels / " + String.valueOf(voiceChannelNumber) + " voice channels", true);
+        builder.addField("Channels :keyboard: :loud_sound:", String.valueOf(channelNumber) + " text / " + String.valueOf(voiceChannelNumber) + " voice channels", true);
         builder.addBlankField(true);
 
         builder.addField("Current activity :video_game:", game, true);

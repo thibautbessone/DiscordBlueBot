@@ -32,7 +32,7 @@ public class CommandParser {
         }
     }
     public CommandContainer parse(String str, MessageReceivedEvent event) {
-        ArrayList<String> split = new ArrayList<String>();
+        ArrayList<String> split = new ArrayList<>();
         String raw = str;
         String noprefix;
         if(MainBot.getPrefixes().containsKey(event.getGuild().getId())) {
@@ -46,7 +46,7 @@ public class CommandParser {
             noprefix = raw.replaceFirst(MainBot.getBasePrefix(), "");
         }
         String[] split_noprefix = noprefix.split(" ");
-        for(String s: split_noprefix) {split.add(s);}
+        for(String s : split_noprefix) {split.add(s);}
         String invoke = split.get(0);
         String[] args = new String[split.size() -1];
         split.subList(1, split.size()).toArray(args);

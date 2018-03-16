@@ -35,9 +35,10 @@ public class QuickPollCommand implements Command {
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.decode(MainBot.getConfig().getEmbedColor()));
         builder.setAuthor(event.getAuthor().getName() + "#" + event.getAuthor().getDiscriminator() + " created a poll", null, event.getAuthor().getAvatarUrl());
-        builder.setThumbnail("http://i.imgur.com/pwVKRqD.png");
-        builder.addField(":grey_question: Question :", query, false);
+        builder.addField("", ":grey_question: Question : " + "**" + query + "**", false);
+        builder.setFooter("Vote by adding a reaction below !", null);
 
+        event.getMessage().delete().queue();
         event.getTextChannel().sendMessage(builder.build()).queue();
 
         //Now retrieves the last message from BlueBot to add reactions

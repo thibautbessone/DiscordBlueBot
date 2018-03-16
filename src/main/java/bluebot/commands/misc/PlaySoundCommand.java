@@ -29,8 +29,7 @@ public class PlaySoundCommand implements Command {
                                 " \n\nUsage : `!sound list` - lists all the available sounds on your server," +
                                 " `!sound theSpecifiedSound` - plays the sound," +
                                 " `!sound stop` - stop playing and makes the bot leave the voice channel." +
-                                " \nAdd the `general` parameter after theSpecifiedSound to use the general soundboard : " +
-                                " `!sound theSpecifiedSound general`, `!sound list general`";
+                                " \nYou can toggle between your server soundboard and the general soundboard using the `!enable` and `!disable` commands.";
     private File folder;
 
     @Override

@@ -202,6 +202,7 @@ public class MainBot {
         miscCommands.put("github", new GitHubCommand());
         miscCommands.put("info", new InfoCommand());
         miscCommands.put("invite", new InviteCommand());
+        miscCommands.put("poll", new MultiPollCommand());
         miscCommands.put("sound", new PlaySoundCommand());
         miscCommands.put("qpoll", new QuickPollCommand());
         miscCommands.put("rmsound", new RemoveSoundCommand());

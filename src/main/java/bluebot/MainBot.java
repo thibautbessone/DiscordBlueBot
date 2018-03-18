@@ -43,7 +43,7 @@ import java.util.TreeMap;
 
 public class MainBot {
 
-
+    private static boolean isPublicInstance = false;
     private static JDA jda;
     private static LoadingProperties config = new LoadingProperties();
     private static AudioPlayerManager playerManager;
@@ -105,7 +105,13 @@ public class MainBot {
     public static ArrayList<String> getServerSBDisabled() {
         return serverSBDisabled;
     }
-    private static String basePrefix = "!";
+    public static boolean isPublicInstance() {
+        return isPublicInstance;
+    }
+    public static void setPublicInstance(boolean publicInstance) {
+        isPublicInstance = publicInstance;
+    }
+        private static String basePrefix = "!";
 
     public static void handleCommand(CommandParser.CommandContainer cmdContainer) {
         Map<String, Command> localMap = new TreeMap<String, Command>();

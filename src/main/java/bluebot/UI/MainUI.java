@@ -71,7 +71,7 @@ public class MainUI extends Application {
     }
 
     public static void main(String[] args) {
-        if(args.length == 1) {
+        if(args.length >= 1) { //Added one parameter for the public instance
             if(args[0].equals("cmd")) {
                 new MainBot(); //Runs command-line app
                 System.out.println("Command-line app started");
@@ -79,6 +79,12 @@ public class MainUI extends Application {
                 System.out.println("Invalid option - use the cmd option to run in command-line mode.\n" +
                         "Usage : java -jar BlueBot.jar cmd");
             }
+            if(args.length == 2) {
+                if(args[1].equals("public")) {
+                    MainBot.setPublicInstance(true); //Clearly not the best, but I'm the only one running the public instance, otherwise a map<arg, argActionObject> like the commands maps
+                }
+            }
+
         } else {
             System.out.println("JavaFX app started");
             launch(args); //Runs GUI

@@ -11,6 +11,7 @@ embedColor=\#0088FF
 autoRoleList={}
 streamerList={}
 twitchDisabled=[]
+serverSBDisabled=[]
 cleverBotDisabled=[]
 cleverbotAPIKey=YOURCLEVERBOTAPIKEY
 bwDisabled=[]

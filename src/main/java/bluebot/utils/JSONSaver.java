@@ -29,6 +29,7 @@ public class JSONSaver {
     private String cleverBotDisabled;
     private String bwDisabled;
     private String userEventDisabled;
+    private String serverSBDisabled;
 
     private String twitchChannel;
     private String userEventChannel;
@@ -45,6 +46,7 @@ public class JSONSaver {
         cleverBotDisabled = gsonTool.toJson(MainBot.getCleverBotDisabled());
         bwDisabled = gsonTool.toJson(MainBot.getBwDisabled());
         userEventDisabled = gsonTool.toJson(MainBot.getUserEventDisabled());
+        serverSBDisabled = gsonTool.toJson(MainBot.getServerSBDisabled());
 
         twitchChannel = gsonTool.toJson(MainBot.getTwitchChannel());
         userEventChannel = gsonTool.toJson(MainBot.getUserEventChannel());
@@ -69,6 +71,7 @@ public class JSONSaver {
             properties.setProperty("cleverBotDisabled", cleverBotDisabled);
             properties.setProperty("bwDisabled", bwDisabled);
             properties.setProperty("userEventDisabled", userEventDisabled);
+            properties.setProperty("serverSBDisabled", serverSBDisabled);
 
             properties.setProperty("twitchChannel", twitchChannel);
             properties.setProperty("userEventChannel", userEventChannel);

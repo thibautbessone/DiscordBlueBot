@@ -170,6 +170,7 @@ public class MainBot {
             cleverBotDisabled = gson.fromJson(config.getCleverBotDisabled(), new TypeToken<ArrayList<String>>(){}.getType());
             bwDisabled = gson.fromJson(config.getBwDisabled(), new TypeToken<ArrayList<String>>(){}.getType());
             userEventDisabled = gson.fromJson(config.getUserEventDisabled(), new TypeToken<ArrayList<String>>(){}.getType());
+            serverSBDisabled = gson.fromJson(config.getServerSBDisabled(), new TypeToken<ArrayList<String>>(){}.getType());
 
             twitchChannel = gson.fromJson(config.getTwitchChannel(), new TypeToken<Map<String, String>>(){}.getType());
             userEventChannel = gson.fromJson(config.getUserEventChannel(), new TypeToken<Map<String, String>>(){}.getType());
@@ -195,7 +196,7 @@ public class MainBot {
         funCommands.put("kappa", new KappaCommand());
         funCommands.put("nope", new NopeCommand());
         funCommands.put("wat", new WatCommand());
-        funCommands.put("cat", new CatCommand());
+        //funCommands.put("cat", new CatCommand());
         funCommands.put("c&h", new CyanideHapinessCommand());
         funCommands.put("dog", new DogCommand());
         funCommands.put("gif", new GifCommand());

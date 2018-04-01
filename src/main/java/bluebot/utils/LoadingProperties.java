@@ -31,6 +31,7 @@ public class LoadingProperties {
     private String cleverBotDisabled;
     private String bwDisabled;
     private String userEventDisabled;
+    private String serverSBDisabled;
 
     private String twitchChannel;
     private String userEventChannel;
@@ -76,6 +77,9 @@ public class LoadingProperties {
     public String getUserEventDisabled() {
         return userEventDisabled;
     }
+    public String getServerSBDisabled() {
+        return serverSBDisabled;
+    }
     public String getTwitchChannel() {
         return twitchChannel;
     }
@@ -113,6 +117,7 @@ public class LoadingProperties {
             cleverBotDisabled = properties.getProperty("cleverBotDisabled");
             bwDisabled = properties.getProperty("bwDisabled");
             userEventDisabled = properties.getProperty("userEventDisabled");
+            serverSBDisabled = properties.getProperty("serverSBDisabled");
 
             twitchChannel = properties.getProperty("twitchChannel");
             userEventChannel = properties.getProperty("userEventChannel");

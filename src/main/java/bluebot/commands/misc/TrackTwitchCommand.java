@@ -6,6 +6,8 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.utils.PermissionUtil;
 
+import java.util.Map;
+
 /**
  * @file TrackTwitchCommand.java
  * @author Blue
@@ -16,7 +18,7 @@ public class TrackTwitchCommand implements Command {
 
     private final String HELP = "The command `tracktwitch` makes the bot post a message when the specified user is streaming." +
                                 "\nThis command requires the manage messages permission." +
-                                " \n\nUsage : `!tracktwitch @TrackedUser streamLink`";
+                                " \n\nUsage : `!tracktwitch @TrackedUser streamLink`, `!tracktwitch list` to list users";
     private boolean permissionFail = false;
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -34,6 +36,14 @@ public class TrackTwitchCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
+        if (args[0].equals("list")) {
+            String list = new String("**Users tracked : **\n\n");
+            for(Map.Entry<String, String> entry : MainBot.getStreamerList().entrySet()) {
+                list +=  MainBot.getJda().getUserById(entry.getKey()).getName() + "#" + MainBot.getJda().getUserById(entry.getKey()).getDiscriminator()  /*+ " " + entry.getValue()*/ + "\n";
+            }
+            event.getTextChannel().sendMessage(list).queue();
+            return;
+        }
         if (event.getMessage().getMentionedUsers().isEmpty() || event.getMessage().getMentionedUsers().size() > 1) {
             event.getTextChannel().sendMessage("No user or too many users mentioned.").queue();
         }

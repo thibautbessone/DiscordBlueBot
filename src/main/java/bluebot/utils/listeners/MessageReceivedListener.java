@@ -19,21 +19,21 @@ public class MessageReceivedListener extends ListenerAdapter {
         try {
             if(!event.getAuthor().isBot()) {
                 if (MainBot.getPrefixes().containsKey(event.getGuild().getId())) {
-                    if(event.getMessage().getContent().startsWith(MainBot.getPrefixes().get(event.getGuild().getId())) && event.getMessage().getAuthor() != event.getJDA()) {
-                        MainBot.handleCommand(MainBot.parser.parse(event.getMessage().getContent(), event));
+                    if(event.getMessage().getContentRaw().startsWith(MainBot.getPrefixes().get(event.getGuild().getId())) && event.getMessage().getAuthor() != event.getJDA()) {
+                        MainBot.handleCommand(MainBot.parser.parse(event.getMessage().getContentRaw(), event));
                     }
                 } else {
-                    if(event.getMessage().getContent().startsWith(MainBot.getBasePrefix()) && event.getMessage().getAuthor() != event.getJDA()) {
-                        MainBot.handleCommand(MainBot.parser.parse(event.getMessage().getContent(), event));
+                    if(event.getMessage().getContentRaw().startsWith(MainBot.getBasePrefix()) && event.getMessage().getAuthor() != event.getJDA()) {
+                        MainBot.handleCommand(MainBot.parser.parse(event.getMessage().getContentRaw(), event));
                     }
                 }
                 System.out.println(MainBot.getBasePrefix());
-                System.out.println("[" + LocalDateTime.now() + "] " + "Guild : " + event.getGuild().getName() + "/" + event.getAuthor().getName() + "(" + event.getMessage().getAuthor().getId() + ")" + " : " + event.getMessage().getContent());
+                System.out.println("[" + LocalDateTime.now() + "] " + "Guild : " + event.getGuild().getName() + "/" + event.getAuthor().getName() + "(" + event.getMessage().getAuthor().getId() + ")" + " : " + event.getMessage().getContentRaw());
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
             //Command sent in private channel with the bot
-            if(event.getMessage().getContent().startsWith(MainBot.getBasePrefix()) && event.getMessage().getAuthor() != event.getJDA()) {
+            if(event.getMessage().getContentRaw().startsWith(MainBot.getBasePrefix()) && event.getMessage().getAuthor() != event.getJDA()) {
                 event.getPrivateChannel().sendMessage("You can't use commands in our private conversation :wink:").queue();
             }
         }

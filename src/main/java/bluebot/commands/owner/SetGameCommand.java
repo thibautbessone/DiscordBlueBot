@@ -39,7 +39,7 @@ public class SetGameCommand implements Command {
         for(String arg : args) {
             text += arg + " ";
         }
-        MainBot.getJda().getPresence().setGame(Game.of(text));
+        MainBot.getJda().getPresence().setGame(Game.playing(text));
     }
 
     @Override

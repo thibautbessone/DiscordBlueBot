@@ -26,7 +26,6 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
 import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
@@ -155,7 +154,7 @@ public class MainBot {
                     .setBulkDeleteSplittingEnabled(false).buildBlocking();
 
             botOwner = config.getBotOwner();
-            jda.getPresence().setGame(Game.of(config.getBotActivity()));
+            jda.getPresence().setGame(Game.playing(config.getBotActivity()));
             System.out.println("Current activity " + jda.getPresence().getGame());
 
             //Loading the previous state of the bot(before shutdown)
@@ -181,7 +180,7 @@ public class MainBot {
             System.out.println("Connected servers : " + jda.getGuilds().size());
             System.out.println("Concerned users : " + jda.getUsers().size());
 
-        } catch (InterruptedException | LoginException | RateLimitedException e) {
+        } catch (InterruptedException | LoginException e) {
          System.out.println("No internet connection or invalid or missing token. Please edit config.blue and try again.");
         }
 
@@ -239,8 +238,6 @@ public class MainBot {
         ownerCommands.put("setgame", new SetGameCommand());
         ownerCommands.put("setos", new SetOnlineStateCommand());
         ownerCommands.put("shutdown", new ShutDownCommand());
-
-        //commands.put("prune", new PruneCommand());
     }
 
     public static JDA getJda() {return jda;}

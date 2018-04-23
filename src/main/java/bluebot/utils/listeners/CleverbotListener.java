@@ -32,7 +32,7 @@ public class CleverbotListener extends ListenerAdapter {
                 if (talkingToBot) {
 
                     //Creating the query
-                    String message = event.getMessage().getContent();
+                    String message = event.getMessage().getContentRaw();
                     message = message.replaceAll("@\\p{L}+", ""); //deletes the mentions
                     String text = message.replace(' ', '+');//creates the query
                     text = text.substring(0, text.length()-1);

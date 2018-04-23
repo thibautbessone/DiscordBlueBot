@@ -21,7 +21,7 @@ public class BadWordsListener extends ListenerAdapter {
         }
         try {
             for(String word : MainBot.getBadWords().get(event.getGuild().getId())) {
-                if(event.getMessage().getContent().contains(word)) {
+                if(event.getMessage().getContentRaw().contains(word)) {
                     event.getMessage().delete().queue();
                     event.getTextChannel().sendMessage("Whoop whoop " + event.getMessage().getAuthor().getAsMention() + ", don't use such bad words :confused:").queue();
                     break;

@@ -81,10 +81,3 @@ The OpenJFX Monocle library can be found [here](https://drive.google.com/uc?id=1
 ## License
 
 This project is released under the [MIT License](https://github.com/thibautbessone/DiscordBlueBot/blob/master/LICENSE).
-
-## Also !
-
-I'm currently a student, so the project may take a while to come to its end. Don't expect too many updates, I have some work to do and some social life to have.
-
-
-And I like blue, obviously.

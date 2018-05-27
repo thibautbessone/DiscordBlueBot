@@ -1,7 +1,11 @@
 package bluebot.commands.utility;
 
+import bluebot.MainBot;
 import bluebot.utils.Command;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+
+import java.awt.*;
 
 /**
  * @file PingCommand.java
@@ -21,7 +25,12 @@ public class PingCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        event.getTextChannel().sendMessage("Pong ! Stop bothering me please, I'm being developed.").queue();
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setColor(Color.decode(MainBot.getConfig().getEmbedColor()));
+        builder.setAuthor("I'm online !");
+        builder.setDescription("Ping : " + event.getJDA().getPing() + " ms");
+
+        event.getTextChannel().sendMessage(builder.build()).queue();
     }
 
     @Override

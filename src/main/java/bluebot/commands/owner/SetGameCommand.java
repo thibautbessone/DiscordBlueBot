@@ -5,6 +5,9 @@ import bluebot.utils.Command;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @file SetGameCommand.java
  * @author Blue
@@ -13,9 +16,11 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
  */
 public class SetGameCommand implements Command {
 
-    private final String HELP = "The command `setgame` change the current bot activity to the one given in parameter." +
+    private final String HELP = "The command `setgame` change the current bot activity / rich presence to the one given in parameter." +
+                                "\nThe available types are `playing`, `listening` and `streaming`." +
+                                "\nIf you are using the `streaming` type, provide a valid twitch URL after the activity (by default : mine)." +
                                 "\nThis command requires to be the owner of the bot." +
-                                "\n\nUsage : `!setgame activity`";
+                                "\n\nUsage (syntax is important) : `!setgame (type) [activity) streamLink`";
     private boolean permissionFail = false;
 
     @Override
@@ -36,10 +41,50 @@ public class SetGameCommand implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         String text = new String();
+        String streamLink = new String("https://www.twitch.tv/bluretv");
+        Pattern typeRegex = Pattern.compile("\\((.*?)\\)");
+        Pattern activityRegex = Pattern.compile("\\[(.*?)]");
+
+        String type;
+        String activity;
+
         for(String arg : args) {
             text += arg + " ";
         }
-        MainBot.getJda().getPresence().setGame(Game.playing(text));
+
+        Matcher typeMatcher = typeRegex.matcher(text);
+        Matcher activityMatcher = activityRegex.matcher(text);
+
+        if (typeMatcher.find()) {
+            type = typeMatcher.group(1);
+        } else {
+            event.getTextChannel().sendMessage("Please specify the type of the rich presence.").queue();
+            return;
+        }
+
+        if (activityMatcher.find()) {
+            activity = activityMatcher.group(1);
+        } else {
+            event.getTextChannel().sendMessage("Please specify the activity of the bot.").queue();
+            return;
+        }
+
+        switch (type) {
+            case "playing":
+                MainBot.getJda().getPresence().setGame(Game.playing(activity));
+                break;
+            case "listening":
+                MainBot.getJda().getPresence().setGame(Game.listening(activity));
+                break;
+            case "streaming":
+                for(String arg : args) {
+                    if (arg.contains("twitch.tv/")) streamLink = arg;
+                }
+                MainBot.getJda().getPresence().setGame(Game.streaming(activity, streamLink));
+                break;
+            default:
+                event.getTextChannel().sendMessage("Wrong type specified.").queue();
+        }
     }
 
     @Override

@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 
 /**
  * @file LogSystem.java
@@ -15,8 +18,11 @@ public class LogSystem {
 
     public static void run() {
         //PrintStream console = System.err; //save
+        //Logs dates
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH-mm-ss");
 
-        File file = new File("log.blue");
+        File file = new File("log" + LocalDate.now() + "Time" + sdf.format(cal.getTime()) + ".blue");
         FileOutputStream fileOS = null;
         try {
             fileOS = new FileOutputStream(file);

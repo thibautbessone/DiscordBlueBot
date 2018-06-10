@@ -1,18 +1,19 @@
-#Sun Mar 11 07:56:16 CET 2018
-badWords={}
-userEventChannel={}
-musicChannel={}
-botActivity=type \!help for help
-botToken=YOURTOKENHERE
-twitchChannel={}
-userEventDisabled=[]
-prefixes={}
-embedColor=\#0088FF
-autoRoleList={}
-streamerList={}
-twitchDisabled=[]
-serverSBDisabled=[]
-cleverBotDisabled=[]
+#Sun Jun 10 20:28:55 CEST 2018
 cleverbotAPIKey=YOURCLEVERBOTAPIKEY
+botToken=MzA0NzA2MzQ4NjQ0MzAyODUz.DQ_5Kw.y-KJHHs_XiUb23HE82vvI6MgVhs
+twitchChannel={}
+selfAssignedRolesList={}
+botActivity=type \!help for help
+badWords={"342940167570456587"\:[]}
+twitchDisabled=[]
+userEventDisabled=[]
 bwDisabled=[]
-botOwner=YOURIDHERE
+cleverBotDisabled=[]
+musicChannel={}
+userEventChannel={}
+streamerList={"218461869617184768"\:"https\://www.twitch.tv/1234"}
+prefixes={"311620440319590400"\:"?"}
+botOwner=197114678533554179
+autoRoleList={}
+embedColor=\#0088FF
+serverSBDisabled=[]

@@ -21,6 +21,7 @@ public class JSONSaver {
 
     private String streamerList;
     private String autoRoleList;
+    private String selfAssignedRolesList;
 
     private String badWords;
     private String prefixes;
@@ -38,6 +39,7 @@ public class JSONSaver {
     public JSONSaver() {
         streamerList = gsonTool.toJson(MainBot.getStreamerList());
         autoRoleList = gsonTool.toJson(MainBot.getAutoRoleList());
+        selfAssignedRolesList = gsonTool.toJson(MainBot.getSelfAssignedRolesList());
 
         badWords = gsonTool.toJson(MainBot.getBadWords());
         prefixes = gsonTool.toJson(MainBot.getPrefixes());
@@ -63,6 +65,7 @@ public class JSONSaver {
             FileOutputStream fileOutput = new FileOutputStream(configFile);
             properties.setProperty("streamerList", streamerList);
             properties.setProperty("autoRoleList", autoRoleList);
+            properties.setProperty("selfAssignedRolesList", selfAssignedRolesList);
 
             properties.setProperty("badWords", badWords);
             properties.setProperty("prefixes", prefixes);

@@ -66,11 +66,17 @@ public class PlaySoundCommand implements Command {
         if(args[0].equals("list")) {
         //Displays the sound lists LENGTH : 15
             ArrayList<String> list = new ArrayList<>();
-            for (File file : folder.listFiles()) {
-                if(file.getName().contains(".mp3")) {
-                    list.add(file.getName().replace(".mp3", ""));
+            try {
+                for (File file : folder.listFiles()) {
+                    if(file.getName().contains(".mp3")) {
+                        list.add(file.getName().replace(".mp3", ""));
+                    }
                 }
+            } catch (NullPointerException e) {
+                event.getTextChannel().sendMessage("No sounds available.").queue();
+                return;
             }
+
 
             String fileList = "```Available sounds :\n" +
                                  "------------------\n\n";
@@ -83,7 +89,7 @@ public class PlaySoundCommand implements Command {
                 fileList += file + "\t";
                 if(0 == nb%6) fileList += "\n";
                 if(0 == nb%42) {
-                    System.out.println("50 atteint");
+                    System.out.println("50 sounds reached");
                     fileList += "```";
                     event.getTextChannel().sendMessage(fileList).queue();
                     fileList = "```";

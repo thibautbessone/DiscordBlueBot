@@ -23,6 +23,7 @@ public class LoadingProperties {
 
     private String streamerList;
     private String autoRoleList;
+    private String selfAssignedRolesList;
 
     private String badWords;
     private String prefixes;
@@ -57,6 +58,9 @@ public class LoadingProperties {
         return streamerList;
     }
     public String getAutoRoleList() {
+        return autoRoleList;
+    }
+    public String getSelfAssignedRolesList() {
         return autoRoleList;
     }
     public String getBadWords() {
@@ -109,6 +113,7 @@ public class LoadingProperties {
 
             streamerList = properties.getProperty("streamerList");
             autoRoleList = properties.getProperty("autoRoleList");
+            selfAssignedRolesList = properties.getProperty("selfAssignedRolesList");
 
             badWords = properties.getProperty("badWords");
             prefixes = properties.getProperty("prefixes");

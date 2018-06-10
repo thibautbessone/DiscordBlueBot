@@ -12,10 +12,7 @@ import bluebot.commands.owner.SetGameCommand;
 import bluebot.commands.owner.SetOnlineStateCommand;
 import bluebot.commands.owner.ShutDownCommand;
 import bluebot.commands.utility.*;
-import bluebot.utils.Command;
-import bluebot.utils.CommandParser;
-import bluebot.utils.LoadingProperties;
-import bluebot.utils.SaveThread;
+import bluebot.utils.*;
 import bluebot.utils.listeners.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -57,7 +54,7 @@ public class MainBot {
     public static  Map<String, Command> ownerCommands = new TreeMap<String, Command>();
     private static Map<String, String> streamerList =  new HashMap<>();
     private static Map<String, String> autoRoleList = new HashMap<>();
-
+    private static Map<String, ArrayList<String>> selfAssignedRolesList = new HashMap<>();
     private static Map<String, ArrayList<String>> badWords = new HashMap<>();
     private static Map<String, String> prefixes = new HashMap<>();
     private static Map<String, String> bannedServers = new HashMap<>(); //server, reason for ban
@@ -133,6 +130,8 @@ public class MainBot {
 
 
     public MainBot() {
+        //LogSystem logger = new LogSystem();
+        LogSystem.run();
         try {
             //jda instanciation
             //default method as provided in the API
@@ -161,6 +160,7 @@ public class MainBot {
             Gson gson = new Gson();
             streamerList = gson.fromJson(config.getStreamerList(), new TypeToken<Map<String, String>>(){}.getType());
             autoRoleList = gson.fromJson(config.getAutoRoleList(), new TypeToken<Map<String, String>>(){}.getType());
+            //selfAssignedRolesList = gson.fromJson(config.getSelfAssignedRolesList(), new TypeToken<Map<String, ArrayList<String>>>(){}.getType());
 
             badWords = gson.fromJson(config.getBadWords(), new TypeToken<Map<String, ArrayList<String>>>(){}.getType());
             prefixes = gson.fromJson(config.getPrefixes(), new TypeToken<Map<String, String>>(){}.getType());
@@ -205,12 +205,14 @@ public class MainBot {
 
         //Miscellaneous commands
         miscCommands.put("call", new CallCommand());
+        //miscCommands.put("embed", new CustomEmbedCommand());
         miscCommands.put("github", new GitHubCommand());
         miscCommands.put("info", new InfoCommand());
         miscCommands.put("invite", new InviteCommand());
         miscCommands.put("poll", new MultiPollCommand());
         miscCommands.put("sound", new PlaySoundCommand());
         miscCommands.put("qpoll", new QuickPollCommand());
+        //miscCommands.put("rank", new RankCommand());
         miscCommands.put("rmsound", new RemoveSoundCommand());
         miscCommands.put("server", new ServerCommand());
         miscCommands.put("steam", new SteamStatusCommand());
@@ -247,6 +249,7 @@ public class MainBot {
     public static AudioPlayerManager getPlayerManager() {return playerManager;}
     public static Map<String, String> getStreamerList() {return streamerList;}
     public static Map<String, String> getAutoRoleList() {return autoRoleList;}
+    public static Map<String, ArrayList<String>> getSelfAssignedRolesList() {return selfAssignedRolesList;}
     public static Map<String, ArrayList<String>> getBadWords() {return badWords;}
     public static String getBasePrefix() {return basePrefix;}
     public static Map<String, String> getPrefixes() {return prefixes;}

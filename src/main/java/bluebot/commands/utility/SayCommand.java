@@ -24,6 +24,7 @@ public class SayCommand implements Command {
     public void action(String[] args, MessageReceivedEvent event) {
         String text = new String();
         for(String arg : args) {
+            if(arg.equals("@everyone")) continue; //cause people don't like to be ping'd at all it seems
             text += arg + " ";
         }
         event.getMessage().delete().queue();

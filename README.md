@@ -69,13 +69,25 @@ By typing ```help``` after each command, you'll get information on how to use th
 The command ping pings the bot (to check if it's online). Usage : !ping
 ```
 
+## Hosting the bot
+
+You can host your own instance of the bot. To do so, head over to the Releases page and download the latest one.
+To run BlueBot, you'll need Java 8 and OpenJFX. After installing them (Google is your friend, it depends on your OS), you'll be ready to go.
+
+If you are using the bot on several servers, in order to have a dedicated soundboard per server, you'll have to :
+* Enable Discord Developer mode (in the app settings, go to Appearance -> Advanced -> Toggle Developer mode on), then right click on your server and click on ```Copy ID```.
+* Create a folder named like the server ID (for example, if one of the server has ```264445054966991498``` as ID, you want to name your folder ```264445054966991498```)
+* Drop your .mp3 files inside this folder. These sounds will only be available on this particular server.
+
+To toggle between the general soundboard and the dedicated one, remember to use the ```!enable``` and ```!disable``` commands.
+
 ## Running BlueBot on a headless device (VPS, Raspberry ...)
 
 Since BlueBot is using JavaFX for the GUI, you'll need to install an additional library to run the app without a display.
 The OpenJFX Monocle library can be found [here](https://drive.google.com/uc?id=1U4LGDiNYRvnKDvBPiCt65VKlChBtxQsJ&export=download) (you can find it on the web, but this is the version I'm using on my server).
 * Install Java 8 (ex. Debian : ```sudo apt-get install java-8-oracle```)
 * Install OpenJFX (ex Debian : ```sudo apt-get install openjfx```)
-* Place the downloaded .jar in the ${JAVA_HOME}/jre/lib/ext folder (for me it's ```/usr/lib/jvm/java-8-oracle/jre/lib/ext``` with Debian 8)
+* Place the downloaded .jar in the ```${JAVA_HOME}/jre/lib/ext folder (for me it's``` ```/usr/lib/jvm/java-8-oracle/jre/lib/ext``` with Debian 8)
 * Run the bot with ```java -jar -Xmx512m -Dtestfx.robot=glass -Dglass.platform=Monocle -Dmonocle.platform=Headless -Dprism.order=sw BlueBot.jar cmd```
 
 ## License

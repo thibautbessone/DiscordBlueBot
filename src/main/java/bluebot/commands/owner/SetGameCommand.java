@@ -73,6 +73,9 @@ public class SetGameCommand implements Command {
             case "playing":
                 MainBot.getJda().getPresence().setGame(Game.playing(activity));
                 break;
+            case "watching":
+                MainBot.getJda().getPresence().setGame(Game.watching(activity));
+                break;
             case "listening":
                 MainBot.getJda().getPresence().setGame(Game.listening(activity));
                 break;

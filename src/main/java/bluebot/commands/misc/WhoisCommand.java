@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * @file WhoisCommand.java
  * @author Blue
- * @version 0.1
+ * @version 0.2
  * @brief Gives info about the mentioned user
  */
 public class WhoisCommand implements Command {
@@ -55,7 +55,7 @@ public class WhoisCommand implements Command {
 
         String role = "No role";
         if(!event.getGuild().getMemberById(user.getId()).getRoles().isEmpty()) {
-            role = event.getGuild().getMemberById(user.getId()).getRoles().get(0).getName();
+            role = event.getGuild().getMemberById(user.getId()).getRoles().get(0).getAsMention();
         }
         builder.addField(":medal: Higher role", role, true);
 
@@ -64,8 +64,6 @@ public class WhoisCommand implements Command {
         builder.addField(":inbox_tray:  Join date", event.getGuild().getMemberById(user.getId()).getJoinDate().format(formatter), true);
 
         event.getTextChannel().sendMessage(builder.build()).queue();
-
-
     }
 
     @Override

@@ -33,7 +33,7 @@ import java.util.TreeMap;
 /**
  * @file MainBot.java
  * @author Blue
- * @version 1
+ * @version I don't even know anymore, probably around 50 lol
  * @brief The main class of BlueBot
  */
 
@@ -131,7 +131,7 @@ public class MainBot {
 
     public MainBot() {
         //LogSystem logger = new LogSystem();
-        LogSystem.run();
+        //LogSystem.run();
         try {
             //jda instanciation
             //default method as provided in the API
@@ -234,6 +234,7 @@ public class MainBot {
         modUtilCommands.put("say", new SayCommand());
         modUtilCommands.put("sayhi", new SayHiCommand());
         modUtilCommands.put("whoareyou", new WhoAreYouCommand());
+        modUtilCommands.put("settings", new SettingsCommand());
 
         //Owner commands
         ownerCommands.put("announce", new AnnouncementCommand());

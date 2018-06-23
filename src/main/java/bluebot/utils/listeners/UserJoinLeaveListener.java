@@ -47,7 +47,7 @@ public class UserJoinLeaveListener extends ListenerAdapter {
         if(MainBot.getUserEventChannel().containsKey(event.getGuild().getId())) {
             MainBot.getJda().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(event.getMember().getAsMention() + " has left the server :cry: !").queue();
         } else {
-            event.getGuild().getDefaultChannel().sendMessage(event.getMember().getAsMention() + " has left the server :cry: !").queue();
+            event.getGuild().getDefaultChannel().sendMessage(event.getUser().getAsMention() + " has left the server :cry: !").queue();
         }
     }
 }

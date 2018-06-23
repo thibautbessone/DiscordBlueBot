@@ -71,7 +71,7 @@ The command ping pings the bot (to check if it's online). Usage : !ping
 
 ## Hosting the bot
 
-You can host your own instance of the bot. To do so, head over to the Releases page and download the latest one.
+You can host your own instance of the bot. To do so, head over to the [Releases](https://github.com/thibautbessone/DiscordBlueBot/releases) page and download the latest one.
 To run BlueBot, you'll need Java 8 and OpenJFX. After installing them (Google is your friend, it depends on your OS), you'll be ready to go.
 
 If you are using the bot on several servers, in order to have a dedicated soundboard per server, you'll have to :

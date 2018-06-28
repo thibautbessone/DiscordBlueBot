@@ -38,6 +38,8 @@ public class LoadingProperties {
     private String userEventChannel;
     private String musicChannel;
 
+    private String userEventsMessages;
+
 
     private String embedColor;
 
@@ -93,6 +95,7 @@ public class LoadingProperties {
     public String getMusicChannel() {
         return musicChannel;
     }
+    public String getUserEventsMessages() {return userEventsMessages;}
     public String getEmbedColor() {
         return embedColor;
     }
@@ -129,6 +132,7 @@ public class LoadingProperties {
             musicChannel = properties.getProperty("musicChannel");
 
             embedColor = properties.getProperty("embedColor");
+            userEventsMessages = properties.getProperty("userEventsMessages");
 
         } catch (IOException e) {
             e.printStackTrace();

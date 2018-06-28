@@ -58,6 +58,7 @@ public class MainBot {
     private static Map<String, ArrayList<String>> badWords = new HashMap<>();
     private static Map<String, String> prefixes = new HashMap<>();
     private static Map<String, String> bannedServers = new HashMap<>(); //server, reason for ban
+    private static Map<String, JoinLeaveMessageContainer> userEventsMessages = new HashMap<>();
 
     private static ArrayList<String> twitchDisabled = new ArrayList<>();
     private static ArrayList<String> cleverBotDisabled = new ArrayList<>();
@@ -131,7 +132,7 @@ public class MainBot {
 
     public MainBot() {
         //LogSystem logger = new LogSystem();
-        //LogSystem.run();
+        LogSystem.run();
         try {
             //jda instanciation
             //default method as provided in the API
@@ -174,6 +175,8 @@ public class MainBot {
             twitchChannel = gson.fromJson(config.getTwitchChannel(), new TypeToken<Map<String, String>>(){}.getType());
             userEventChannel = gson.fromJson(config.getUserEventChannel(), new TypeToken<Map<String, String>>(){}.getType());
             musicChannel = gson.fromJson(config.getMusicChannel(), new TypeToken<Map<String, String>>(){}.getType());
+
+            userEventsMessages = gson.fromJson(config.getUserEventsMessages(), new TypeToken<Map<String, JoinLeaveMessageContainer>>(){}.getType());
 
             saveThread.run();
 
@@ -227,7 +230,6 @@ public class MainBot {
         modUtilCommands.put("setautorole", new SetAutoRoleCommand());
         modUtilCommands.put("setprefix", new SetPrefixCommand());
         modUtilCommands.put("channel", new SpecificChannelCommand());
-
         modUtilCommands.put("clear", new ClearCommand());
         modUtilCommands.put("help", new HelpCommand());
         modUtilCommands.put("ping", new PingCommand());
@@ -235,6 +237,7 @@ public class MainBot {
         modUtilCommands.put("sayhi", new SayHiCommand());
         modUtilCommands.put("whoareyou", new WhoAreYouCommand());
         modUtilCommands.put("settings", new SettingsCommand());
+        modUtilCommands.put("uemsg", new UserEventsMessagesCommand());
 
         //Owner commands
         ownerCommands.put("announce", new AnnouncementCommand());
@@ -254,5 +257,6 @@ public class MainBot {
     public static Map<String, ArrayList<String>> getBadWords() {return badWords;}
     public static String getBasePrefix() {return basePrefix;}
     public static Map<String, String> getPrefixes() {return prefixes;}
+    public static Map<String, JoinLeaveMessageContainer> getUserEventsMessages() {return userEventsMessages;}
     public static ArrayList<String> getNameProtectionDisabled() {return nameProtectionDisabled;}
 }

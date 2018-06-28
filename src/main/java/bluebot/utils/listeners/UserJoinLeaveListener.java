@@ -1,6 +1,7 @@
 package bluebot.utils.listeners;
 
 import bluebot.MainBot;
+import bluebot.utils.UserEventsMessagesParser;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -14,13 +15,21 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class UserJoinLeaveListener extends ListenerAdapter {
 
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
+
         //Welcome
         if(MainBot.getUserEventDisabled().contains(event.getGuild().getId())) {
             return; //function disabled
         }
         if(MainBot.getUserEventChannel().containsKey(event.getGuild().getId())) {
-            MainBot.getJda().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(event.getMember().getAsMention() + " has joined the server ! Welcome :wave: !").queue();
+            if(MainBot.getUserEventsMessages().get(event.getGuild().getId()) != null) {
+                UserEventsMessagesParser parser = new UserEventsMessagesParser(event);
+                MainBot.getJda().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(parser.getJoinMessage()).queue();
+            } else {
+                //Default message in specified channel
+                MainBot.getJda().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(event.getMember().getAsMention() + " has joined the server ! Welcome :wave: !").queue();
+            }
         } else {
+            //Default behavior
             event.getGuild().getDefaultChannel().sendMessage(event.getMember().getAsMention() + " has joined the server ! Welcome :wave: !").queue();
         }
         //event.getGuild().getManager().addRoleToUser(event.getMember(), event.getGuild().getRolesByName(MainBot.getAutoRoleList().get(event.getGuild().getId())).get(0)).update();
@@ -38,14 +47,22 @@ public class UserJoinLeaveListener extends ListenerAdapter {
                 event.getGuild().getController().setNickname(event.getMember(), event.getMember().getEffectiveName() + "(" + lookalikes + ")").queue();
             }
         }*/
+
     }
 
     public void onGuildMemberLeave(GuildMemberLeaveEvent event) {
+
+        //Default behavior
         if(MainBot.getUserEventDisabled().contains(event.getGuild().getId())) {
             return; //function disabled
         }
         if(MainBot.getUserEventChannel().containsKey(event.getGuild().getId())) {
-            MainBot.getJda().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(event.getMember().getAsMention() + " has left the server :cry: !").queue();
+            if(MainBot.getUserEventsMessages().get(event.getGuild().getId()) != null) {
+                UserEventsMessagesParser parser = new UserEventsMessagesParser(event);
+                MainBot.getJda().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(parser.getLeaveMessage()).queue();
+            } else {
+                MainBot.getJda().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(event.getMember().getAsMention() + " has left the server :cry: !").queue();
+            }
         } else {
             event.getGuild().getDefaultChannel().sendMessage(event.getUser().getAsMention() + " has left the server :cry: !").queue();
         }

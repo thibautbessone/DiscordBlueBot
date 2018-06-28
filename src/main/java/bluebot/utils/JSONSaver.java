@@ -36,6 +36,8 @@ public class JSONSaver {
     private String userEventChannel;
     private String musicChannel;
 
+    private String userEventsMessages;
+
     public JSONSaver() {
         streamerList = gsonTool.toJson(MainBot.getStreamerList());
         autoRoleList = gsonTool.toJson(MainBot.getAutoRoleList());
@@ -53,6 +55,8 @@ public class JSONSaver {
         twitchChannel = gsonTool.toJson(MainBot.getTwitchChannel());
         userEventChannel = gsonTool.toJson(MainBot.getUserEventChannel());
         musicChannel = gsonTool.toJson(MainBot.getMusicChannel());
+
+        userEventsMessages = gsonTool.toJson(MainBot.getUserEventsMessages());
 
         try {
             //Opening properties file
@@ -80,6 +84,9 @@ public class JSONSaver {
             properties.setProperty("userEventChannel", userEventChannel);
             properties.setProperty("musicChannel", musicChannel);
 
+            properties.setProperty("userEventsMessages", userEventsMessages);
+
+            //Storing config
             properties.store(fileOutput, null);
             System.out.println("Properties saved");
 

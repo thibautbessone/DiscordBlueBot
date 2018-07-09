@@ -16,4 +16,5 @@ prefixes={}
 botOwner=YOURIDHERE
 autoRoleList={}
 embedColor=\#0088FF
+userEventsMessages={}
 serverSBDisabled=[]

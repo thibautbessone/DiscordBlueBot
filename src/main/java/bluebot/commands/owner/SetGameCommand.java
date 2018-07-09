@@ -20,7 +20,7 @@ public class SetGameCommand implements Command {
                                 "\nThe available types are `playing`, `listening` and `streaming`." +
                                 "\nIf you are using the `streaming` type, provide a valid twitch URL after the activity (by default : mine)." +
                                 "\nThis command requires to be the owner of the bot." +
-                                "\n\nUsage (syntax is important) : `!setgame (type) [activity) streamLink`";
+                                "\n\nUsage (syntax is important) : `!setgame (type) [activity] streamLink`";
     private boolean permissionFail = false;
 
     @Override

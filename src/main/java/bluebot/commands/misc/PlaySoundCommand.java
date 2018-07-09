@@ -41,12 +41,7 @@ public class PlaySoundCommand implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         if(MainBot.getServerSBDisabled().contains(event.getGuild().getId())) {
-            if(!MainBot.isPublicInstance()) {
-                folder = new File("soundboard/");
-            } else {
-                event.getTextChannel().sendMessage("Full sound list available at : https://bluebot.pw/sound_list.php").queue();
-                return; //Edited since 4500+ sounds were a mess to list lol
-            }
+            folder = new File("soundboard/");
         } else {
             folder = new File("soundboard" + "/" + event.getGuild().getId());
         }
@@ -64,6 +59,10 @@ public class PlaySoundCommand implements Command {
         }
 
         if(args[0].equals("list")) {
+            if(MainBot.isPublicInstance() && MainBot.getServerSBDisabled().contains(event.getGuild().getId())) {
+                event.getTextChannel().sendMessage("Full sound list available at : https://bluebot.pw/sound_list.php").queue();
+                return; //Edited since 4500+ sounds were a mess to list lol
+            }
         //Displays the sound lists LENGTH : 15
             ArrayList<String> list = new ArrayList<>();
             try {

@@ -41,7 +41,7 @@ However, the required dependancies for the bot are included in this repository.
 <!--If you want a .exe (or something like that), go [here](https://github.com/thibautbessone/DiscordBlueBotReleases) and download the latest version for all the features. Simple instructions are provided in order to make the bot to work.-->
 
 To edit the code, just follow these steps : 
-* Create your onw app [here](https://discordapp.com/login?redirect_to=/developers/applications/me).
+* Create your own app [here](https://discordapp.com/login?redirect_to=/developers/applications/me).
 * **Clone the project** into your favorite IDE using GitHub's integration (if you're not downloading a release). 
 * On your application page, get your application **token**
 * Open **config.blue**

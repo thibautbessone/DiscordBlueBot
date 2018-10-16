@@ -76,7 +76,7 @@ To run BlueBot, you'll need Java 8 and OpenJFX. After installing them (Google is
 
 If you are using the bot on several servers, in order to have a dedicated soundboard per server, you'll have to :
 * Enable Discord Developer mode (in the app settings, go to Appearance -> Advanced -> Toggle Developer mode on), then right click on your server and click on ```Copy ID```.
-* Create a folder named like the server ID (for example, if one of the server has ```264445054966991498``` as ID, you want to name your folder ```264445054966991498```)
+* Inside the `soundboard` folder, create a folder named like the server ID (for example, if one of the server has ```264445054966991498``` as ID, you want to name your folder ```264445054966991498```)
 * Drop your .mp3 files inside this folder. These sounds will only be available on this particular server.
 
 To toggle between the general soundboard and the dedicated one, remember to use the ```!enable``` and ```!disable``` commands.

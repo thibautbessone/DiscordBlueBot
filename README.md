@@ -6,12 +6,12 @@
    <b>Join the support server :</b>
 </p>
 
-<p align=center>
+<p align="center">
   <a  href="https://discord.gg/rSekkJv">
     <img src="https://discordapp.com/api/guilds/268853008455041025/widget.png?style=banner2">
   </a><br>
 </p>
-<p align=center>
+<p align="center">
 You can add the bot to your server by clicking on
 <a href="https://discordapp.com/oauth2/authorize?client_id=268420199370194944&scope=bot&permissions=-1">this link</a><br><br>
 </p>

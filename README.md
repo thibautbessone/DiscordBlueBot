@@ -6,12 +6,12 @@
    <b>Join the support server :</b>
 </p>
 
-<p align=center>
+<p align="center">
   <a  href="https://discord.gg/rSekkJv">
     <img src="https://discordapp.com/api/guilds/268853008455041025/widget.png?style=banner2">
   </a><br>
 </p>
-<p align=center>
+<p align="center">
 You can add the bot to your server by clicking on
 <a href="https://discordapp.com/oauth2/authorize?client_id=268420199370194944&scope=bot&permissions=-1">this link</a><br><br>
 </p>
@@ -41,7 +41,7 @@ However, the required dependancies for the bot are included in this repository.
 <!--If you want a .exe (or something like that), go [here](https://github.com/thibautbessone/DiscordBlueBotReleases) and download the latest version for all the features. Simple instructions are provided in order to make the bot to work.-->
 
 To edit the code, just follow these steps : 
-* Create your onw app [here](https://discordapp.com/login?redirect_to=/developers/applications/me).
+* Create your own app [here](https://discordapp.com/login?redirect_to=/developers/applications/me).
 * **Clone the project** into your favorite IDE using GitHub's integration (if you're not downloading a release). 
 * On your application page, get your application **token**
 * Open **config.blue**
@@ -76,7 +76,7 @@ To run BlueBot, you'll need Java 8 and OpenJFX. After installing them (Google is
 
 If you are using the bot on several servers, in order to have a dedicated soundboard per server, you'll have to :
 * Enable Discord Developer mode (in the app settings, go to Appearance -> Advanced -> Toggle Developer mode on), then right click on your server and click on ```Copy ID```.
-* Create a folder named like the server ID (for example, if one of the server has ```264445054966991498``` as ID, you want to name your folder ```264445054966991498```)
+* Inside the `soundboard` folder, create a folder named like the server ID (for example, if one of the server has ```264445054966991498``` as ID, you want to name your folder ```264445054966991498```)
 * Drop your .mp3 files inside this folder. These sounds will only be available on this particular server.
 
 To toggle between the general soundboard and the dedicated one, remember to use the ```!enable``` and ```!disable``` commands.

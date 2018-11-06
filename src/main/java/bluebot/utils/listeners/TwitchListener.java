@@ -25,14 +25,14 @@ public class TwitchListener extends ListenerAdapter {
     public void onUserUpdateGame(UserUpdateGameEvent event) {
         try {
             if(MainBot.getStreamerList().containsKey(event.getUser().getId()) && !event.getOldGame().getType().equals(Game.GameType.STREAMING) && event.getGuild().getMember(event.getUser()).getGame().getType().equals(Game.GameType.STREAMING)) {
-                List<Guild> serverList = MainBot.getJda().getGuilds();
+                List<Guild> serverList = event.getJDA().getGuilds();
                 for(Guild server : serverList) {
                     if(server.getMembers().contains(event.getUser())) {
                         if(MainBot.getTwitchDisabled().contains(server.getId())) {
                             continue; //function disabled
                         }
                         if(MainBot.getTwitchChannel().containsKey(server.getId())) {
-                            MainBot.getJda().getTextChannelById(MainBot.getTwitchChannel().get(server.getId())).sendMessage(/*server.getPublicRole().getName() + " : " + */event.getUser().getName() + " is now streaming ! Watch live at " + MainBot.getStreamerList().get(event.getUser().getId())).queue();
+                            event.getJDA().getTextChannelById(MainBot.getTwitchChannel().get(server.getId())).sendMessage(/*server.getPublicRole().getName() + " : " + */event.getUser().getName() + " is now streaming ! Watch live at " + MainBot.getStreamerList().get(event.getUser().getId())).queue();
                         } else {
                             server.getDefaultChannel().sendMessage(/*server.getPublicRole().getName() + " : " + */event.getUser().getName() + " is now streaming ! Watch live at " + MainBot.getStreamerList().get(event.getUser().getId())).queue();
                         }

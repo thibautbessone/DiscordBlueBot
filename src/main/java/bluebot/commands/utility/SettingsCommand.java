@@ -27,7 +27,7 @@ public class SettingsCommand implements Command {
     public void action(String[] args, MessageReceivedEvent event) {
 
         EmbedBuilder builder = new EmbedBuilder();
-        builder.setAuthor("Settings for " + event.getGuild().getName(), "https://bluebot.pw", MainBot.getJda().getSelfUser().getAvatarUrl());
+        builder.setAuthor("Settings for " + event.getGuild().getName(), "https://bluebot.pw", event.getJDA().getSelfUser().getAvatarUrl());
         builder.setColor(Color.decode(MainBot.getConfig().getEmbedColor()));
         builder.setThumbnail(event.getGuild().getIconUrl());
 
@@ -37,21 +37,21 @@ public class SettingsCommand implements Command {
         if(twitchChannel == null) {
             twitchChannel = defaultChannel;
         } else {
-            twitchChannel = MainBot.getJda().getTextChannelById(twitchChannel).getAsMention();
+            twitchChannel = event.getJDA().getTextChannelById(twitchChannel).getAsMention();
         }
 
         String userEventChannel = MainBot.getUserEventChannel().get(event.getGuild().getId());
         if(userEventChannel == null) {
             userEventChannel = defaultChannel;
         } else {
-            userEventChannel = MainBot.getJda().getTextChannelById(userEventChannel).getAsMention();
+            userEventChannel = event.getJDA().getTextChannelById(userEventChannel).getAsMention();
         }
 
         String soundChannel = MainBot.getMusicChannel().get(event.getGuild().getId());
         if(soundChannel == null) {
             soundChannel = defaultChannel;
         } else {
-            soundChannel = MainBot.getJda().getTextChannelById(soundChannel).getAsMention();
+            soundChannel = event.getJDA().getTextChannelById(soundChannel).getAsMention();
         }
         builder.addField("Channels", "Twitch channel : " + twitchChannel + "\nUser events channel : " + userEventChannel + "\nSound channel : " + soundChannel + "\n̔̏", false);
 
@@ -82,7 +82,7 @@ public class SettingsCommand implements Command {
         if(autorole == null) {
             autorole = "`No role specified`";
         } else {
-            autorole = MainBot.getJda().getRolesByName(autorole, true).get(0).getAsMention();
+            autorole = event.getJDA().getRolesByName(autorole, true).get(0).getAsMention();
         }
         builder.addField("Autorole : ", autorole + "\n̔̏", false);
 

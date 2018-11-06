@@ -39,7 +39,7 @@ public class TrackTwitchCommand implements Command {
         if (args[0].equals("list")) {
             String list = new String("**Users tracked : **\n\n");
             for(Map.Entry<String, String> entry : MainBot.getStreamerList().entrySet()) {
-                list +=  MainBot.getJda().getUserById(entry.getKey()).getName() + "#" + MainBot.getJda().getUserById(entry.getKey()).getDiscriminator()  /*+ " " + entry.getValue()*/ + "\n";
+                list +=  event.getJDA().getUserById(entry.getKey()).getName() + "#" + event.getJDA().getUserById(entry.getKey()).getDiscriminator()  /*+ " " + entry.getValue()*/ + "\n";
             }
             event.getTextChannel().sendMessage(list).queue();
             return;

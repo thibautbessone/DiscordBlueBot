@@ -25,10 +25,7 @@ import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
 
 import javax.security.auth.login.LoginException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * @file MainBot.java
@@ -39,8 +36,10 @@ import java.util.TreeMap;
 
 public class MainBot {
 
+    private final int SHARDS_COUNT = 5;
+
     private static boolean isPublicInstance = false;
-    private static JDA jda;
+    private static ArrayList<JDA> jdaList = new ArrayList<>();
     private static LoadingProperties config = new LoadingProperties();
     private static AudioPlayerManager playerManager;
 
@@ -132,9 +131,8 @@ public class MainBot {
 
     public MainBot() {
         //LogSystem logger = new LogSystem();
-        LogSystem.run();
         try {
-            //jda instanciation
+            //jdaList instanciation
             //default method as provided in the API
             config = new LoadingProperties();
             SaveThread saveThread = new SaveThread();
@@ -142,20 +140,28 @@ public class MainBot {
             playerManager = new DefaultAudioPlayerManager();
             AudioSourceManagers.registerLocalSource(playerManager);
 
-            jda = new JDABuilder(AccountType.BOT).setToken(config.getBotToken())
+            //jdaList =
+
+            JDABuilder shardBuilder = new JDABuilder(AccountType.BOT).setToken(config.getBotToken())
                     .addEventListener(new TwitchListener())
                     //.addListener(new CleverbotListener())
                     .addEventListener(new BadWordsListener())
                     .addEventListener(new UserJoinLeaveListener())
                     .addEventListener(new BotKickedListener())
                     .addEventListener(new BannedServersListener())
-                    .addEventListener(new MessageReceivedListener())
-                    //.addEventListener(new VCJoinedListener())
-                    .setBulkDeleteSplittingEnabled(false).buildBlocking();
+                    .addEventListener(new MessageReceivedListener());
+
+            for(int i = 0; i < SHARDS_COUNT; i++){ // first id = 0
+                jdaList.add(shardBuilder.useSharding(i, SHARDS_COUNT).setBulkDeleteSplittingEnabled(false).buildBlocking());
+                jdaList.get(i).getPresence().setGame(Game.playing("Bot starting ..."));
+            }
+            LogSystem.run();
 
             botOwner = config.getBotOwner();
-            jda.getPresence().setGame(Game.playing(config.getBotActivity()));
-            System.out.println("Current activity " + jda.getPresence().getGame());
+            for(JDA shard : jdaList) {
+                shard.getPresence().setGame(Game.playing(config.getBotActivity()));
+            }
+            //System.out.println("Current activity " + jdaList.getPresence().getGame());
 
             //Loading the previous state of the bot(before shutdown)
             Gson gson = new Gson();
@@ -180,8 +186,8 @@ public class MainBot {
 
             saveThread.run();
 
-            System.out.println("Connected servers : " + jda.getGuilds().size());
-            System.out.println("Concerned users : " + jda.getUsers().size());
+            //System.out.println("Connected servers : " + jdaList.getGuilds().size());
+            //System.out.println("Concerned users : " + jdaList.getUsers().size());
 
         } catch (InterruptedException | LoginException e) {
          System.out.println("No internet connection or invalid or missing token. Please edit config.blue and try again.");
@@ -246,7 +252,7 @@ public class MainBot {
         ownerCommands.put("shutdown", new ShutDownCommand());
     }
 
-    public static JDA getJda() {return jda;}
+    public static ArrayList<JDA> getJdaList() {return jdaList;}
     public static LoadingProperties getConfig() {
         return config;
     }

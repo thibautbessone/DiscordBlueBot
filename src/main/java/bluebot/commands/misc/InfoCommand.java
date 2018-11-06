@@ -3,6 +3,7 @@ package bluebot.commands.misc;
 import bluebot.MainBot;
 import bluebot.utils.Command;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.*;
@@ -27,12 +28,23 @@ public class InfoCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        int usersNumber = MainBot.getJda().getUsers().size();
-        int serversNumber = MainBot.getJda().getGuilds().size();
-        int channelNumber = MainBot.getJda().getTextChannels().size();
-        int voiceChannelNumber = MainBot.getJda().getVoiceChannels().size();
-
-        String game = MainBot.getJda().getPresence().getGame().getName();
+        int usersNumber = 0;
+        for(JDA shard : MainBot.getJdaList()) {
+            usersNumber += shard.getUsers().size();
+        }
+        int serversNumber = 0;
+        for(JDA shard : MainBot.getJdaList()) {
+            serversNumber += shard.getGuilds().size();
+        }
+        int channelNumber = 0;
+        for(JDA shard : MainBot.getJdaList()) {
+            channelNumber += shard.getTextChannels().size();
+        }
+        int voiceChannelNumber = 0;
+        for(JDA shard : MainBot.getJdaList()) {
+            voiceChannelNumber += shard.getVoiceChannels().size();
+        }
+        String game = event.getJDA().getPresence().getGame().getName();
 
         //Taken from Almighty Alpaca
         //https://github.com/Java-Discord-Bot-System/Plugin-Uptime/blob/master/src/main/java/com/almightyalpaca/discord/bot/plugin/uptime/UptimePlugin.java#L28-L42
@@ -56,12 +68,12 @@ public class InfoCommand implements Command {
 
 
         EmbedBuilder builder = new EmbedBuilder();
-        builder.setAuthor("Information about " + MainBot.getJda().getSelfUser().getName(), "https://bluebot.pw", "http://i.imgur.com/880AyL6.png");
+        builder.setAuthor("Information about " + event.getJDA().getSelfUser().getName(), "https://bluebot.pw", "http://i.imgur.com/880AyL6.png");
         builder.setColor(Color.decode(MainBot.getConfig().getEmbedColor()));
-        builder.setThumbnail(MainBot.getJda().getSelfUser().getAvatarUrl());
+        builder.setThumbnail(event.getJDA().getSelfUser().getAvatarUrl());
 
 
-        builder.addField("Owner :white_check_mark:", MainBot.getJda().getUserById(MainBot.getConfig().getBotOwner()).getName() + "#" + MainBot.getJda().getUserById(MainBot.getConfig().getBotOwner()).getDiscriminator(), true);
+        builder.addField("Owner :white_check_mark:", event.getJDA().getUserById(MainBot.getConfig().getBotOwner()).getName() + "#" + event.getJDA().getUserById(MainBot.getConfig().getBotOwner()).getDiscriminator(), true);
         builder.addBlankField(true);
 
         builder.addField("Users :busts_in_silhouette:", String.valueOf(usersNumber), true);

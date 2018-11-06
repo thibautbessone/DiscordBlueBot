@@ -44,7 +44,7 @@ public class QuickPollCommand implements Command {
         //Now retrieves the last message from BlueBot to add reactions
         List<Message> history = event.getTextChannel().getHistory().retrievePast(10).complete(); //arbitrary ammount
         for (Message msg : history) {
-            if(msg.getAuthor().getId().equals(MainBot.getJda().getSelfUser().getId())) {
+            if(msg.getAuthor().getId().equals(event.getJDA().getSelfUser().getId())) {
                 msg.addReaction("\uD83D\uDC4D").queue();
                 msg.addReaction("\ud83d\udc4e").queue();
                 msg.addReaction("\uD83E\uDD37").queue();

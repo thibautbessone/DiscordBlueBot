@@ -82,7 +82,7 @@ public class MultiPollCommand implements Command {
         //Now retrieves the last message from BlueBot to add reactions
         List<Message> history = event.getTextChannel().getHistory().retrievePast(10).complete(); //arbitrary ammount
         for (Message msg : history) {
-            if(msg.getAuthor().getId().equals(MainBot.getJda().getSelfUser().getId())) {
+            if(msg.getAuthor().getId().equals(event.getJDA().getSelfUser().getId())) {
                 for(int i = 0; i < choices.size(); ++i) {
                     if(i == 9) {
                         msg.addReaction("\uD83D\uDD1F").queue(); //Keycap 10 case

@@ -2,6 +2,7 @@ package bluebot.commands.owner;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;
+import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -71,19 +72,27 @@ public class SetGameCommand implements Command {
 
         switch (type) {
             case "playing":
-                MainBot.getJda().getPresence().setGame(Game.playing(activity));
+                for(JDA shard : MainBot.getJdaList()) {
+                    shard.getPresence().setGame(Game.playing(activity));
+                }
                 break;
             case "watching":
-                MainBot.getJda().getPresence().setGame(Game.watching(activity));
+                for(JDA shard : MainBot.getJdaList()) {
+                    shard.getPresence().setGame(Game.watching(activity));
+                }
                 break;
             case "listening":
-                MainBot.getJda().getPresence().setGame(Game.listening(activity));
+                for(JDA shard : MainBot.getJdaList()) {
+                    shard.getPresence().setGame(Game.listening(activity));
+                }
                 break;
             case "streaming":
                 for(String arg : args) {
                     if (arg.contains("twitch.tv/")) streamLink = arg;
                 }
-                MainBot.getJda().getPresence().setGame(Game.streaming(activity, streamLink));
+                for(JDA shard : MainBot.getJdaList()) {
+                    shard.getPresence().setGame(Game.streaming(activity, streamLink));
+                }
                 break;
             default:
                 event.getTextChannel().sendMessage("Wrong type specified.").queue();

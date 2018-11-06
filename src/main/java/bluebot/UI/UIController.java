@@ -2,6 +2,7 @@ package bluebot.UI;
 
 import bluebot.MainBot;
 import javafx.event.ActionEvent;
+import net.dv8tion.jda.core.JDA;
 
 import java.awt.*;
 import java.io.File;
@@ -31,7 +32,9 @@ public class UIController {
 
     public void stopBot(ActionEvent actionEvent) {
         try {
-            MainBot.getJda().shutdown();
+            for(JDA shard : MainBot.getJdaList()) {
+                shard.shutdown();
+            }
             System.out.println("Bot stopped.");
             running = false;
         } catch (NullPointerException nullPtr) {

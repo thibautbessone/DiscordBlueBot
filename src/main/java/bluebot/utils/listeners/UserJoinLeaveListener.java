@@ -23,10 +23,10 @@ public class UserJoinLeaveListener extends ListenerAdapter {
         if(MainBot.getUserEventChannel().containsKey(event.getGuild().getId())) {
             if(MainBot.getUserEventsMessages().get(event.getGuild().getId()) != null) {
                 UserEventsMessagesParser parser = new UserEventsMessagesParser(event);
-                MainBot.getJda().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(parser.getJoinMessage()).queue();
+                event.getJDA().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(parser.getJoinMessage()).queue();
             } else {
                 //Default message in specified channel
-                MainBot.getJda().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(event.getMember().getAsMention() + " has joined the server ! Welcome :wave: !").queue();
+                event.getJDA().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(event.getMember().getAsMention() + " has joined the server ! Welcome :wave: !").queue();
             }
         } else {
             //Default behavior
@@ -59,9 +59,9 @@ public class UserJoinLeaveListener extends ListenerAdapter {
         if(MainBot.getUserEventChannel().containsKey(event.getGuild().getId())) {
             if(MainBot.getUserEventsMessages().get(event.getGuild().getId()) != null) {
                 UserEventsMessagesParser parser = new UserEventsMessagesParser(event);
-                MainBot.getJda().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(parser.getLeaveMessage()).queue();
+                event.getJDA().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(parser.getLeaveMessage()).queue();
             } else {
-                MainBot.getJda().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(event.getMember().getAsMention() + " has left the server :cry: !").queue();
+                event.getJDA().getTextChannelById(MainBot.getUserEventChannel().get(event.getGuild().getId())).sendMessage(event.getMember().getAsMention() + " has left the server :cry: !").queue();
             }
         } else {
             event.getGuild().getDefaultChannel().sendMessage(event.getUser().getAsMention() + " has left the server :cry: !").queue();

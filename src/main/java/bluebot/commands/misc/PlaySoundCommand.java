@@ -53,7 +53,7 @@ public class PlaySoundCommand implements Command {
 
         if(MainBot.getMusicChannel().containsKey(event.getGuild().getId())) {
             if(!event.getTextChannel().getId().equals(MainBot.getMusicChannel().get(event.getGuild().getId()))) {
-                event.getTextChannel().sendMessage(event.getAuthor().getAsMention()+ ", please use the " + MainBot.getJda().getTextChannelById(MainBot.getMusicChannel().get(event.getGuild().getId())).getAsMention() + " channel for sound commands.").queue();
+                event.getTextChannel().sendMessage(event.getAuthor().getAsMention()+ ", please use the " + event.getJDA().getTextChannelById(MainBot.getMusicChannel().get(event.getGuild().getId())).getAsMention() + " channel for sound commands.").queue();
                 return;
             }
         }

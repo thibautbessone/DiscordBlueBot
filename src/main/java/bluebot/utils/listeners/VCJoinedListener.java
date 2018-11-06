@@ -1,6 +1,5 @@
 package bluebot.utils.listeners;
 
-import bluebot.MainBot;
 import net.dv8tion.jda.core.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
@@ -16,7 +15,7 @@ public class VCJoinedListener extends ListenerAdapter {
     @Override
     public void onGuildVoiceJoin(GuildVoiceJoinEvent event) {
         System.out.println((event.getChannelJoined().getMembers()));
-        if (event.getChannelJoined().getMembers().contains(event.getGuild().getMemberById(MainBot.getJda().getSelfUser().getId()))) {
+        if (event.getChannelJoined().getMembers().contains(event.getGuild().getMemberById(event.getJDA().getSelfUser().getId()))) {
             System.out.println("detected");
         }
     }

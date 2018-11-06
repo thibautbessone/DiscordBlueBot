@@ -2,6 +2,7 @@ package bluebot.commands.owner;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;
+import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -37,15 +38,18 @@ public class SetOnlineStateCommand implements Command {
     public void action(String[] args, MessageReceivedEvent event) {
         try {
             if(args[0].equals("dnd")) {
-                MainBot.getJda().getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
+                for(JDA shard : MainBot.getJdaList()) {
+                    event.getJDA().getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
+                }
             } else {
-                MainBot.getJda().getPresence().setStatus(OnlineStatus.valueOf(args[0].toUpperCase()));
+                for(JDA shard : MainBot.getJdaList()) {
+                    event.getJDA().getPresence().setStatus(OnlineStatus.valueOf(args[0].toUpperCase()));
+                }
             }
             event.getTextChannel().sendMessage("Online status updated to " + args[0]).queue();
         } catch (IllegalArgumentException e) {
             event.getTextChannel().sendMessage("Incorrect status.").queue();
         }
-
     }
 
     @Override

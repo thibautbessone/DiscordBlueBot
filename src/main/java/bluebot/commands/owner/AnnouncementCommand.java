@@ -40,7 +40,7 @@ public class AnnouncementCommand implements Command {
         for(String arg : args) {
             text += arg + " ";
         }
-        for(Guild guild : MainBot.getJda().getGuilds()) {
+        for(Guild guild : event.getJDA().getGuilds()) {
             if(guild == event.getGuild()) continue;
             guild.getDefaultChannel().sendMessage(text).queue();
         }

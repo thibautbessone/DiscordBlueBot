@@ -3,6 +3,7 @@ package bluebot.commands.owner;
 import bluebot.MainBot;
 import bluebot.utils.Command;
 import bluebot.utils.JSONSaver;
+import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 /**
@@ -38,7 +39,9 @@ public class ShutDownCommand implements Command {
         System.out.println("Forced shutdown ...");
         JSONSaver saver = new JSONSaver();
         event.getTextChannel().sendMessage("I've been shut down.").queue();
-        MainBot.getJda().shutdown();
+        for(JDA shard : MainBot.getJdaList()) {
+            shard.shutdown();
+        }
     }
 
     @Override

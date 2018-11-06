@@ -22,7 +22,7 @@ public class CleverbotListener extends ListenerAdapter {
             return; //function disabled
         }
         try {
-            if(!event.getAuthor().getId().equals(MainBot.getJda().getSelfUser().getId())) {
+            if(!event.getAuthor().getId().equals(event.getJDA().getSelfUser().getId())) {
                 boolean talkingToBot = false;
                 for(User mention : event.getMessage().getMentionedUsers()) {
                     if (mention.getId().equals(event.getJDA().getSelfUser().getId())) talkingToBot = true;

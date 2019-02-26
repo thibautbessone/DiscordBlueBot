@@ -19,14 +19,15 @@ public class WhoisCommand implements Command {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        if(args.length == 0 || args.length > 1) {return false;}
-        else return true;
+        if(args.length == 0 || args[0].equals("help")) {
+            return false;
+        } else return true;
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         if(event.getMessage().getMentionedUsers().isEmpty()) {
-            event.getTextChannel().sendMessage("No user mentioned.");
+            event.getTextChannel().sendMessage("No user mentioned.").queue();
             return;
         }
         User user = event.getMessage().getMentionedUsers().get(0);
@@ -57,7 +58,7 @@ public class WhoisCommand implements Command {
         if(!event.getGuild().getMemberById(user.getId()).getRoles().isEmpty()) {
             role = event.getGuild().getMemberById(user.getId()).getRoles().get(0).getAsMention();
         }
-        builder.addField(":medal: Higher role", role, true);
+        builder.addField(":medal: Highest role", role, true);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a");
         builder.addField(":clock2: Creation date", user.getCreationTime().format(formatter), true);
@@ -74,7 +75,7 @@ public class WhoisCommand implements Command {
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
         if(!success) {
-            event.getMessage().delete().queue();
+            event.getTextChannel().sendMessage(help()).queue();
         }
     }
 }

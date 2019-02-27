@@ -31,7 +31,6 @@ public class GitHubCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        String url = new String();
         OkHttpClient caller = new OkHttpClient();
         Request request = new Request.Builder().url("https://api.github.com/users/" + args[0]).build();
         EmbedBuilder builder = new EmbedBuilder();

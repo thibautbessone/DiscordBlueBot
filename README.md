@@ -55,7 +55,7 @@ To edit the code, just follow these steps :
 * Double click anywhere on the background to minimize
 * Click anywhere on the background to drag the window
 * Start buttons launches the bot, Stop button stops it
-* Edit button open the config file in your default text editor
+* Edit button opens the config file in your default text editor
 * Quit button stops the bot (if running) and closes the window
 
 ## Commands

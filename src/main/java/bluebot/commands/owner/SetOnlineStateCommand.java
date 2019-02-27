@@ -39,11 +39,11 @@ public class SetOnlineStateCommand implements Command {
         try {
             if(args[0].equals("dnd")) {
                 for(JDA shard : MainBot.getJdaList()) {
-                    event.getJDA().getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
+                    shard.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
                 }
             } else {
                 for(JDA shard : MainBot.getJdaList()) {
-                    event.getJDA().getPresence().setStatus(OnlineStatus.valueOf(args[0].toUpperCase()));
+                    shard.getPresence().setStatus(OnlineStatus.valueOf(args[0].toUpperCase()));
                 }
             }
             event.getTextChannel().sendMessage("Online status updated to " + args[0]).queue();

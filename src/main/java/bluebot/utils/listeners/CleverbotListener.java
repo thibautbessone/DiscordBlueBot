@@ -38,7 +38,7 @@ public class CleverbotListener extends ListenerAdapter {
                     text = text.substring(0, text.length()-1);
 
                     LoadingProperties config = new LoadingProperties();
-                    String query = ("http://www.cleverbot.com/getreply?key=" + config.getCleverbotAPIKey() + "&input=" + text);
+                    //String query = ("http://www.cleverbot.com/getreply?key=" + config.getCleverbotAPIKey() + "&input=" + text);
 
                     //Handling the response
                     try {

@@ -13,8 +13,6 @@ import java.util.Properties;
  */
 public class LoadingProperties {
 
-    private Gson gsonTool = new Gson();
-
     private String botToken;
     private String botActivity;
     private String steamAPIKey;

@@ -15,7 +15,7 @@ public class SaveThread extends Thread {
         TimerTask autoSaveTask = new TimerTask () {
             @Override
             public void run () {
-                JSONSaver saver = new JSONSaver();
+                new JSONSaver();
                 System.runFinalization();
                 System.gc();
             }

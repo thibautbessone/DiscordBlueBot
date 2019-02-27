@@ -29,7 +29,6 @@ public class SteamStatusCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        String message = "";
         JSONObject result;
         OkHttpClient caller = new OkHttpClient();
         Request request = new Request.Builder().url("https://steamgaug.es/api/v2").build();

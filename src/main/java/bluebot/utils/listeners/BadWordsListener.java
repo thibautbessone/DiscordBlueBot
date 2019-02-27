@@ -19,6 +19,7 @@ public class BadWordsListener extends ListenerAdapter {
         if(MainBot.getBwDisabled().contains(event.getGuild().getId())) {
             return; //function disabled
         }
+        if(event.getAuthor().getId().equals(event.getJDA().getSelfUser().getId())) return; // avoid getting triggered by the bots own messages
         try {
             for(String word : MainBot.getBadWords().get(event.getGuild().getId())) {
                 if(event.getMessage().getContentRaw().contains(word)) {

@@ -14,6 +14,7 @@ import java.util.Properties;
 public class LoadingProperties {
 
     private String botToken;
+    private String shards;
     private String botActivity;
     private String steamAPIKey;
     private String cleverbotAPIKey;
@@ -46,6 +47,9 @@ public class LoadingProperties {
     }
     public String getBotToken() {
         return botToken;
+    }
+    public String getShards() {
+        return shards;
     }
     public String getSteamAPIKey() {return steamAPIKey;}
     public String getBotActivity() {
@@ -108,6 +112,7 @@ public class LoadingProperties {
             fileInput.close();
 
             botToken = properties.getProperty("botToken");
+            shards = properties.getProperty("shards");
             botActivity = properties.getProperty("botActivity");
             cleverbotAPIKey = properties.getProperty("cleverbotAPIKey");
             botOwner = properties.getProperty("botOwner");

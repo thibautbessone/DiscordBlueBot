@@ -36,7 +36,7 @@ import java.util.*;
 
 public class MainBot {
 
-    private final int SHARDS_COUNT = 5;
+    private int shardsNumber;
 
     private static boolean isPublicInstance = false;
     private static ArrayList<JDA> jdaList = new ArrayList<>();
@@ -135,6 +135,7 @@ public class MainBot {
             //jdaList instanciation
             //default method as provided in the API
             config = new LoadingProperties();
+            shardsNumber = Integer.parseInt(config.getShards());
             SaveThread saveThread = new SaveThread();
 
             playerManager = new DefaultAudioPlayerManager();
@@ -151,8 +152,8 @@ public class MainBot {
                     .addEventListener(new BannedServersListener())
                     .addEventListener(new MessageReceivedListener());
 
-            for(int i = 0; i < SHARDS_COUNT; i++){ // first id = 0
-                jdaList.add(shardBuilder.useSharding(i, SHARDS_COUNT).setBulkDeleteSplittingEnabled(false).buildBlocking());
+            for(int i = 0; i < shardsNumber; i++){ // first id = 0
+                jdaList.add(shardBuilder.useSharding(i, shardsNumber).setBulkDeleteSplittingEnabled(false).buildBlocking());
                 jdaList.get(i).getPresence().setGame(Game.playing("Bot starting ..."));
             }
             LogSystem.run();

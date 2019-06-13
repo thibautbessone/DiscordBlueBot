@@ -130,7 +130,6 @@ public class MainBot {
 
 
     public MainBot() {
-        LogSystem logger = new LogSystem();
         try {
             //jdaList instanciation
             //default method as provided in the API

@@ -130,7 +130,7 @@ public class MainBot {
 
 
     public MainBot() {
-        //LogSystem logger = new LogSystem();
+        LogSystem logger = new LogSystem();
         try {
             //jdaList instanciation
             //default method as provided in the API
@@ -140,8 +140,6 @@ public class MainBot {
 
             playerManager = new DefaultAudioPlayerManager();
             AudioSourceManagers.registerLocalSource(playerManager);
-
-            //jdaList =
 
             JDABuilder shardBuilder = new JDABuilder(AccountType.BOT).setToken(config.getBotToken())
                     .addEventListener(new TwitchListener())

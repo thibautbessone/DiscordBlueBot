@@ -53,7 +53,7 @@ public class SettingsCommand implements Command {
         } else {
             soundChannel = event.getJDA().getTextChannelById(soundChannel).getAsMention();
         }
-        builder.addField("Channels", "Twitch channel : " + twitchChannel + "\nUser events channel : " + userEventChannel + "\nSound channel : " + soundChannel + "\n̔̏", false);
+        builder.addField("Channels", "Twitch channel : " + twitchChannel + "\nUser events channel : " + userEventChannel + "\nSound channel : " + soundChannel, false);
 
         //Functionalities
         String twitchNotif = "`enabled`";
@@ -75,7 +75,7 @@ public class SettingsCommand implements Command {
         if(MainBot.getServerSBDisabled().contains(event.getGuild().getId())) {
             serverSb = "`general`";
         }
-        builder.addField("Functionalities : ", "Twitch notifications : " + twitchNotif + "\nBad words filter : " + badWords + "\nUser events : " + userEvents + "\nSoundboard : " + serverSb + "\n̔̏", false);
+        builder.addField("Functionalities : ", "Twitch notifications : " + twitchNotif + "\nBad words filter : " + badWords + "\nUser events : " + userEvents + "\nSoundboard : " + serverSb, false);
 
         //Autorole
         String autorole = MainBot.getAutoRoleList().get(event.getGuild().getId());
@@ -84,14 +84,14 @@ public class SettingsCommand implements Command {
         } else {
             autorole = event.getJDA().getRolesByName(autorole, true).get(0).getAsMention();
         }
-        builder.addField("Autorole : ", autorole + "\n̔̏", false);
+        builder.addField("Autorole : ", autorole, false);
 
         //Prefix
         String prefix = MainBot.getPrefixes().get(event.getGuild().getId());
         if(prefix == null) {
             prefix = "!";
         }
-        builder.addField("Current prefix : ", "Prefix is `" + prefix + "`" + "\n̔̏", false);
+        builder.addField("Current prefix : ", "Prefix is `" + prefix + "`", false);
 
         builder.setFooter("To edit these settings, use the channel, enable/disable, setautorole & setprefix commands", "https://i.imgur.com/VHtAEeP.png");
 

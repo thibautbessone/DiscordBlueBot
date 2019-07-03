@@ -19,3 +19,4 @@ embedColor=\#0088FF
 userEventsMessages={}
 serverSBDisabled=[]
 shards=1
+guildsLogChannelId=LOGCHANNELIDHERE

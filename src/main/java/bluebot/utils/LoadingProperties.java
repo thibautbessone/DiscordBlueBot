@@ -19,6 +19,7 @@ public class LoadingProperties {
     private String steamAPIKey;
     private String cleverbotAPIKey;
     private String botOwner;
+    private String guildsLogChannelId;
 
     private String streamerList;
     private String autoRoleList;
@@ -51,7 +52,9 @@ public class LoadingProperties {
     public String getShards() {
         return shards;
     }
-    public String getSteamAPIKey() {return steamAPIKey;}
+    public String getSteamAPIKey() {
+        return steamAPIKey;
+    }
     public String getBotActivity() {
         return botActivity;
     }
@@ -97,9 +100,14 @@ public class LoadingProperties {
     public String getMusicChannel() {
         return musicChannel;
     }
-    public String getUserEventsMessages() {return userEventsMessages;}
+    public String getUserEventsMessages() {
+        return userEventsMessages;
+    }
     public String getEmbedColor() {
         return embedColor;
+    }
+    public String getGuildsLogChannelId() {
+        return guildsLogChannelId;
     }
 
 
@@ -116,6 +124,7 @@ public class LoadingProperties {
             botActivity = properties.getProperty("botActivity");
             cleverbotAPIKey = properties.getProperty("cleverbotAPIKey");
             botOwner = properties.getProperty("botOwner");
+            guildsLogChannelId = properties.getProperty("guildsLogChannelId");
 
             streamerList = properties.getProperty("streamerList");
             autoRoleList = properties.getProperty("autoRoleList");

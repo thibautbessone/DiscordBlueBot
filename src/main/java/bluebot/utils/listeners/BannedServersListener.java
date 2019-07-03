@@ -13,8 +13,6 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
  */
 public class BannedServersListener extends ListenerAdapter {
 
-
-
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         if(MainBot.getBannedServers().containsKey(event.getGuild().getId())) {

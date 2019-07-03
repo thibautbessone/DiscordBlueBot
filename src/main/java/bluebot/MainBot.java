@@ -145,7 +145,7 @@ public class MainBot {
                     //.addListener(new CleverbotListener())
                     .addEventListener(new BadWordsListener())
                     .addEventListener(new UserJoinLeaveListener())
-                    .addEventListener(new BotKickedListener())
+                    .addEventListener(new GuildsListener())
                     .addEventListener(new BannedServersListener())
                     .addEventListener(new MessageReceivedListener());
 

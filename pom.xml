@@ -27,12 +27,16 @@
             <url>http://jcenter.bintray.com</url>
         </repository>
     </repositories>
-
     <dependencies>
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>3.6.0_358</version>
+            <version>3.8.3_464</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20190722</version>
         </dependency>
         <dependency>
             <groupId>com.sedmelluq</groupId>

@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import org.apache.log4j.Logger;
 
 /**
  * @file MainUI.java
@@ -21,6 +22,8 @@ import javafx.stage.WindowEvent;
  */
 
 public class MainUI extends Application {
+
+    private static Logger logger = Logger.getLogger(MainBot.class);
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -74,9 +77,9 @@ public class MainUI extends Application {
         if(args.length >= 1) { //Added one parameter for the public instance
             if(args[0].equals("cmd")) {
                 new MainBot(); //Runs command-line app
-                System.out.println("Command-line app started");
+                logger.info("Command-line app started");
             } else {
-                System.out.println("Invalid option - use the cmd option to run in command-line mode.\n" +
+                logger.info("Invalid option - use the cmd option to run in command-line mode.\n" +
                         "Usage : java -jar BlueBot.jar cmd");
             }
             if(args.length == 2) {
@@ -86,7 +89,7 @@ public class MainUI extends Application {
             }
 
         } else {
-            System.out.println("JavaFX app started");
+            logger.info("JavaFX app started");
             launch(args); //Runs GUI
         }
     }

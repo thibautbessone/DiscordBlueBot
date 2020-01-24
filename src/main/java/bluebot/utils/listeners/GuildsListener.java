@@ -6,6 +6,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import org.apache.log4j.Logger;
 
 /**
  * @file GuildsListener.java
@@ -14,6 +15,8 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
  * @brief Detects when the bot is kicked from a server to prevent malfunctions. Created after a bug report made by sinikebe#2208
  */
 public class GuildsListener extends ListenerAdapter {
+
+    private static Logger logger = Logger.getLogger(GuildsListener.class);
 
     private TextChannel retrieveLogChannel() {
         for(JDA shard : MainBot.getJdaList()) {
@@ -38,6 +41,6 @@ public class GuildsListener extends ListenerAdapter {
         retrieveLogChannel().sendMessage(rmvMsg).queue();
         // Deletes prefix to avoid malfunctions - thanks to sinikebe#2208 for reporting the issue
         MainBot.getPrefixes().remove(event.getGuild().getId());
-        System.out.println("Bot kicked from " + event.getGuild().getName() + "(" + event.getGuild().getId() + ")");
+        logger.info("Bot kicked from " + event.getGuild().getName() + "(" + event.getGuild().getId() + ")");
     }
 }

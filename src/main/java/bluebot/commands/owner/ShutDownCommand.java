@@ -5,6 +5,7 @@ import bluebot.utils.Command;
 import bluebot.utils.JSONSaver;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import org.apache.log4j.Logger;
 
 /**
  * @file ShutDownCommand.java
@@ -13,6 +14,8 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
  * @brief Shutdowns the bot (emergency command)
  */
 public class ShutDownCommand implements Command {
+
+    private static Logger logger = Logger.getLogger(ShutDownCommand.class);
 
     private final String HELP = "The command `shutdown` stops the bot." +
             "\nThis command requires to be the owner of the bot." +
@@ -36,7 +39,7 @@ public class ShutDownCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        System.out.println("Forced shutdown ...");
+        logger.info("Forced shutdown ...");
         new JSONSaver();
         event.getTextChannel().sendMessage("I've been shut down.").queue();
         for(JDA shard : MainBot.getJdaList()) {

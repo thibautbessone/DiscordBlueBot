@@ -2,6 +2,7 @@ package bluebot.utils;
 
 import bluebot.MainBot;
 import com.google.gson.Gson;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,6 +17,8 @@ import java.util.Properties;
  * @brief Loads all JSON files containing settings for each server
  */
 public class JSONSaver {
+
+    private static Logger logger = Logger.getLogger(JSONSaver.class);
 
     private Gson gsonTool = new Gson();
 
@@ -88,7 +91,7 @@ public class JSONSaver {
 
             //Storing config
             properties.store(fileOutput, null);
-            System.out.println("Properties saved");
+            logger.info("Properties saved");
 
         } catch (IOException e) {
             e.printStackTrace();

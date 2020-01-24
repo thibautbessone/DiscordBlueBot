@@ -35,7 +35,6 @@ public class CatCommand implements Command {
             Response response = caller.newCall(request).execute();
             JSONObject json = new JSONObject(response.body().string());
             url = (String) json.get("file");
-            System.out.println(json);
         } catch (IOException | NullPointerException | JSONException e) {
             event.getTextChannel().sendMessage("The random.cat API might be down at the moment").queue();
         }

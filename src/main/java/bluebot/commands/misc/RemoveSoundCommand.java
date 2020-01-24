@@ -4,6 +4,7 @@ import bluebot.utils.Command;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.utils.PermissionUtil;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 
@@ -14,6 +15,8 @@ import java.io.File;
  * @brief Allow the user to delete uploaded sounds
  */
 public class RemoveSoundCommand implements Command {
+
+    private static Logger logger = Logger.getLogger(RemoveSoundCommand.class);
 
     private final String HELP = "The command `rmsound` allows you to delete a target from your server soundboard." +
             "\nThis command requires the manage messages permission." +
@@ -40,7 +43,7 @@ public class RemoveSoundCommand implements Command {
         target = new File("soundboard" + "/" + event.getGuild().getId() + "/" + args[0] + ".mp3");
         String msg = new String();
         if(target.delete()){
-            System.out.println("Sound " + target.getName() + " deleted");
+            logger.info("Sound " + target.getName() + " deleted");
             msg = "The sound `" + target.getName() + "` has been deleted.";
         } else {
             msg = "The sound `" + target.getName() + "` doesn't exist.";

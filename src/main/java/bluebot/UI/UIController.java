@@ -3,6 +3,7 @@ package bluebot.UI;
 import bluebot.MainBot;
 import javafx.event.ActionEvent;
 import net.dv8tion.jda.core.JDA;
+import org.apache.log4j.Logger;
 
 import java.awt.*;
 import java.io.File;
@@ -20,11 +21,13 @@ import java.net.URISyntaxException;
 
 public class UIController {
 
+    private static Logger logger = Logger.getLogger(UIController.class);
+
     private boolean running = false;
 
     public void startBot(ActionEvent actionEvent) {
         if (!running) {
-            System.out.println("Bot starting ...");
+            logger.info("Bot starting ...");
             new MainBot();
             running = true;
         }
@@ -35,10 +38,10 @@ public class UIController {
             for(JDA shard : MainBot.getJdaList()) {
                 shard.shutdown();
             }
-            System.out.println("Bot stopped.");
+            logger.info("Bot stopped.");
             running = false;
         } catch (NullPointerException nullPtr) {
-            System.out.println("No running instance of the bot.");
+            logger.error("No running instance of the bot.");
         }
     }
 
@@ -55,7 +58,7 @@ public class UIController {
             }
         }
         else {
-            System.out.println("File config.blue not found.");
+            logger.error("File config.blue not found.");
         }
     }
 

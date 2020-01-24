@@ -3,6 +3,7 @@ package bluebot.utils.listeners;
 import bluebot.MainBot;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import org.apache.log4j.Logger;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +14,8 @@ import java.time.LocalDateTime;
  * @brief Listens to message posted in chat
  */
 public class MessageReceivedListener extends ListenerAdapter {
+
+    private static Logger logger = Logger.getLogger(MessageReceivedListener.class);
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
@@ -27,8 +30,7 @@ public class MessageReceivedListener extends ListenerAdapter {
                         MainBot.handleCommand(MainBot.parser.parse(event.getMessage().getContentRaw(), event));
                     }
                 }
-                System.out.println(MainBot.getBasePrefix());
-                System.out.println("[" + LocalDateTime.now() + "] " + "Guild : " + event.getGuild().getName() + "/" + event.getAuthor().getName() + "(" + event.getMessage().getAuthor().getId() + ")" + " : " + event.getMessage().getContentRaw());
+                logger.info("[" + LocalDateTime.now() + "] " + "Guild : " + event.getGuild().getName() + "/" + event.getAuthor().getName() + "(" + event.getMessage().getAuthor().getId() + ")" + " : " + event.getMessage().getContentRaw());
             }
         } catch (NullPointerException e) {
             e.printStackTrace();

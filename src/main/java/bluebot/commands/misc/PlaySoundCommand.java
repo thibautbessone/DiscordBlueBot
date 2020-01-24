@@ -88,7 +88,6 @@ public class PlaySoundCommand implements Command {
                 fileList += file + "\t";
                 if(0 == nb%6) fileList += "\n";
                 if(0 == nb%42) {
-                    System.out.println("50 sounds reached");
                     fileList += "```";
                     event.getTextChannel().sendMessage(fileList).queue();
                     fileList = "```";

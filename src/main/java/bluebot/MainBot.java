@@ -12,7 +12,10 @@ import bluebot.commands.owner.SetGameCommand;
 import bluebot.commands.owner.SetOnlineStateCommand;
 import bluebot.commands.owner.ShutDownCommand;
 import bluebot.commands.utility.*;
-import bluebot.utils.*;
+import bluebot.utils.Command;
+import bluebot.utils.CommandParser;
+import bluebot.utils.LoadingProperties;
+import bluebot.utils.SaveThread;
 import bluebot.utils.listeners.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -23,9 +26,13 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
+import org.apache.log4j.Logger;
 
 import javax.security.auth.login.LoginException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @file MainBot.java
@@ -35,6 +42,8 @@ import java.util.*;
  */
 
 public class MainBot {
+
+    private static Logger logger = Logger.getLogger(MainBot.class);
 
     private int shardsNumber;
 
@@ -131,6 +140,8 @@ public class MainBot {
 
     public MainBot() {
         try {
+
+            //BasicConfigurator.configure();
             //jdaList instanciation
             //default method as provided in the API
             config = new LoadingProperties();
@@ -153,7 +164,7 @@ public class MainBot {
                 jdaList.add(shardBuilder.useSharding(i, shardsNumber).setBulkDeleteSplittingEnabled(false).buildBlocking());
                 jdaList.get(i).getPresence().setGame(Game.playing("Bot starting ..."));
             }
-            LogSystem.run();
+            //LogSystem.run();
 
             botOwner = config.getBotOwner();
             for(JDA shard : jdaList) {
@@ -188,7 +199,7 @@ public class MainBot {
             //System.out.println("Concerned users : " + jdaList.getUsers().size());
 
         } catch (InterruptedException | LoginException e) {
-         System.out.println("No internet connection or invalid or missing token. Please edit config.blue and try again.");
+         logger.error("No internet connection or invalid or missing token. Please edit config.blue and try again.");
         }
 
         //Banned servers

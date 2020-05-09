@@ -158,7 +158,8 @@ public class MainBot {
                     .addEventListener(new UserJoinLeaveListener())
                     .addEventListener(new GuildsListener())
                     .addEventListener(new BannedServersListener())
-                    .addEventListener(new MessageReceivedListener());
+                    .addEventListener(new MessageReceivedListener())
+                    .addEventListener(new EmptyVCListener());
 
             for(int i = 0; i < shardsNumber; i++){ // first id = 0
                 jdaList.add(shardBuilder.useSharding(i, shardsNumber).setBulkDeleteSplittingEnabled(false).buildBlocking());

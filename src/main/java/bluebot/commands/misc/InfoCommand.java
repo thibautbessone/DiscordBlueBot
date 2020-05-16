@@ -84,6 +84,8 @@ public class InfoCommand implements Command {
         builder.addField("Current activity :video_game:", game, true);
         builder.addField("Uptime :timer:", uptime, true);
 
+        builder.setFooter("Shard : " + (event.getJDA().getShardInfo().getShardId()+1) + "/" + event.getJDA().getShardInfo().getShardTotal(), null);
+
         event.getTextChannel().sendMessage(builder.build()).queue();
     }
 

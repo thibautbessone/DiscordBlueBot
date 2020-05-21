@@ -18,9 +18,9 @@ public class RemoveSoundCommand implements Command {
 
     private static Logger logger = Logger.getLogger(RemoveSoundCommand.class);
 
-    private final String HELP = "The command `rmsound` allows you to delete a target from your server soundboard." +
+    private final String HELP = "The command `rmsound` allows you to delete sounds from your server soundboard." +
             "\nThis command requires the manage messages permission." +
-            "\n\nUsage : `!rmsound yourSound`";
+            "\n\nUsage : `!rmsound yourSound`, `!rmsound allSounds` (deletes all the sounds from your server soundboard)";
     private boolean permissionFail = false;
     private File target;
 
@@ -40,13 +40,21 @@ public class RemoveSoundCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        target = new File("soundboard" + "/" + event.getGuild().getId() + "/" + args[0] + ".mp3");
-        String msg = new String();
-        if(target.delete()){
-            logger.info("Sound " + target.getName() + " deleted");
-            msg = "The sound `" + target.getName() + "` has been deleted.";
+        String msg;
+        if (args[0].equals("allSounds")) {
+            File directory = new File("soundboard" + "/" + event.getGuild().getId());
+            for(File file : directory.listFiles()) {
+                file.delete();
+            }
+            msg = "All sounds have been removed.";
         } else {
-            msg = "The sound `" + target.getName() + "` doesn't exist.";
+            target = new File("soundboard" + "/" + event.getGuild().getId() + "/" + args[0] + ".mp3");
+            if (target.delete()) {
+                logger.info("Sound " + target.getName() + " deleted");
+                msg = "The sound `" + target.getName() + "` has been deleted.";
+            } else {
+                msg = "The sound `" + target.getName() + "` doesn't exist.";
+            }
         }
         event.getTextChannel().sendMessage(msg).queue();
     }

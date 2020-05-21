@@ -48,8 +48,6 @@ public class PlaySoundCommand implements Command {
 
         AudioManager guildAudioManager = event.getGuild().getAudioManager();
         AudioPlayer player = MainBot.getPlayerManager().createPlayer();
-        //TrackScheduler scheduler = new TrackScheduler(player);
-        //player.addListener(scheduler);
 
         if(MainBot.getMusicChannel().containsKey(event.getGuild().getId())) {
             if(!event.getTextChannel().getId().equals(MainBot.getMusicChannel().get(event.getGuild().getId()))) {
@@ -63,22 +61,22 @@ public class PlaySoundCommand implements Command {
                 event.getTextChannel().sendMessage("Full sound list available at : https://bluebot.pw/sound_list.php").queue();
                 return; //Edited since 4500+ sounds were a mess to list lol
             }
-        //Displays the sound lists LENGTH : 15
             ArrayList<String> list = new ArrayList<>();
-            try {
-                for (File file : folder.listFiles()) {
-                    if(file.getName().contains(".mp3")) {
-                        list.add(file.getName().replace(".mp3", ""));
-                    }
-                }
-            } catch (NullPointerException e) {
+
+            if(!folder.exists() || folder.listFiles().length == 0) {
                 event.getTextChannel().sendMessage("No sounds available.").queue();
                 return;
             }
 
-
             String fileList = "```Available sounds :\n" +
                                  "------------------\n\n";
+
+            for (File file : folder.listFiles()) {
+                if(file.getName().contains(".mp3")) {
+                    list.add(file.getName().replace(".mp3", ""));
+                }
+            }
+
             int nb = 0;
             for(String file : list) {
                 nb++;

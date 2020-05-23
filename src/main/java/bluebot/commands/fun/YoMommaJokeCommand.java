@@ -37,7 +37,7 @@ public class YoMommaJokeCommand implements Command {
             event.getTextChannel().sendMessage("No user mentioned.");
         }
         else {
-            String joke = new String();
+            String joke;
             OkHttpClient caller = new OkHttpClient();
             Request request = new Request.Builder().url("http://api.yomomma.info/").build();
             List<User> mentionedUsers = event.getMessage().getMentionedUsers();
@@ -46,10 +46,10 @@ public class YoMommaJokeCommand implements Command {
                     Response response = caller.newCall(request).execute();
                     JSONObject json = new JSONObject(response.body().string());
                     joke = (String) json.get("joke");
+                    event.getTextChannel().sendMessage(u.getAsMention() + " " + joke).queue();
                 } catch (IOException | NullPointerException e) {
                     event.getTextChannel().sendMessage("No joke found").queue();
                 }
-                event.getTextChannel().sendMessage(u.getAsMention() + " " + joke).queue();
             }
         }
     }

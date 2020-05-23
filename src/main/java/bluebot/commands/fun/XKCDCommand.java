@@ -28,7 +28,7 @@ public class XKCDCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        String url = new String();
+        String url;
         OkHttpClient caller = new OkHttpClient();
         Request request;
 
@@ -46,12 +46,10 @@ public class XKCDCommand implements Command {
             Response response = caller.newCall(request).execute();
             JSONObject json = new JSONObject(response.body().string());
             url = (String) json.get("img");
+            event.getTextChannel().sendMessage(url).queue();
         } catch (IOException | NullPointerException e) {
             event.getTextChannel().sendMessage("The xkcd.com API might be down at the moment").queue();
         }
-
-        event.getTextChannel().sendMessage(url).queue();
-
     }
 
     @Override

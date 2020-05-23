@@ -32,7 +32,7 @@ public class GifCommand implements Command {
     public void action(String[] args, MessageReceivedEvent event) {
         String url;
         JSONArray array;
-        String query = new String();
+        String query = "";
         for(String arg : args) {
             query += arg.toLowerCase() + "+";
             query = query.substring(0, query.length()-1);

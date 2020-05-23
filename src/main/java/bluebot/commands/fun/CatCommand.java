@@ -28,17 +28,17 @@ public class CatCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        String url = new String();
+        String url;
         OkHttpClient caller = new OkHttpClient();
         Request request = new Request.Builder().url("https://aws.random.cat/meow").build();
         try {
             Response response = caller.newCall(request).execute();
             JSONObject json = new JSONObject(response.body().string());
             url = (String) json.get("file");
+            event.getTextChannel().sendMessage(url).queue();
         } catch (IOException | NullPointerException | JSONException e) {
             event.getTextChannel().sendMessage("The random.cat API might be down at the moment").queue();
         }
-        event.getTextChannel().sendMessage(url).queue();
     }
 
     @Override

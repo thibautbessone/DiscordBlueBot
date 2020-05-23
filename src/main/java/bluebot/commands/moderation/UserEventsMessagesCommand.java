@@ -44,7 +44,7 @@ public class UserEventsMessagesCommand implements Command {
         if(MainBot.getUserEventsMessages().get(event.getGuild().getId()) != null) container = MainBot.getUserEventsMessages().get(event.getGuild().getId());
         else container = new JoinLeaveMessageContainer();
         //Raw text without options
-        String text = new String();
+        String text = "";
         for(String arg : args) {
             if(arg.equals("-joinMention")) {
                 container.setJoinMention(true);

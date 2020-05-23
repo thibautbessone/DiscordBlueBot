@@ -29,7 +29,7 @@ public class RankCommand implements Command {
         if (args[0].equals("list")) {
             System.out.println(MainBot.getSelfAssignedRolesList().toString());
             System.out.println(MainBot.getBadWords().toString());
-            String list = new String("**Available ranks : **\n\n");
+            String list = "**Available ranks : **\n\n";
             try {
                 for (String rank : MainBot.getSelfAssignedRolesList().get(event.getGuild().getId())) {
                     list += rank + "\n";
@@ -38,10 +38,8 @@ public class RankCommand implements Command {
                 list = "No ranks available.";
             }
             event.getTextChannel().sendMessage(list).queue();
-            return;
-
         } else {
-            String roleName = new String();
+            String roleName = "";
             for(String arg : args) {
                 roleName += arg + " ";
             }

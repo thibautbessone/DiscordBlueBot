@@ -28,7 +28,7 @@ public class QuickPollCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        String query = new String();
+        String query = "";
         for (String arg : args) {
             query += arg + " ";
         }

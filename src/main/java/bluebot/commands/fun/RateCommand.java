@@ -15,14 +15,14 @@ public class RateCommand implements Command {
 
     private final String HELP = "The command `rate` let you rate what you want. \n\nUsage : `!rate the thing you want to rate`";
 
-    private final String responsePrefix = new String(":arrow_right: ");
+    private final String responsePrefix = ":arrow_right: ";
 
-    private String ten = new String("is incredibly awesome and should get the perfect score : ");
-    private String eighttonine = new String("is (relatively) incredible and deserves a ");
-    private String sixtoseven = new String("is quite good and should get a ");
-    private String fourtofive = new String("is quite average and can be rated something like ");
-    private String twotothree = new String("is bad and only deserves a ");
-    private String zerotoone = new String("horribly sucks and gets what it deserves : a ");
+    private String ten = "is incredibly awesome and should get the perfect score : ";
+    private String eighttonine = "is (relatively) incredible and deserves a ";
+    private String sixtoseven = "is quite good and should get a ";
+    private String fourtofive = "is quite average and can be rated something like ";
+    private String twotothree = "is bad and only deserves a ";
+    private String zerotoone = "horribly sucks and gets what it deserves : a ";
 
 
 

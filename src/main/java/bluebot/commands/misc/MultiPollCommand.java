@@ -31,9 +31,9 @@ public class MultiPollCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        String query = new String();
+        String query = "";
         String subject;
-        String choicesList = new String();
+        String choicesList = "";
         ArrayList<String> choices = new ArrayList<>();
         Pattern subjectRegex = Pattern.compile("\\((.*?)\\)");
         Pattern choiceRegex = Pattern.compile("\\[(.*?)]");

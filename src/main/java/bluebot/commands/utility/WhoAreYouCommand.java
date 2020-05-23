@@ -23,7 +23,7 @@ public class WhoAreYouCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        String infoText = new String();
+        String infoText = "";
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("infoFile.blue")))) {
             try {
                 String line;
@@ -57,6 +57,5 @@ public class WhoAreYouCommand implements Command {
         if(!success) {
             event.getTextChannel().sendMessage(help()).queue();
         }
-
     }
 }

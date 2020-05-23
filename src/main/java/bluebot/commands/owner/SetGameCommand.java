@@ -41,8 +41,8 @@ public class SetGameCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        String text = new String();
-        String streamLink = new String("https://www.twitch.tv/bluretv");
+        String text = "";
+        String streamLink = "https://www.twitch.tv/bluretv";
         Pattern typeRegex = Pattern.compile("\\((.*?)\\)");
         Pattern activityRegex = Pattern.compile("\\[(.*?)]");
 

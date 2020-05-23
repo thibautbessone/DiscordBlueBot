@@ -38,7 +38,7 @@ public class SetAutoRoleCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        String roleName = new String();
+        String roleName = "";
         for(String arg : args) {
             roleName += arg + " ";
         }

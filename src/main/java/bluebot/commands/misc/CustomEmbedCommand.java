@@ -41,7 +41,7 @@ public class CustomEmbedCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        String query = new String();
+        String query = "";
         Pattern subjectRegex = Pattern.compile("\\((.*?)\\)");
         String subject;
 
@@ -62,7 +62,6 @@ public class CustomEmbedCommand implements Command {
         builder.setColor(Color.decode(MainBot.getConfig().getEmbedColor()));
         builder.setAuthor(event.getAuthor().getName() + "#" + event.getAuthor().getDiscriminator() + " : " + subject, null, event.getAuthor().getAvatarUrl());
         builder.addField("","**" + subject + "**", false);
-
 
         event.getMessage().delete().queue();
         event.getTextChannel().sendMessage(builder.build()).queue();

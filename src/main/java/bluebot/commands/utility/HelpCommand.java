@@ -28,31 +28,31 @@ public class HelpCommand implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
 
-        String funCommandsList = new String("**Fun commands : ** ");
+        String funCommandsList = "**Fun commands : ** ";
         for(Map.Entry<String, Command> entry : MainBot.funCommands.entrySet()) {
             String command = entry.getKey();
             funCommandsList += "`" + command + "`" + "\t";
         }
 
-        String modUtilCommandsList = new String("\n\n**Moderation & Utlity commands : ** ");
+        String modUtilCommandsList = "\n\n**Moderation & Utlity commands : ** ";
         for(Map.Entry<String, Command> entry : MainBot.modUtilCommands.entrySet()) {
             String command = entry.getKey();
             modUtilCommandsList += "`" + command + "`" + "\t";
         }
 
-        String miscCommandsList = new String("\n\n**Miscellaneous commands : ** ");
+        String miscCommandsList = "\n\n**Miscellaneous commands : ** ";
         for(Map.Entry<String, Command> entry : MainBot.miscCommands.entrySet()) {
             String command = entry.getKey();
             miscCommandsList += "`" + command + "`" + "\t";
         }
 
-        String ownerCommandsList = new String("\n\n**Owner-only commands : ** ");
+        String ownerCommandsList = "\n\n**Owner-only commands : ** ";
         for(Map.Entry<String, Command> entry : MainBot.ownerCommands.entrySet()) {
             String command = entry.getKey();
             ownerCommandsList += "`" + command + "`" + "\t";
         }
 
-        String footer = new String("\n\nIf you need more help, join the support server : https://discord.gg/rSekkJv \n\nThanks for using **BlueBot** ! ");
+        String footer = "\n\nIf you need more help, join the support server : https://discord.gg/rSekkJv \n\nThanks for using **BlueBot** ! ";
 
         String finalList = funCommandsList + modUtilCommandsList + miscCommandsList + ownerCommandsList + footer;
         event.getAuthor().openPrivateChannel().queue( (channel) -> channel.sendMessage(TEXT + "\n" + finalList + "").queue() );

@@ -1,21 +1,12 @@
 package bluebot;
 
 import bluebot.commands.fun.*;
-import bluebot.commands.fun.quickreactions.IDGFCommand;
-import bluebot.commands.fun.quickreactions.KappaCommand;
-import bluebot.commands.fun.quickreactions.NopeCommand;
-import bluebot.commands.fun.quickreactions.WatCommand;
+import bluebot.commands.fun.quickreactions.*;
 import bluebot.commands.misc.*;
 import bluebot.commands.moderation.*;
-import bluebot.commands.owner.AnnouncementCommand;
-import bluebot.commands.owner.SetGameCommand;
-import bluebot.commands.owner.SetOnlineStateCommand;
-import bluebot.commands.owner.ShutDownCommand;
+import bluebot.commands.owner.*;
 import bluebot.commands.utility.*;
-import bluebot.utils.Command;
-import bluebot.utils.CommandParser;
-import bluebot.utils.LoadingProperties;
-import bluebot.utils.SaveThread;
+import bluebot.utils.*;
 import bluebot.utils.listeners.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -54,8 +45,9 @@ public class MainBot {
 
 
     private static String botOwner;
+    private static String basePrefix = "!";
+
     public static final CommandParser parser = new CommandParser();
-    //public static  Map<String, Command> commands = new TreeMap<String, Command>();
     public static  Map<String, Command> funCommands = new TreeMap<String, Command>();
     public static  Map<String, Command> modUtilCommands = new TreeMap<String, Command>();
     public static  Map<String, Command> miscCommands = new TreeMap<String, Command>();
@@ -116,7 +108,6 @@ public class MainBot {
     public static void setPublicInstance(boolean publicInstance) {
         isPublicInstance = publicInstance;
     }
-        private static String basePrefix = "!";
 
     public static void handleCommand(CommandParser.CommandContainer cmdContainer) {
         Map<String, Command> localMap = new TreeMap<String, Command>();

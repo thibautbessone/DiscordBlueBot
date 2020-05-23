@@ -1,7 +1,5 @@
 package bluebot.utils;
 
-import com.google.gson.Gson;
-
 import java.io.*;
 import java.util.Properties;
 
@@ -16,7 +14,6 @@ public class LoadingProperties {
     private String botToken;
     private String shards;
     private String botActivity;
-    private String steamAPIKey;
     private String cleverbotAPIKey;
     private String botOwner;
     private String guildsLogChannelId;
@@ -51,9 +48,6 @@ public class LoadingProperties {
     }
     public String getShards() {
         return shards;
-    }
-    public String getSteamAPIKey() {
-        return steamAPIKey;
     }
     public String getBotActivity() {
         return botActivity;

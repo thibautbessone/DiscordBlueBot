@@ -47,6 +47,8 @@ public class DogCommand implements Command {
 
     @Override
     public void executed(boolean success, MessageReceivedEvent event) {
-
+        if(!success) {
+            event.getTextChannel().sendMessage(help()).queue();
+        }
     }
 }

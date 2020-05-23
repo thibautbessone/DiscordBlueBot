@@ -37,7 +37,7 @@ public class TrackTwitchCommand implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         if (args[0].equals("list")) {
-            String list = new String("**Users tracked : **\n\n");
+            String list = "**Users tracked : **\n\n";
             for(Map.Entry<String, String> entry : MainBot.getStreamerList().entrySet()) {
                 list +=  event.getJDA().getUserById(entry.getKey()).getName() + "#" + event.getJDA().getUserById(entry.getKey()).getDiscriminator()  /*+ " " + entry.getValue()*/ + "\n";
             }

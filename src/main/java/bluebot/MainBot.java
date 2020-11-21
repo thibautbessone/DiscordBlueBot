@@ -1,22 +1,30 @@
 package bluebot;
 
 import bluebot.commands.fun.*;
-import bluebot.commands.fun.quickreactions.*;
+import bluebot.commands.fun.quickreactions.IDGFCommand;
+import bluebot.commands.fun.quickreactions.KappaCommand;
+import bluebot.commands.fun.quickreactions.NopeCommand;
+import bluebot.commands.fun.quickreactions.WatCommand;
 import bluebot.commands.misc.*;
 import bluebot.commands.moderation.*;
-import bluebot.commands.owner.*;
+import bluebot.commands.owner.AnnouncementCommand;
+import bluebot.commands.owner.SetGameCommand;
+import bluebot.commands.owner.SetOnlineStateCommand;
+import bluebot.commands.owner.ShutDownCommand;
 import bluebot.commands.utility.*;
-import bluebot.utils.*;
+import bluebot.utils.Command;
+import bluebot.utils.CommandParser;
+import bluebot.utils.LoadingProperties;
+import bluebot.utils.SaveThread;
 import bluebot.utils.listeners.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
-import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 import org.apache.log4j.Logger;
 
 import javax.security.auth.login.LoginException;
@@ -142,25 +150,24 @@ public class MainBot {
             playerManager = new DefaultAudioPlayerManager();
             AudioSourceManagers.registerLocalSource(playerManager);
 
-            JDABuilder shardBuilder = new JDABuilder(AccountType.BOT).setToken(config.getBotToken())
-                    .addEventListener(new TwitchListener())
+            JDABuilder shardBuilder = JDABuilder.createDefault(config.getBotToken())
+                    .addEventListeners(new TwitchListener())
                     //.addListener(new CleverbotListener())
-                    .addEventListener(new BadWordsListener())
-                    .addEventListener(new UserJoinLeaveListener())
-                    .addEventListener(new GuildsListener())
-                    .addEventListener(new BannedServersListener())
-                    .addEventListener(new MessageReceivedListener())
-                    .addEventListener(new EmptyVCListener());
+                    .addEventListeners(new BadWordsListener())
+                    .addEventListeners(new UserJoinLeaveListener())
+                    .addEventListeners(new GuildsListener())
+                    .addEventListeners(new BannedServersListener())
+                    .addEventListeners(new MessageReceivedListener())
+                    .addEventListeners(new EmptyVCListener());
 
             for(int i = 0; i < shardsNumber; i++){ // first id = 0
-                jdaList.add(shardBuilder.useSharding(i, shardsNumber).setBulkDeleteSplittingEnabled(false).buildBlocking());
-                jdaList.get(i).getPresence().setGame(Game.playing("Bot starting ..."));
+                jdaList.add(shardBuilder.useSharding(i, shardsNumber).setBulkDeleteSplittingEnabled(false).build().awaitReady());
+                jdaList.get(i).getPresence().setActivity(Activity.playing("Bot starting ..."));
             }
-            //LogSystem.run();
 
             botOwner = config.getBotOwner();
             for(JDA shard : jdaList) {
-                shard.getPresence().setGame(Game.playing(config.getBotActivity()));
+                shard.getPresence().setActivity(Activity.playing(config.getBotActivity()));
             }
             //System.out.println("Current activity " + jdaList.getPresence().getGame());
 

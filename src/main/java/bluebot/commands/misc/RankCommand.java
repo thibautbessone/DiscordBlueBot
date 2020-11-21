@@ -2,8 +2,8 @@ package bluebot.commands.misc;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;
-import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.List;
 

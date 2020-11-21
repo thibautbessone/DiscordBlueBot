@@ -2,9 +2,9 @@ package bluebot.commands.moderation;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.utils.PermissionUtil;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.internal.utils.PermissionUtil;
 
 import java.util.ArrayList;
 
@@ -27,7 +27,7 @@ public class BadWordCommand implements Command {
     public boolean called(String[] args, MessageReceivedEvent event) {
         if (args.length == 0 || args[0].equals("help") || args.length > 2) {return false;}
         else {
-            if(PermissionUtil.checkPermission(event.getTextChannel(), event.getMember(), Permission.MESSAGE_MANAGE)) {
+            if(PermissionUtil.checkPermission(event.getTextChannel(), event.getMessage().getMember(), Permission.MESSAGE_MANAGE)) {
                 return true;
             } else {
                 event.getTextChannel().sendMessage(event.getAuthor().getAsMention() + ", you don't have the permission to do that.").queue();

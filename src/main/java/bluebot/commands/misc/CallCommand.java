@@ -1,8 +1,8 @@
 package bluebot.commands.misc;
 
 import bluebot.utils.Command;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 /**
  * @file CallCommand.java

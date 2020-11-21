@@ -2,10 +2,10 @@ package bluebot.commands.misc;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.OnlineStatus;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.time.format.DateTimeFormatter;
@@ -38,7 +38,7 @@ public class ServerCommand implements Command {
         builder.addField("Server ID", event.getGuild().getId(), true);
         builder.addField("Region", event.getGuild().getRegion().name(), true);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a");
-        builder.addField("Creation Date", event.getGuild().getCreationTime().format(formatter), true);
+        builder.addField("Creation Date", event.getGuild().getTimeCreated().format(formatter), true);
         builder.addField("Total Members", String.valueOf(event.getGuild().getMembers().size()), true);
         int online = 0;
         for(Member member : event.getGuild().getMembers()) {

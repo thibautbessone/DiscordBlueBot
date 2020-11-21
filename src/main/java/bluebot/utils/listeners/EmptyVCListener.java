@@ -1,10 +1,10 @@
 package bluebot.utils.listeners;
 
-import net.dv8tion.jda.core.entities.VoiceChannel;
-import net.dv8tion.jda.core.events.guild.voice.GenericGuildVoiceEvent;
-import net.dv8tion.jda.core.events.guild.voice.GuildVoiceLeaveEvent;
-import net.dv8tion.jda.core.events.guild.voice.GuildVoiceMoveEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.events.guild.voice.GenericGuildVoiceEvent;
+import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
+import net.dv8tion.jda.api.events.guild.voice.GuildVoiceMoveEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.apache.log4j.Logger;
 
 import java.time.LocalDateTime;

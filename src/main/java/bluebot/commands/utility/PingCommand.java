@@ -2,8 +2,8 @@ package bluebot.commands.utility;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 
@@ -28,7 +28,7 @@ public class PingCommand implements Command {
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.decode(MainBot.getConfig().getEmbedColor()));
         builder.setAuthor("I'm online !");
-        builder.setDescription("Ping : " + event.getJDA().getPing() + " ms");
+        builder.setDescription("Ping : " + event.getJDA().getGatewayPing() + " ms");
 
         event.getTextChannel().sendMessage(builder.build()).queue();
     }

@@ -2,7 +2,7 @@ package bluebot.UI;
 
 import bluebot.MainBot;
 import javafx.event.ActionEvent;
-import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.api.JDA;
 import org.apache.log4j.Logger;
 
 import java.awt.*;

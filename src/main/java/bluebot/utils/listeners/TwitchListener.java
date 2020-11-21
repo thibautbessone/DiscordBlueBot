@@ -1,10 +1,10 @@
 package bluebot.utils.listeners;
 
 import bluebot.MainBot;
-import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.events.user.update.UserUpdateGameEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.events.user.update.UserUpdateActivityOrderEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.List;
 
@@ -22,9 +22,9 @@ public class TwitchListener extends ListenerAdapter {
         MainBot.getStreamerList().put("218461869617184768", "https://www.twitch.tv/minipasglop"); //Id Minipasglop for test : twitch.tv/minipasglop
     }
 
-    public void onUserUpdateGame(UserUpdateGameEvent event) {
+    public void onUserUpdateGame(UserUpdateActivityOrderEvent event) {
         try {
-            if(MainBot.getStreamerList().containsKey(event.getUser().getId()) && !event.getOldGame().getType().equals(Game.GameType.STREAMING) && event.getGuild().getMember(event.getUser()).getGame().getType().equals(Game.GameType.STREAMING)) {
+            if(MainBot.getStreamerList().containsKey(event.getUser().getId()) && !event.getOldValue().get(0).getType().equals(Activity.ActivityType.STREAMING) && event.getGuild().getMember(event.getUser()).getActivities().get(0).getType().equals(Activity.ActivityType.STREAMING)) {
                 List<Guild> serverList = event.getJDA().getGuilds();
                 for(Guild server : serverList) {
                     if(server.getMembers().contains(event.getUser())) {

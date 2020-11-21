@@ -2,8 +2,8 @@ package bluebot.utils;
 
 import bluebot.MainBot;
 import bluebot.commands.utility.JoinLeaveMessageContainer;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberLeaveEvent;
 
 /**
  * @file UserEventsMessagesParser.java

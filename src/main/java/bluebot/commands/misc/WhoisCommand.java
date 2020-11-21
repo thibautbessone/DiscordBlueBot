@@ -1,9 +1,9 @@
 package bluebot.commands.misc;
 
 import bluebot.utils.Command;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.time.format.DateTimeFormatter;
 
@@ -43,8 +43,8 @@ public class WhoisCommand implements Command {
         builder.addField(":computer: Status", event.getGuild().getMemberById(user.getId()).getOnlineStatus().name().toLowerCase(), true);
 
         String activity = "None";
-        if(event.getGuild().getMemberById(user.getId()).getGame() != null) {
-            activity = event.getGuild().getMemberById(user.getId()).getGame().getName();
+        if(event.getGuild().getMemberById(user.getId()).getActivities().get(0) != null) {
+            activity = event.getGuild().getMemberById(user.getId()).getActivities().get(0).getName();
         }
         builder.addField(":video_game: Activity", activity, true);
 
@@ -61,8 +61,8 @@ public class WhoisCommand implements Command {
         builder.addField(":medal: Highest role", role, true);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a");
-        builder.addField(":clock2: Creation date", user.getCreationTime().format(formatter), true);
-        builder.addField(":inbox_tray:  Join date", event.getGuild().getMemberById(user.getId()).getJoinDate().format(formatter), true);
+        builder.addField(":clock2: Creation date", user.getTimeCreated().format(formatter), true);
+        builder.addField(":inbox_tray:  Join date", event.getGuild().getMemberById(user.getId()).getTimeJoined().format(formatter), true);
 
         event.getTextChannel().sendMessage(builder.build()).queue();
     }

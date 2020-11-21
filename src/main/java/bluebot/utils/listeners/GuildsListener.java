@@ -1,11 +1,11 @@
 package bluebot.utils.listeners;
 
 import bluebot.MainBot;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
-import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
+import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.apache.log4j.Logger;
 
 /**

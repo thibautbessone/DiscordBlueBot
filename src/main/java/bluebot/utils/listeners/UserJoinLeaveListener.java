@@ -2,9 +2,9 @@ package bluebot.utils.listeners;
 
 import bluebot.MainBot;
 import bluebot.utils.UserEventsMessagesParser;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberLeaveEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
  * @file UserJoinLeaveListener.java
@@ -33,7 +33,7 @@ public class UserJoinLeaveListener extends ListenerAdapter {
             event.getGuild().getDefaultChannel().sendMessage(event.getMember().getAsMention() + " has joined the server ! Welcome :wave: !").queue();
         }
         //event.getGuild().getManager().addRoleToUser(event.getMember(), event.getGuild().getRolesByName(MainBot.getAutoRoleList().get(event.getGuild().getId())).get(0)).update();
-        event.getGuild().getController().addRolesToMember(event.getMember(), event.getGuild().getRolesByName(MainBot.getAutoRoleList().get(event.getGuild().getId()), true).get(0)).queue();
+        event.getGuild().modifyMemberRoles(event.getMember(), event.getGuild().getRolesByName(MainBot.getAutoRoleList().get(event.getGuild().getId()), true).get(0)).queue();
 
         //Name protection
         if(MainBot.getNameProtectionDisabled().contains(event.getGuild().getId())) {

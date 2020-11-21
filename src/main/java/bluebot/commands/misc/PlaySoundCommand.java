@@ -8,9 +8,9 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
-import net.dv8tion.jda.core.entities.VoiceChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.managers.AudioManager;
+import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.managers.AudioManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -102,7 +102,7 @@ public class PlaySoundCommand implements Command {
                 e.printStackTrace();
             }
         } else {
-            VoiceChannel targetChannel = event.getMember().getVoiceState().getChannel();
+            VoiceChannel targetChannel =  event.getMessage().getMember().getVoiceState().getChannel();
             if (targetChannel == null) {
                 event.getTextChannel().sendMessage("Please join a voice channel first.").queue();
             } else {

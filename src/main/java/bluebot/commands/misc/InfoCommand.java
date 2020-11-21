@@ -2,9 +2,9 @@ package bluebot.commands.misc;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.lang.management.ManagementFactory;
@@ -44,7 +44,7 @@ public class InfoCommand implements Command {
         for(JDA shard : MainBot.getJdaList()) {
             voiceChannelNumber += shard.getVoiceChannels().size();
         }
-        String game = event.getJDA().getPresence().getGame().getName();
+        String game = event.getJDA().getPresence().getActivity().getName();
 
         //Taken from Almighty Alpaca
         //https://github.com/Java-Discord-Bot-System/Plugin-Uptime/blob/master/src/main/java/com/almightyalpaca/discord/bot/plugin/uptime/UptimePlugin.java#L28-L42

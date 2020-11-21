@@ -1,11 +1,11 @@
 package bluebot.commands.fun;
 
 import bluebot.utils.Command;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.json.JSONObject;
 
 import java.io.IOException;

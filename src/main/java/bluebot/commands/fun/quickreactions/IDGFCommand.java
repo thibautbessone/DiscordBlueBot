@@ -1,7 +1,7 @@
 package bluebot.commands.fun.quickreactions;
 
 import bluebot.utils.Command;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 /**
  * @file NopeCommand.java

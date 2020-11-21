@@ -1,7 +1,8 @@
 package bluebot.utils.listeners;
 
-import net.dv8tion.jda.core.events.guild.voice.GuildVoiceJoinEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+
+import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
  * @file VCJoinedListener.java

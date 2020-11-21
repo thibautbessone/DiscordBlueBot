@@ -2,9 +2,9 @@ package bluebot.commands.owner;
 
 import bluebot.MainBot;
 import bluebot.utils.Command;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -73,17 +73,17 @@ public class SetGameCommand implements Command {
         switch (type) {
             case "playing":
                 for(JDA shard : MainBot.getJdaList()) {
-                    shard.getPresence().setGame(Game.playing(activity));
+                    shard.getPresence().setActivity(Activity.playing(activity));
                 }
                 break;
             case "watching":
                 for(JDA shard : MainBot.getJdaList()) {
-                    shard.getPresence().setGame(Game.watching(activity));
+                    shard.getPresence().setActivity(Activity.watching(activity));
                 }
                 break;
             case "listening":
                 for(JDA shard : MainBot.getJdaList()) {
-                    shard.getPresence().setGame(Game.listening(activity));
+                    shard.getPresence().setActivity(Activity.listening(activity));
                 }
                 break;
             case "streaming":
@@ -91,7 +91,7 @@ public class SetGameCommand implements Command {
                     if (arg.contains("twitch.tv/")) streamLink = arg;
                 }
                 for(JDA shard : MainBot.getJdaList()) {
-                    shard.getPresence().setGame(Game.streaming(activity, streamLink));
+                    shard.getPresence().setActivity(Activity.streaming(activity, streamLink));
                 }
                 break;
             default:

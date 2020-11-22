@@ -43,7 +43,7 @@ public class WhoisCommand implements Command {
         builder.addField(":computer: Status", event.getGuild().getMemberById(user.getId()).getOnlineStatus().name().toLowerCase(), true);
 
         String activity = "None";
-        if(event.getGuild().getMemberById(user.getId()).getActivities().get(0) != null) {
+        if(!event.getGuild().getMemberById(user.getId()).getActivities().isEmpty()) {
             activity = event.getGuild().getMemberById(user.getId()).getActivities().get(0).getName();
         }
         builder.addField(":video_game: Activity", activity, true);

@@ -83,12 +83,16 @@ To toggle between the general soundboard and the dedicated one, remember to use 
 
 ## Running BlueBot on a headless device (VPS, Raspberry ...)
 
-Since BlueBot is using JavaFX for the GUI, you'll need to install an additional library to run the app without a display.
-The OpenJFX Monocle library can be found [here](https://drive.google.com/uc?id=1U4LGDiNYRvnKDvBPiCt65VKlChBtxQsJ&export=download) (you can find it on the web, but this is the version I'm using on my server).
-* Install Java 8 (ex. Debian : ```sudo apt-get install java-8-oracle```)
+First, install Java with OpenJDK & OpenJFX:
+* Install OpenJDK (ex. Debian : ```sudo apt-get install openjdk-11-jdk```)
 * Install OpenJFX (ex Debian : ```sudo apt-get install openjfx```)
-* Place the downloaded .jar in the ```${JAVA_HOME}/jre/lib/ext folder (for me it's``` ```/usr/lib/jvm/java-8-oracle/jre/lib/ext``` with Debian 8)
-* Run the bot with ```java -jar -Xmx512m -Dtestfx.robot=glass -Dglass.platform=Monocle -Dmonocle.platform=Headless -Dprism.order=sw BlueBot.jar cmd```
+
+Since BlueBot is using JavaFX for the GUI, you'll need to install a display emulator to run the app. I personally use [Xvfb](https://www.x.org/releases/X11R7.6/doc/man/man1/Xvfb.1.xhtml)
+
+* Install Xvfb (ex. Debian : ```sudo apt-get install xvfb```)
+* Run ```Xvfb :1 &``` to start an emulated display in the background
+* Run ```export DISPLAY=:1``` to set it as main display
+* Run the bot with ```java --module-path /usr/share/openjfx/lib --add-modules javafx.controls -jar BlueBot.jar cmd &```
 
 ## License
 

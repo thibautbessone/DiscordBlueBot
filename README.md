@@ -20,7 +20,7 @@ You can add the bot to your server by clicking on
 You can also contact me on **Steam** : [<img src="https://img.shields.io/badge/Steam-Blue-blue.svg">](http://steamcommunity.com/profiles/76561198206490817)
 
 The **API** can be found [here](https://github.com/DV8FromTheWorld/JDA).
-However, the required dependancies for the bot are included in this repository.
+However, the required dependencies for the bot are included in this repository.
 
 **BlueBot** will provide useful features like :
 * Moderation & utility features

@@ -228,6 +228,7 @@ public class MainBot {
         miscCommands.put("invite", new InviteCommand());
         miscCommands.put("poll", new MultiPollCommand());
         miscCommands.put("sound", new PlaySoundCommand());
+        miscCommands.put("s", new PlaySoundCommand());
         miscCommands.put("qpoll", new QuickPollCommand());
         //miscCommands.put("rank", new RankCommand());
         miscCommands.put("rmsound", new RemoveSoundCommand());
